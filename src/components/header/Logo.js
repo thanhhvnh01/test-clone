@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
+import { ResponsiveLogoConfig } from "src/theme/ResponsiveTheme";
 
 export default function Logo(props) {
   return (
     <Box {...props}>
-      <Image boxSize={["50px", "60px", "70px", "86px"]} src="/logo/AndreaHair_logo.svg" />
+      <Image boxSize={ResponsiveLogoConfig} src="/logo/AndreaHair_logo.svg" />
     </Box>
   );
 }
