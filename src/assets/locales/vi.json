@@ -1,4 +1,7 @@
 {
     "/* title */": "page title, form title, tab title",
-    "title.main": "Trang chủ"
+    "title.main": "Trang chủ",
+
+    "/* label */": "label",
+    "label.socialNetwork": "Mạng xã hội"
 }

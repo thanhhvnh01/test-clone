@@ -5,4 +5,11 @@ export const theme = extendTheme({
   components: {
     Button,
   },
+  breakpoints: {
+    sm: "390px",
+    md: "880px",
+    lg: "960px",
+    xl: "1600px",
+    "2xl": "1650px",
+  },
 });
