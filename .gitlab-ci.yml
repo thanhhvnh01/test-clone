@@ -1,5 +1,5 @@
-deploy:
-  stage: production
+deploy_production:
+  stage: deploy
   script:
     - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/andrea-hair-frontend.git HEAD:main
     - echo "Deployed to production server"
