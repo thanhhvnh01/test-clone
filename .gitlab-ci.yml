@@ -1,4 +1,4 @@
-deploy_production:
+deploy:
   stage: production
   script:
     - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/andrea-hair-frontend.git HEAD:main
