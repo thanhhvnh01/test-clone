@@ -3,5 +3,5 @@ heroku:
  only:
  - main
  script:
- - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/andrea-hair-frontend.git
+ - git remote add heroku https://heroku:$HEROKU_API_KEY@gitlab.com/hungw2810/andrea-hair-frontend
  - git push -f heroku main
