@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
+import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
 import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
 import { ToggleButton } from "./ToggleButton";
@@ -10,8 +11,10 @@ const NavBarContainer = ({ children, ...props }) => {
       as="nav"
       align="center"
       justify="space-between"
+      alignContent="center"
       wrap="wrap"
       w="100%"
+      h={ResponsiveNavbarHeight}
       mb={8}
       p={4}
       bg={["#6B6E72 !important", "#6B6E72", "transparent", "transparent"]}
@@ -20,6 +23,7 @@ const NavBarContainer = ({ children, ...props }) => {
         opacity: 0.9,
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         position: "fixed",
+        top: 0,
         zIndex: 2,
       }}
       {...props}

@@ -3,5 +3,14 @@
     "title.main": "Trang chủ",
 
     "/* label */": "label",
-    "label.socialNetwork": "Mạng xã hội"
+    "label.socialNetwork": "Mạng xã hội",
+    "label.supportOnline": "Hỗ trợ trực tuyến",
+
+    "/* info */": "info",
+    "info.address": "Địa chỉ: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
+    "info.phoneNumber": "Số điện thoại: +84356737790",
+    "info.email": "Email: duythanh.qn1@gmail.com",
+    "info.socialNetwork": "Mạng xã hội",
+    "info.shipping": "Hỗ trợ vận chuyển",
+    "info.payment": "Hình thức thanh toán"
 }
