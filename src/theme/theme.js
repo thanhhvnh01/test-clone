@@ -6,7 +6,7 @@ export const theme = extendTheme({
     Button,
   },
   breakpoints: {
-    sm: "390px",
+    sm: "414px",
     md: "880px",
     lg: "960px",
     xl: "1600px",

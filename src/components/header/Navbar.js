@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react";
+import useMobile from "@hooks/useMobile";
 import React from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
 import Logo from "./Logo";
@@ -34,6 +35,7 @@ const NavBarContainer = ({ children, ...props }) => {
 };
 
 const Navbar = ({ ...props }) => {
+  const [isMobile] = useMobile();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -41,7 +43,7 @@ const Navbar = ({ ...props }) => {
   return (
     <NavBarContainer {...props}>
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
-      <ToggleButton toggle={toggle} isOpen={isOpen} />
+      <ToggleButton isMobile={isMobile} toggle={toggle} isOpen={isOpen} />
       <NavbarItems />
     </NavBarContainer>
   );

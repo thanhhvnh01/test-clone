@@ -1,11 +1,12 @@
-import { Box, Text, Grid, GridItem, Stack, Image, HStack } from "@chakra-ui/react";
+import { Box, Text, Grid, GridItem, Stack, Image, HStack, VStack } from "@chakra-ui/react";
 import Logo from "@components/header/Logo";
+import useMobile from "@hooks/useMobile";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-const InfomationSection = () => {
+const InfomationSection = ({ isMobile }) => {
   return (
-    <Box color="#AAAAAA" p={4}>
+    <Box color="#AAAAAA" p={!isMobile && 4}>
       <Logo />
       <Stack spacing="16px">
         <Text fontSize="xl" fontWeight="bold">
@@ -34,77 +35,56 @@ const InfomationSection = () => {
   );
 };
 
-const PaymentSection = () => {
+const PaymentSection = ({ isMobile }) => {
   return (
-    <Box color="#AAAAAA">
-      <Text fontSize="xl" fontWeight="bold">
+    <VStack color="#AAAAAA" p={!isMobile && 4} display={isMobile ? "block" : "flex"}>
+      <Text align={isMobile ? "left" : "center"} fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
         <FormattedMessage id="info.payment" />
       </Text>
-    </Box>
+      <Image sx={{ display: "flex", mr: "auto", ml: "auto" }} src="/images/footer_payment.png" />
+    </VStack>
   );
 };
 
-const ShippingSection = () => {
+const ShippingSection = ({ isMobile }) => {
   return (
-    <Box color="#AAAAAA">
-      <Text fontSize="xl" fontWeight="bold">
+    <VStack color="#AAAAAA" p={!isMobile && 4} display={isMobile ? "block" : "flex"}>
+      <Text align={isMobile ? "left" : "center"} fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
         <FormattedMessage id="info.shipping" />
       </Text>
-    </Box>
+      <Image sx={{ display: "flex", mr: "auto", ml: "auto" }} src="/images/footer_shipping.png" />
+    </VStack>
   );
 };
 
-const SocialNetworkSection = () => {
+const SocialNetworkSection = ({ isMobile }) => {
   return (
-    <Box color="#AAAAAA">
-      <Text fontSize="xl" fontWeight="bold">
-        <FormattedMessage id="info.payment" />
+    <VStack color="#AAAAAA" p={!isMobile && 4} display={isMobile ? "block" : "flex"}>
+      <Text fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
+        <FormattedMessage id="label.socialNetwork" />
       </Text>
-    </Box>
+    </VStack>
   );
 };
 
 const Footer = () => {
+  const [isMobile] = useMobile();
   return (
     <Box bg="black" sx={{ mt: "auto", width: "100%", p: 5 }}>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+      <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(4, 1fr)"} gap={6}>
         <GridItem>
-          <InfomationSection />
+          <InfomationSection isMobile={isMobile} />
         </GridItem>
         <GridItem>
-          <PaymentSection />
+          <PaymentSection isMobile={isMobile} />
         </GridItem>
         <GridItem>
-          <ShippingSection />
+          <ShippingSection isMobile={isMobile} />
         </GridItem>
         <GridItem>
-          <SocialNetworkSection />
+          <SocialNetworkSection isMobile={isMobile} />
         </GridItem>
       </Grid>
-      {/* <Flex sx={{ p: 3, justifyContent: "space-between" }}>
-        <Flex>
-          <Stack
-            spacing={8}
-            align="center"
-            justify={["center", "space-between", "flex-end", "flex-end"]}
-            direction={["column", "row", "row", "row"]}
-          >
-            <Image boxSize="50px" src="/icons/facebook_icon.svg" />
-            <Image boxSize="50px" src="/icons/instagram_gif.gif" />
-            <Image boxSize="50px" src="/icons/twitter_icon.svg" />
-          </Stack>
-        </Flex>
-        <Stack
-          spacing={8}
-          align="center"
-          justify={["center", "space-between", "flex-end", "flex-end"]}
-          direction={["column", "row", "row", "row"]}
-        >
-          <NavbarItem to="/">About us</NavbarItem>
-          <NavbarItem to="/how">Product</NavbarItem>
-          <NavbarItem to="/how">Subscribe</NavbarItem>
-        </Stack>
-      </Flex> */}
     </Box>
   );
 };
