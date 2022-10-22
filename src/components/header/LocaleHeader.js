@@ -1,5 +1,5 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, Flex, HStack, MenuItem, Select, Text } from "@chakra-ui/react";
+import { Box, HStack, Select, Text } from "@chakra-ui/react";
 import { IntlContext } from "@utility/contexts/Internationalization";
 import React, { useContext, useState } from "react";
 import ReactCountryFlag from "react-country-flag";

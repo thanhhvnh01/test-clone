@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Link } from "@chakra-ui/react";
 import { ResponsiveLogoConfig } from "src/theme/ResponsiveTheme";
 
 export default function Logo(props) {

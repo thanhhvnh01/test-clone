@@ -13,7 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React, { useRef } from "react";
+import React from "react";
 import { FormattedMessage } from "react-intl";
 
 const Products = () => {

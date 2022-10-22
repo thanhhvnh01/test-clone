@@ -1,4 +1,4 @@
-import { Avatar, Box, Image, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
 const SupporterCard = ({ isMobile }) => {
