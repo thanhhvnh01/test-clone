@@ -175,7 +175,7 @@ const BestSaleSection = ({ isMobile }) => {
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
         <Box bg="#EEEEEE" p={10}>
-          <Grid templateColumns="repeat(4, 1fr)" gap={3}>
+          <Grid templateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)"} gap={3}>
             {products.map((item, index) => {
               return (
                 <GridItem key={index} mt={5} display="flex" justifyContent="center">

@@ -11,15 +11,20 @@
 
     "/* label */": "label",
     "label.socialNetwork": "Social Network",
-    "label.supportOnline": "Hỗ trợ trực tuyến",
+    "label.supportOnline": "Support Online",
+    "label.subscribe": "Subscribe",
+    "label.subscribeForInfo": "Sign-up to our newsletter",
 
     "/* info */": "info",
     "info.address": "Địa chỉ: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
     "info.phoneNumber": "Số điện thoại: +84356737790",
     "info.email": "Email: duythanh.qn1@gmail.com",
-    "info.socialNetwork": "Mạng xã hội",
-    "info.shipping": "Hỗ trợ vận chuyển",
-    "info.payment": "Hình thức thanh toán"
+    "info.socialNetwork": "Social Network",
+    "info.shipping": "Shipping Method",
+    "info.payment": "Payment Method",
 
+    "/* button */": "button",
+    "button.submit": "submit",
+    "button.subsrcibe": "Subsrcibe"
 
 }

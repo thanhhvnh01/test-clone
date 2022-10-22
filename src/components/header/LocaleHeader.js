@@ -42,7 +42,7 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
       iconSize="9px"
       variant="unstyled"
       bg="black"
-      w="100px"
+      w="90px"
       borderColor="black"
       value={lang}
       onChange={(e) => {
