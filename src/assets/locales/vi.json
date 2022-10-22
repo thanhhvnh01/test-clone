@@ -2,6 +2,12 @@
     "/* title */": "page title, form title, tab title",
     "title.main": "Trang chủ",
     "title.allProducts": "Tất cả sản phẩm",
+    "title.aboutUs": "Về chúng tôi",
+    "title.products": "Sản phẩm",
+    "title.contact": "Liên hệ",
+    "title.subsrcibe": "Đăng ký",
+    "title.vi": "Tiếng Việt",
+    "title.en": "Tiếng Anh",
 
     "/* label */": "label",
     "label.socialNetwork": "Mạng xã hội",

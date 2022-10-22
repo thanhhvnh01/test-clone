@@ -1,6 +1,23 @@
 body {
     font-family: Barlow !important;
 }
+
+option {
+  color: black
+}
+
+.navbar-item {
+   text-decoration: none !important;
+}
+
+.navbar-item:hover {
+  color: #FFA800
+}
+
+a {
+  text-decoration: none !important;
+}
+
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
     display: none;
   }

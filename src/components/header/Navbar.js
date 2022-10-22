@@ -2,36 +2,40 @@ import { Box, Flex } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
+import LocaleHeader from "./LocaleHeader";
 import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
 import { ToggleButton } from "./ToggleButton";
 
 const NavBarContainer = ({ children, isMobile, ...props }) => {
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justifyContent="space-between"
-      alignContent="center"
-      wrap="wrap"
+    <Box
       w="100%"
-      h={ResponsiveNavbarHeight}
-      mb={8}
-      p={4}
-      bg={["#6B6E72 !important", "#6B6E72", "transparent", "transparent"]}
-      color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
       sx={{
         opacity: 0.9,
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         position: "fixed",
         top: 0,
         zIndex: 6,
-        px: isMobile ? "10px" : "11%",
       }}
-      {...props}
     >
-      {children}
-    </Flex>
+      <LocaleHeader sx={{ px: isMobile ? "10px" : "11%" }} />
+      <Flex
+        as="nav"
+        align="center"
+        justifyContent="space-between"
+        alignContent="center"
+        wrap="wrap"
+        h={ResponsiveNavbarHeight}
+        p={4}
+        sx={{ px: isMobile ? "10px" : "11%" }}
+        bg={["#6B6E72 !important", "#6B6E72", "transparent", "transparent"]}
+        color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
+        {...props}
+      >
+        {children}
+      </Flex>
+    </Box>
   );
 };
 

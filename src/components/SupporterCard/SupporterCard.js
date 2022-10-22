@@ -3,7 +3,7 @@ import React from "react";
 
 const SupporterCard = ({ isMobile }) => {
   return (
-    <Box bg="#FFFF" py={3}>
+    <Box bg="#FFFF" py={3} sx={{ border: "1px solid #AAAAAA" }}>
       <Avatar
         w="71px"
         h="71px"
