@@ -70,15 +70,13 @@ const SocialNetworkSection = ({ isMobile }) => {
 const Footer = () => {
   const [isMobile] = useMobile();
   return (
-    <Box bg="black" sx={{ mt: "auto", width: "100%", p: 5 }}>
-      <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(4, 1fr)"} gap={6}>
+    <Box bg="black" sx={{ mt: "auto", width: "100%", p: 5, px: isMobile ? "10px" : "11%" }}>
+      <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
         <GridItem>
           <InfomationSection isMobile={isMobile} />
         </GridItem>
         <GridItem>
           <PaymentSection isMobile={isMobile} />
-        </GridItem>
-        <GridItem>
           <ShippingSection isMobile={isMobile} />
         </GridItem>
         <GridItem>

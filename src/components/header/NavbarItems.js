@@ -22,7 +22,7 @@ const NavbarItems = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         <NavbarItem to="/">About us</NavbarItem>
-        <NavbarItem to="/how">Product</NavbarItem>
+        <NavbarItem to="/products">Product</NavbarItem>
         <NavbarItem to="/how">Contact</NavbarItem>
         <NavbarItem to="/how">Subscribe</NavbarItem>
       </Stack>

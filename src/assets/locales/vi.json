@@ -1,6 +1,7 @@
 {
     "/* title */": "page title, form title, tab title",
     "title.main": "Trang chủ",
+    "title.allProducts": "Tất cả sản phẩm",
 
     "/* label */": "label",
     "label.socialNetwork": "Mạng xã hội",
@@ -17,5 +18,6 @@
     "info.payment": "Hình thức thanh toán",
 
     "/* button */": "button",
-    "button.submit": "Xác nhận"
+    "button.submit": "Xác nhận",
+    "button.subsrcibe": "Đăng ký"
 }

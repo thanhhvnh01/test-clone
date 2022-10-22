@@ -1,10 +1,22 @@
-import { Avatar, Box } from "@chakra-ui/react";
+import { Avatar, Box, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
-const SupporterCard = () => {
+const SupporterCard = ({ isMobile }) => {
   return (
-    <Box>
-      <Avatar></Avatar>
+    <Box bg="#FFFF" py={3}>
+      <Avatar
+        w="71px"
+        h="71px"
+        sx={{ display: "flex", m: "auto", my: 3 }}
+        src="https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG"
+      />
+      <VStack display="flex" spacing="0px">
+        <Text align="center" fontSize={isMobile ? "12px" : "22px"} fontWeight="bold">
+          Mrs.Mỹ Anh
+        </Text>
+        <Text fontSize={isMobile ? "11px" : "16px"}>Chuyên gia làm tóc</Text>
+        <Text fontSize={isMobile ? "11px" : "16px"}>+84356737790</Text>
+      </VStack>
     </Box>
   );
 };

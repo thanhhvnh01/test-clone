@@ -10,7 +10,7 @@ const ImageSlider = ({ images }) => {
   const [isMobile] = useMobile();
 
   return (
-    <Container p={isMobile && 0} maxW={isMobile ? "100%" : "90%"}>
+    <Container p={isMobile && 0} maxW={isMobile ? "100%" : "80%"}>
       <Box
         h={ResponsiveImage}
         sx={{ mt: isMobile ? "60px" : "120px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}
@@ -21,6 +21,7 @@ const ImageSlider = ({ images }) => {
           autoPlay
           showArrows={false}
           showStatus={false}
+          interval={6000}
           className="slide-container"
         >
           {images.map((slideImage, index) => (

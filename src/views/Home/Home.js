@@ -7,23 +7,20 @@ import {
   Flex,
   Grid,
   GridItem,
-  HStack,
   Image,
   Input,
   InputGroup,
   InputLeftAddon,
   SlideFade,
-  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import ImageSlider from "@components/ImageSlider";
-import ProductSlider from "@components/ProductSlider";
 import { useInView } from "react-intersection-observer";
 // slider
-// icon
-import { PhoneIcon } from "@chakra-ui/icons";
 import useMobile from "@hooks/useMobile";
+import SupporterCard from "@components/SupporterCard";
+import ProductCard from "@components/ProductCard";
 
 const slideImages = [
   {
@@ -40,6 +37,41 @@ const slideImages = [
   },
 ];
 
+const products = [
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+  {
+    title: "RED Hair",
+    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
+  },
+];
+
 const Home = () => {
   const [isMobile] = useMobile();
   return (
@@ -47,16 +79,16 @@ const Home = () => {
       <ImageSlider images={slideImages} />
       <Container
         p={isMobile && 0}
-        maxW={isMobile ? "100%" : "90%"}
+        maxW={isMobile ? "100%" : "80%"}
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
         <Box bg="#F5F5F5">
           <AboutUsSection isMobile={isMobile} />
           <BestSaleSection isMobile={isMobile} />
           <SupportSection isMobile={isMobile} />
-          <SignUpSection isMobile={isMobile} />
         </Box>
       </Container>
+      <SignUpSection isMobile={isMobile} />
     </>
   );
 };
@@ -142,8 +174,16 @@ const BestSaleSection = ({ isMobile }) => {
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
-        <Box bg="#6B6E72">
-          <ProductSlider />
+        <Box bg="#EEEEEE" p={10}>
+          <Grid templateColumns="repeat(4, 1fr)" gap={3}>
+            {products.map((item, index) => {
+              return (
+                <GridItem key={index} mt={5} display="flex" justifyContent="center">
+                  <ProductCard title={item.title} itemId={index} />
+                </GridItem>
+              );
+            })}
+          </Grid>
         </Box>
       </Box>
     </SlideFade>
@@ -165,38 +205,15 @@ const SupportSection = ({ isMobile }) => {
           >
             <FormattedMessage id="label.supportOnline" />
           </Text>
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+          <Grid templateColumns="repeat(3, 1fr)" gap={6}>
             <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
-              <Stack direction={isMobile ? "column" : "row"} spacing="24px" bg="#ffff" p={5}>
-                <Image w="40%" src="https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG" />
-                {/* infomation */}
-                <Box>
-                  <Text fontSize={isMobile ? "12px" : "22px"} fontWeight="bold">
-                    Mrs.Mỹ Anh
-                  </Text>
-                  <Text fontSize={isMobile ? "11px" : "16px"}> Chuyên gia làm tóc </Text>
-                  <HStack>
-                    <PhoneIcon h={isMobile ? "9px" : "20px"} />
-                    <Text fontSize={isMobile ? "11px" : "16px"}>+84356737790</Text>
-                  </HStack>
-                </Box>
-              </Stack>
+              <SupporterCard isMobile={isMobile} />
             </GridItem>
             <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
-              <Stack direction={isMobile ? "column" : "row"} spacing="24px" bg="#ffff" p={5}>
-                <Image w="40%" src="https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG" />
-                {/* infomation */}
-                <Box>
-                  <Text fontSize={isMobile ? "12px" : "22px"} fontWeight="bold">
-                    Mrs.Mỹ Anh
-                  </Text>
-                  <Text fontSize={isMobile ? "11px" : "16px"}> Chuyên gia làm tóc </Text>
-                  <HStack>
-                    <PhoneIcon h={isMobile ? "9px" : "20px"} />
-                    <Text fontSize={isMobile ? "11px" : "16px"}>+84356737790</Text>
-                  </HStack>
-                </Box>
-              </Stack>
+              <SupporterCard isMobile={isMobile} />
+            </GridItem>
+            <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
+              <SupporterCard isMobile={isMobile} />
             </GridItem>
           </Grid>
         </Box>
@@ -210,17 +227,7 @@ const SignUpSection = ({ isMobile }) => {
   return (
     <Box bg="#6B6E72">
       <SlideFade ref={ref} in={inView} offsetY="100px">
-        <Text
-          color="#FFEA85"
-          pt={isMobile ? 10 : 20}
-          fontSize={isMobile ? "32px" : "40px"}
-          fontWeight="bold"
-          textAlign="center"
-          textTransform="uppercase"
-        >
-          <FormattedMessage id="label.subscribe" />
-        </Text>
-        <Text color="#FFEA85" textAlign="center">
+        <Text pt={isMobile ? 10 : 20} color="#FFEA85" textAlign="center">
           <FormattedMessage id="label.subscribeForInfo" />
         </Text>
         <VStack
@@ -234,7 +241,7 @@ const SignUpSection = ({ isMobile }) => {
             <Input variant="outline" bg="#fffff" placeholder="examle@gmail.com" />
           </InputGroup>
           <Button color="#FFEA85" borderColor="#FFEA85">
-            <FormattedMessage id="button.submit" />
+            <FormattedMessage id="button.subsrcibe" />
           </Button>
         </VStack>
       </SlideFade>

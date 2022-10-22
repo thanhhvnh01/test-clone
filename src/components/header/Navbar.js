@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
@@ -6,12 +6,12 @@ import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
 import { ToggleButton } from "./ToggleButton";
 
-const NavBarContainer = ({ children, ...props }) => {
+const NavBarContainer = ({ children, isMobile, ...props }) => {
   return (
     <Flex
       as="nav"
       align="center"
-      justify="space-between"
+      justifyContent="space-between"
       alignContent="center"
       wrap="wrap"
       w="100%"
@@ -25,7 +25,8 @@ const NavBarContainer = ({ children, ...props }) => {
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         position: "fixed",
         top: 0,
-        zIndex: 2,
+        zIndex: 6,
+        px: isMobile ? "10px" : "11%",
       }}
       {...props}
     >
@@ -41,7 +42,7 @@ const Navbar = ({ ...props }) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer isMobile={isMobile} {...props}>
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
       <ToggleButton isMobile={isMobile} toggle={toggle} isOpen={isOpen} />
       <NavbarItems />
