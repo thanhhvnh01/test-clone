@@ -104,15 +104,10 @@ const AboutUsSection = ({ content, isMobile }) => {
               <Image src="/images/about_us_picture.png" />
             </GridItem>
             <GridItem colSpan={1} p={10}>
-              <Box py={[1, 2, 3, 10, 20]}>
-                <Text
-                  sx={{ borderBottom: "4px solid black" }}
-                  fontSize="40px"
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                  textAlign="center"
-                >
+              <Box py={[1, 2, 3, 10, 15]}>
+                <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
                   <FormattedMessage id="label.aboutUs" defaultMessage="About us" />
+                  <Flex bg="black" w={97} h="3px" m="auto" />
                 </Text>
               </Box>
               <Text textAlign="justify">
@@ -170,7 +165,7 @@ const BestSaleSection = ({ isMobile }) => {
             textAlign="center"
             textTransform="uppercase"
           >
-            Best sale products
+            <FormattedMessage id="label.bestSelling" />
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
@@ -197,7 +192,7 @@ const SupportSection = ({ isMobile }) => {
       <SlideFade ref={ref} in={inView} offsetY="100px">
         <Box pb={20}>
           <Text
-            py={10}
+            pt={10}
             fontSize={isMobile ? "20px" : "40px"}
             fontWeight="bold"
             textAlign="center"
@@ -205,6 +200,7 @@ const SupportSection = ({ isMobile }) => {
           >
             <FormattedMessage id="label.supportOnline" />
           </Text>
+          <Flex bg="black" w={97} h="3px" m="auto" />
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>
             <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
               <SupporterCard isMobile={isMobile} />

@@ -5,15 +5,16 @@ import React, { useContext, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { FormattedMessage } from "react-intl";
 
-const LocaleHeader = ({ ...props }) => {
+const LocaleHeader = ({ isMobile, ...props }) => {
   const intlContext = useContext(IntlContext);
 
   const [lang, setLang] = useState(intlContext.locale);
   return (
     <Box w="100%" bg="black" {...props}>
-      <HStack color="#ffff" spacing="24px" justifyContent="right" sx={{ ml: "auto" }}>
+      <HStack color="#ffff" spacing="24px" justifyContent={isMobile ? "space-between" : "right"} sx={{ ml: "auto" }}>
         <Text fontSize="12px">+84 973360301</Text>
         <Text fontSize="12px">example@gmail.com</Text>
+
         <ReactCountryFlag
           style={{
             width: "1em",

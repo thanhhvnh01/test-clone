@@ -1,10 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
 import LocaleHeader from "./LocaleHeader";
 import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
+import NavbarVertical from "./NavbarVertical";
 import { ToggleButton } from "./ToggleButton";
 
 const NavBarContainer = ({ children, isMobile, ...props }) => {
@@ -19,7 +20,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         zIndex: 6,
       }}
     >
-      <LocaleHeader sx={{ px: isMobile ? "10px" : "11%" }} />
+      <LocaleHeader isMobile={isMobile} sx={{ px: isMobile ? "10px" : "11%" }} />
       <Flex
         as="nav"
         align="center"
@@ -28,7 +29,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         wrap="wrap"
         h={ResponsiveNavbarHeight}
         p={4}
-        sx={{ px: isMobile ? "10px" : "11%" }}
+        sx={{ px: isMobile ? "7%" : "11%" }}
         bg={["#6B6E72 !important", "#6B6E72", "transparent", "transparent"]}
         color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
         {...props}
@@ -41,15 +42,16 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
 
 const Navbar = ({ ...props }) => {
   const [isMobile] = useMobile();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const toggle = () => setIsOpen(!isOpen);
+  // const toggle = () => setIsOpen(!isOpen);
 
   return (
     <NavBarContainer isMobile={isMobile} {...props}>
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
-      <ToggleButton isMobile={isMobile} toggle={toggle} isOpen={isOpen} />
+      <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
       <NavbarItems />
+      {isOpen && <NavbarVertical isOpen={isOpen} onClose={onClose} />}
     </NavBarContainer>
   );
 };
