@@ -1,6 +1,6 @@
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React from "react";
+import React, { useState } from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
 import LocaleHeader from "./LocaleHeader";
 import Logo from "./Logo";
@@ -43,14 +43,18 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
 const Navbar = ({ ...props }) => {
   const [isMobile] = useMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [open, setOpen] = useState(false);
 
-  // const toggle = () => setIsOpen(!isOpen);
+  const toggleOn = () => setOpen(true);
+  const toggleOff = () => setOpen(false);
+
+  // console.log(open);
 
   return (
     <NavBarContainer isMobile={isMobile} {...props}>
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
       <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
-      <NavbarItems />
+      <NavbarItems isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
       {isOpen && <NavbarVertical isOpen={isOpen} onClose={onClose} />}
     </NavBarContainer>
   );

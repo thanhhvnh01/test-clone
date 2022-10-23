@@ -1,6 +1,6 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, HStack, Link, Menu, MenuButton, MenuItem, MenuList, Stack, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
@@ -21,7 +21,81 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-const NavbarItems = ({ isOpen }) => {
+const ProductMenu = ({ isOpen, ...rest }) => {
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
+
+  console.log(subMenuOpen);
+
+  const toggleOn = () => setSubMenuOpen(true);
+  const toggleOff = () => setSubMenuOpen(false);
+
+  const SubMenu = () => {
+    return (
+      <Box onMouseOver={toggleOn} onMouseLeave={toggleOff}>
+        <Menu isLazy>
+          <MenuButton>
+            <Flex
+              alignContent="center"
+              justifyContent="center"
+              fontSize="18px"
+              fontWeight="500"
+              textTransform="uppercase"
+              //   display="block"
+            >
+              <HStack justifyContent="center">
+                <Text>
+                  <FormattedMessage id="title.products" />
+                </Text>
+                <TriangleDownIcon w="12px" mt={1.5} />
+              </HStack>
+            </Flex>
+          </MenuButton>
+          <MenuList bg="#575757" sx={{ borderRadius: "0px", p: 0 }}>
+            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>aaas</MenuItem>
+            {/* <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
+            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
+            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem> */}
+          </MenuList>
+        </Menu>
+      </Box>
+    );
+  };
+
+  return (
+    <Box {...rest}>
+      <Menu isLazy isOpen={isOpen}>
+        <MenuButton>
+          <Flex
+            alignContent="center"
+            justifyContent="center"
+            fontSize="18px"
+            fontWeight="500"
+            textTransform="uppercase"
+            //   display="block"
+          >
+            <HStack justifyContent="center">
+              <Text>
+                <FormattedMessage id="title.products" />
+              </Text>
+              <TriangleDownIcon w="12px" mt={1.5} />
+            </HStack>
+          </Flex>
+        </MenuButton>
+        <MenuList bg="#575757" sx={{ borderRadius: "0px", p: 0 }}>
+          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>
+            <SubMenu />
+          </MenuItem>
+          {/* <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
+          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
+          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem> */}
+        </MenuList>
+      </Menu>
+    </Box>
+  );
+};
+
+const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
+  // console.log("aaa", isOpen);
   return (
     <Box display={{ base: isOpen ? "block" : "none", md: "block" }} flexBasis={{ base: "100%", md: "auto" }}>
       <Stack
@@ -34,14 +108,13 @@ const NavbarItems = ({ isOpen }) => {
         <NavbarItem to="/">
           <FormattedMessage id="title.aboutUs" />
         </NavbarItem>
-        <NavbarItem to="/products">
-          <HStack justifyContent="center">
-            <Text>
+
+        {/* <Text>
               <FormattedMessage id="title.products" />
             </Text>
-            <TriangleDownIcon w="12px" mt={1.5} />
-          </HStack>
-        </NavbarItem>
+            <TriangleDownIcon w="12px" mt={1.5} /> */}
+        <ProductMenu isOpen={isOpen} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+
         <NavbarItem to="/how">
           <FormattedMessage id="title.contact" />
         </NavbarItem>

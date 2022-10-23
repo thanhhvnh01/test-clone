@@ -26,5 +26,6 @@
 
     "/* button */": "button",
     "button.submit": "Xác nhận",
-    "button.subsrcibe": "Đăng ký"
+    "button.subsrcibe": "Đăng ký",
+    "button.readMore": "Đọc thêm"
 }

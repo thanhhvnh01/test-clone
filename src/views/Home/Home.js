@@ -106,7 +106,7 @@ const AboutUsSection = ({ content, isMobile }) => {
             <GridItem colSpan={1} p={10}>
               <Box py={[1, 2, 3, 10, 15]}>
                 <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
-                  <FormattedMessage id="label.aboutUs" defaultMessage="About us" />
+                  <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
                   <Flex bg="black" w={97} h="3px" m="auto" />
                 </Text>
               </Box>
@@ -119,7 +119,9 @@ const AboutUsSection = ({ content, isMobile }) => {
                 software like Aldus PageMaker including versions of Lorem Ipsum. . .
               </Text>
               <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
-                <Button>Read more</Button>
+                <Button>
+                  <FormattedMessage id="button.readMore" />
+                </Button>
               </Box>
             </GridItem>
           </Grid>
@@ -129,7 +131,7 @@ const AboutUsSection = ({ content, isMobile }) => {
           <VStack spacing="24px">
             <Box>
               <Text fontSize="20px" fontWeight="bold" textTransform="uppercase" textAlign="center">
-                <FormattedMessage id="label.aboutUs" defaultMessage="About us" />
+                <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
               </Text>
               <Flex bg="black" w={97} h="3px" m="auto" />
             </Box>
@@ -236,7 +238,7 @@ const SignUpSection = ({ isMobile }) => {
             <InputLeftAddon children="Email" />
             <Input variant="outline" bg="#fffff" placeholder="examle@gmail.com" />
           </InputGroup>
-          <Button color="#FFEA85" borderColor="#FFEA85">
+          <Button className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
             <FormattedMessage id="button.subsrcibe" />
           </Button>
         </VStack>

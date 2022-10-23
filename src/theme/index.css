@@ -6,6 +6,10 @@ option {
   color: black
 }
 
+.btn-sub:hover {
+  background-color: #AAAAAA !important;
+}
+
 .navbar-item {
    text-decoration: none !important;
 }
