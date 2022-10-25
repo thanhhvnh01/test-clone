@@ -1,7 +1,8 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, Flex, HStack, Link, Menu, MenuButton, MenuItem, MenuList, Stack, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
+import React from "react";
 import { FormattedMessage } from "react-intl";
+import Dropdown from "react-multilevel-dropdown";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -21,80 +22,65 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-const ProductMenu = ({ isOpen, ...rest }) => {
-  const [subMenuOpen, setSubMenuOpen] = useState(false);
+const data = [
+  { label: "Toc1" },
+  { label: "Toc2", submenu: [{ label: "meo" }, { label: "meo" }] },
+  { label: "Toc3" },
+  { label: "Toc4" },
+];
 
-  console.log(subMenuOpen);
-
-  const toggleOn = () => setSubMenuOpen(true);
-  const toggleOff = () => setSubMenuOpen(false);
-
-  const SubMenu = () => {
-    return (
-      <Box onMouseOver={toggleOn} onMouseLeave={toggleOff}>
-        <Menu isLazy>
-          <MenuButton>
-            <Flex
-              alignContent="center"
-              justifyContent="center"
-              fontSize="18px"
-              fontWeight="500"
-              textTransform="uppercase"
-              //   display="block"
-            >
-              <HStack justifyContent="center">
-                <Text>
-                  <FormattedMessage id="title.products" />
-                </Text>
-                <TriangleDownIcon w="12px" mt={1.5} />
-              </HStack>
-            </Flex>
-          </MenuButton>
-          <MenuList bg="#575757" sx={{ borderRadius: "0px", p: 0 }}>
-            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>aaas</MenuItem>
-            {/* <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
-            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
-            <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem> */}
-          </MenuList>
-        </Menu>
-      </Box>
-    );
-  };
-
+const ProductMenu = () => {
   return (
-    <Box {...rest}>
-      <Menu isLazy isOpen={isOpen}>
-        <MenuButton>
-          <Flex
-            alignContent="center"
-            justifyContent="center"
-            fontSize="18px"
-            fontWeight="500"
-            textTransform="uppercase"
-            //   display="block"
-          >
-            <HStack justifyContent="center">
-              <Text>
-                <FormattedMessage id="title.products" />
-              </Text>
-              <TriangleDownIcon w="12px" mt={1.5} />
-            </HStack>
-          </Flex>
-        </MenuButton>
-        <MenuList bg="#575757" sx={{ borderRadius: "0px", p: 0 }}>
-          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>
-            <SubMenu />
-          </MenuItem>
-          {/* <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
-          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem>
-          <MenuItem sx={{ borderBottom: "1px solid #000000" }}>Download</MenuItem> */}
-        </MenuList>
-      </Menu>
-    </Box>
+    <Dropdown
+      openOnHover
+      position="right"
+      className="dropdown"
+      title={
+        <Flex
+          alignContent="center"
+          justifyContent="center"
+          fontSize="18px"
+          fontWeight="500"
+          textTransform="uppercase"
+          //   display="block"
+        >
+          <HStack justifyContent="center">
+            <Text>
+              <FormattedMessage id="title.products" />
+            </Text>
+            <TriangleDownIcon w="12px" mt={1.5} />
+          </HStack>
+        </Flex>
+      }
+    >
+      <Box bg="#575757" sx={{ border: "2px solid black", opacity: "1 !important" }}>
+        {data.map((item) => {
+          return (
+            <Dropdown.Item>
+              {item.label}
+              {!!item.submenu && (
+                <Dropdown.Submenu position="right">
+                  <Box sx={{ border: "2px solid black" }}>
+                    {item.submenu.map((i) => {
+                      return <Dropdown.Item>{i.label}</Dropdown.Item>;
+                    })}
+                  </Box>
+                </Dropdown.Submenu>
+              )}
+            </Dropdown.Item>
+          );
+        })}
+      </Box>
+    </Dropdown>
   );
 };
 
 const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
+  const signUpElement = document.getElementById("sign-up-section");
+
+  const handleScroll = () => {
+    signUpElement.scrollIntoView({ behavior: "smooth" });
+  };
   // console.log("aaa", isOpen);
   return (
     <Box display={{ base: isOpen ? "block" : "none", md: "block" }} flexBasis={{ base: "100%", md: "auto" }}>
@@ -113,14 +99,26 @@ const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
               <FormattedMessage id="title.products" />
             </Text>
             <TriangleDownIcon w="12px" mt={1.5} /> */}
-        <ProductMenu isOpen={isOpen} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+        <ProductMenu />
 
         <NavbarItem to="/how">
           <FormattedMessage id="title.contact" />
         </NavbarItem>
-        <NavbarItem sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4 }} to="/how">
+        <Flex
+          className="navbar-item"
+          onClick={() => {
+            handleScroll();
+          }}
+          alignContent="center"
+          justifyContent="center"
+          fontSize="18px"
+          fontWeight="500"
+          textTransform="uppercase"
+          display="block"
+          sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4, cursor: "pointer" }}
+        >
           <FormattedMessage id="title.subsrcibe" />
-        </NavbarItem>
+        </Flex>
       </Stack>
     </Box>
   );

@@ -41,11 +41,13 @@
     "prop-types": "15.7.2",
     "react": "18.2.0",
     "react-app-rewired": "2.2.1",
+    "react-country-flag": "3.0.2",
     "react-dom": "18.2.0",
     "react-horizontal-scrolling-menu": "^3.2.0",
     "react-intersection-observer": "9.4.0",
-    "react-country-flag": "3.0.2",
     "react-intl": "6.2.0",
+    "axios": "0.27.2",
+    "react-multilevel-dropdown": "^3.0.3",
     "react-redux": "7.2.8",
     "react-responsive-carousel": "3.2.23",
     "react-router-dom": "6",
@@ -75,6 +77,9 @@
     "prettier": "^2.5.1",
     "react-app-rewire-aliases": "^0.2.0",
     "react-app-rewire-postcss": "^3.0.2",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
+    "sass-loader": "^8.0.2"
   }
 }

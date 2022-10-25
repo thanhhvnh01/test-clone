@@ -6,7 +6,7 @@ import { IntlProvider } from "react-intl";
 
 // ** User Language Data
 // import userMessagesEn from "src/assets/locales/en.json";
-import userMessagesVi from "@assets/locales/vi.json";
+import userMessagesRu from "@assets/locales/ru.json";
 import userMessagesEn from "@assets/locales/en.json";
 // import { Storage, STORAGE_KEYS } from "@utility/storage";
 // import { updateDeviceTokenAPI } from "@api/main";
@@ -14,14 +14,14 @@ import userMessagesEn from "@assets/locales/en.json";
 // ** Menu msg obj
 const menuMessages = {
   en: { ...userMessagesEn },
-  vi: { ...userMessagesVi },
+  ru: { ...userMessagesRu },
 };
 
 // ** Create Context
 const Context = createContext();
 
 const IntlProviderWrapper = ({ children }) => {
-  const initLang = localStorage.getItem("language") || "vi";
+  const initLang = localStorage.getItem("language") || "en";
   // ** States
   const [locale, setLocale] = useState(initLang);
   const [messages, setMessages] = useState(menuMessages[initLang]);
@@ -52,7 +52,7 @@ const IntlProviderWrapper = ({ children }) => {
 
   return (
     <Context.Provider value={{ locale, switchLanguage }}>
-      <IntlProvider key={locale} locale={locale} messages={messages} defaultLocale="vi">
+      <IntlProvider key={locale} locale={locale} messages={messages} defaultLocale="ru">
         {children}
       </IntlProvider>
     </Context.Provider>

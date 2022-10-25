@@ -1,5 +1,5 @@
 body {
-    font-family: Barlow !important;
+    font-family: Sumana !important;
 }
 
 option {
@@ -30,4 +30,29 @@ a {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  
+
+  .Dropdown_dropdown__3CP60 .Dropdown_menu__4NhQ5 {
+    padding: 0px ;
+  }
+
+ul {
+  margin: 0px !important;
+  opacity: 1 !important;
+}
+
+.Item_item__eDdfj {
+ 
+  color: #FFEA85;
+  text-transform: uppercase;
+}
+
+.Submenu_right__yD0Kz{
+  top: 0;
+  left: 100%
+}
+
+.Submenu_submenu__qO6cP{
+  border-radius: 0;
+  background-color: #575757;
+}
+

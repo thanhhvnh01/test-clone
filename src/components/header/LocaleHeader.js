@@ -11,7 +11,12 @@ const LocaleHeader = ({ isMobile, ...props }) => {
   const [lang, setLang] = useState(intlContext.locale);
   return (
     <Box w="100%" bg="black" {...props}>
-      <HStack color="#ffff" spacing="24px" justifyContent={isMobile ? "space-between" : "right"} sx={{ ml: "auto" }}>
+      <HStack
+        color="#ffff"
+        spacing="24px"
+        justifyContent={isMobile ? "space-between" : "right"}
+        sx={{ ml: "auto", alignContent: "center" }}
+      >
         <Text fontSize="12px">+84 973360301</Text>
         <Text fontSize="12px">example@gmail.com</Text>
 
@@ -20,7 +25,7 @@ const LocaleHeader = ({ isMobile, ...props }) => {
             width: "1em",
             height: "1em",
           }}
-          countryCode={lang === "vi" ? "vn" : "us"}
+          countryCode={lang === "en" ? "us" : "ru"}
           svg
         />
         <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
@@ -52,12 +57,12 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
       size="xs"
       pb={1}
     >
-      <option value="vi">
-        <FormattedMessage id="title.vi" />
-      </option>
-
       <option value="en">
         <FormattedMessage id="title.en" />
+      </option>
+
+      <option value="ru">
+        <FormattedMessage id="title.ru" />
       </option>
     </Select>
   );

@@ -26,6 +26,8 @@
 
     "/* button */": "button",
     "button.submit": "submit",
+    "button.readMore": "Read more",
     "button.subsrcibe": "Subsrcibe"
+
 
 }

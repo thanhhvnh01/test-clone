@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   Box,
@@ -21,6 +21,7 @@ import { useInView } from "react-intersection-observer";
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
 import ProductCard from "@components/ProductCard";
+import { subscribeNewMemberAPI } from "@api/main";
 
 const slideImages = [
   {
@@ -222,8 +223,18 @@ const SupportSection = ({ isMobile }) => {
 
 const SignUpSection = ({ isMobile }) => {
   const { ref, inView } = useInView();
+  const [email, setEmail] = useState("");
+
+  const handleChangeInput = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSignUp = async () => {
+    await subscribeNewMemberAPI({ email });
+  };
+
   return (
-    <Box bg="#6B6E72">
+    <Box bg="#6B6E72" id="sign-up-section">
       <SlideFade ref={ref} in={inView} offsetY="100px">
         <Text pt={isMobile ? 10 : 20} color="#FFEA85" textAlign="center">
           <FormattedMessage id="label.subscribeForInfo" />
@@ -236,9 +247,15 @@ const SignUpSection = ({ isMobile }) => {
         >
           <InputGroup>
             <InputLeftAddon children="Email" />
-            <Input variant="outline" bg="#fffff" placeholder="examle@gmail.com" />
+            <Input
+              value={email}
+              onChange={handleChangeInput}
+              variant="outline"
+              bg="#fffff"
+              placeholder="examle@gmail.com"
+            />
           </InputGroup>
-          <Button className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
+          <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
             <FormattedMessage id="button.subsrcibe" />
           </Button>
         </VStack>
