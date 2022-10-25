@@ -13,7 +13,7 @@ const ImageSlider = ({ images }) => {
     <Container p={isMobile && 0} maxW={isMobile ? "100%" : "80%"}>
       <Box
         h={ResponsiveImage}
-        sx={{ mt: isMobile ? "87px" : "120px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}
+        sx={{ mt: isMobile ? "100px" : "130px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}
       >
         <Carousel
           showThumbs={false}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Storage, STORAGE_KEYS } from "@utility/storage";
-import { store } from "@store/store";
+// import { store } from "@store/store";
 
 const Axios = axios.create();
 
@@ -14,7 +14,7 @@ const defaultConfig = {
   __cors: false,
 };
 
-let refreshTokenRequest = null;
+// let refreshTokenRequest = null;
 
 const setHeader = (config, key, value) => {
   if (!config.headers) {

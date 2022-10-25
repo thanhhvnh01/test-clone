@@ -1,6 +1,7 @@
+import { getProductForHomePageAPI } from "@api/main";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import Dropdown from "react-multilevel-dropdown";
 
@@ -22,14 +23,7 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-const data = [
-  { label: "Toc1" },
-  { label: "Toc2", submenu: [{ label: "meo" }, { label: "meo" }] },
-  { label: "Toc3" },
-  { label: "Toc4" },
-];
-
-const ProductMenu = () => {
+const ProductMenu = ({ dropDownData }) => {
   return (
     <Dropdown
       openOnHover
@@ -53,16 +47,16 @@ const ProductMenu = () => {
         </Flex>
       }
     >
-      <Box bg="#575757" sx={{ border: "2px solid black", opacity: "1 !important" }}>
-        {data.map((item) => {
+      <Box bg="#575757" sx={{ border: "2px solid black", borderBottom: "none", opacity: "1 !important" }}>
+        {dropDownData.map((item) => {
           return (
-            <Dropdown.Item>
-              {item.label}
-              {!!item.submenu && (
+            <Dropdown.Item key={item.categoryId}>
+              {item.categoryName}
+              {!!item.productTypes && (
                 <Dropdown.Submenu position="right">
-                  <Box sx={{ border: "2px solid black" }}>
-                    {item.submenu.map((i) => {
-                      return <Dropdown.Item>{i.label}</Dropdown.Item>;
+                  <Box sx={{ border: "2px solid black", borderBottom: "none" }}>
+                    {item.productTypes.map((i) => {
+                      return <Dropdown.Item key={i.productTypeId}>{i.productTypeName}</Dropdown.Item>;
                     })}
                   </Box>
                 </Dropdown.Submenu>
@@ -76,12 +70,23 @@ const ProductMenu = () => {
 };
 
 const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
+  const [dropDownData, setDropDownData] = useState([]);
+
+  const fetchDropDownData = async () => {
+    const res = await getProductForHomePageAPI();
+    setDropDownData(res.data);
+  };
+
+  useEffect(() => {
+    fetchDropDownData();
+  }, []);
+
   const signUpElement = document.getElementById("sign-up-section");
 
   const handleScroll = () => {
     signUpElement.scrollIntoView({ behavior: "smooth" });
   };
-  // console.log("aaa", isOpen);
+
   return (
     <Box display={{ base: isOpen ? "block" : "none", md: "block" }} flexBasis={{ base: "100%", md: "auto" }}>
       <Stack
@@ -99,7 +104,7 @@ const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
               <FormattedMessage id="title.products" />
             </Text>
             <TriangleDownIcon w="12px" mt={1.5} /> */}
-        <ProductMenu />
+        <ProductMenu dropDownData={dropDownData} />
 
         <NavbarItem to="/how">
           <FormattedMessage id="title.contact" />

@@ -13,6 +13,7 @@ const ProductCard = ({ title, image }) => {
       w={isMobile ? "112px" : "236px"}
       h={isMobile ? "139px" : "305px"}
       sx={{ border: "1px solid #AAAAAA" }}
+      mr={10}
     >
       <Image mx={isMobile ? 2 : 5} w={isMobile ? "94px" : "198px"} src="/images/product_1.png" />
       <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>

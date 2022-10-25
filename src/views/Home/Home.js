@@ -20,8 +20,8 @@ import { useInView } from "react-intersection-observer";
 // slider
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
-import ProductCard from "@components/ProductCard";
 import { subscribeNewMemberAPI } from "@api/main";
+import ProductSlider from "@components/ProductSlider";
 
 const slideImages = [
   {
@@ -38,41 +38,6 @@ const slideImages = [
   },
 ];
 
-const products = [
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-  {
-    title: "RED Hair",
-    image: "https://static2.yan.vn/YanNews/2167221/202004/demo-la-gi-44db1d42.PNG",
-  },
-];
-
 const Home = () => {
   const [isMobile] = useMobile();
   return (
@@ -84,8 +49,8 @@ const Home = () => {
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
         <Box bg="#F5F5F5">
-          <AboutUsSection isMobile={isMobile} />
           <BestSaleSection isMobile={isMobile} />
+          <AboutUsSection isMobile={isMobile} />
           <SupportSection isMobile={isMobile} />
         </Box>
       </Container>
@@ -108,8 +73,8 @@ const AboutUsSection = ({ content, isMobile }) => {
               <Box py={[1, 2, 3, 10, 15]}>
                 <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
                   <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
-                  <Flex bg="black" w={97} h="3px" m="auto" />
                 </Text>
+                <Flex bg="black" w={97} h="3px" m="auto" />
               </Box>
               <Text textAlign="justify">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -167,13 +132,14 @@ const BestSaleSection = ({ isMobile }) => {
             fontWeight="bold"
             textAlign="center"
             textTransform="uppercase"
+            pt={5}
           >
             <FormattedMessage id="label.bestSelling" />
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
         <Box bg="#EEEEEE" p={10}>
-          <Grid templateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)"} gap={3}>
+          {/* <Grid templateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)"} gap={3}>
             {products.map((item, index) => {
               return (
                 <GridItem key={index} mt={5} display="flex" justifyContent="center">
@@ -181,7 +147,8 @@ const BestSaleSection = ({ isMobile }) => {
                 </GridItem>
               );
             })}
-          </Grid>
+          </Grid> */}
+          <ProductSlider />
         </Box>
       </Box>
     </SlideFade>
