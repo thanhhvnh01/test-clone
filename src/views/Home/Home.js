@@ -22,6 +22,7 @@ import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
 import { subscribeNewMemberAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const slideImages = [
   {
@@ -149,6 +150,19 @@ const BestSaleSection = ({ isMobile }) => {
             })}
           </Grid> */}
           <ProductSlider />
+          <Button
+            variant="link"
+            className="navbar-item"
+            sx={{
+              textTransform: "none",
+              textDecoration: "none",
+              display: "flex",
+              ml: "auto",
+              color: "black",
+            }}
+          >
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon />}
+          </Button>
         </Box>
       </Box>
     </SlideFade>
@@ -182,6 +196,20 @@ const SupportSection = ({ isMobile }) => {
               <SupporterCard isMobile={isMobile} />
             </GridItem>
           </Grid>
+          <Button
+            variant="link"
+            className="navbar-item"
+            sx={{
+              textTransform: "none",
+              textDecoration: "none",
+              display: "flex",
+              ml: "auto",
+              mr: 10,
+              color: "black",
+            }}
+          >
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon />}
+          </Button>
         </Box>
       </SlideFade>
     </Box>
