@@ -24,7 +24,15 @@ const ProductCard = ({ title, image }) => {
           <Text fontSize="11px" color="#FFB800">
             {"(Single color hair)"}
           </Text>
-          <Button p={3} borderRadius="206px" bg="#FFB800" variant="solid" h="25px">
+          <Button
+            _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+            p={3}
+            borderRadius="206px"
+            bg="#FFB800"
+            variant="solid"
+            h="25px"
+            w="125px"
+          >
             <Text fontSize="13px" textTransform="none">
               Explore
             </Text>

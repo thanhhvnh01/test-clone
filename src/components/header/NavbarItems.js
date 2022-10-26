@@ -38,11 +38,13 @@ const ProductMenu = ({ dropDownData }) => {
           textTransform="uppercase"
           //   display="block"
         >
-          <HStack justifyContent="center">
-            <Text>
-              <FormattedMessage id="title.products" />
-            </Text>
-            <TriangleDownIcon w="12px" mt={1.5} />
+          <HStack className="navbar-item" justifyContent="center">
+            <Link href="/products">
+              <Text>
+                <FormattedMessage id="title.products" />
+              </Text>
+            </Link>
+            <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
           </HStack>
         </Flex>
       }
@@ -51,19 +53,28 @@ const ProductMenu = ({ dropDownData }) => {
         bg="#575757"
         sx={{
           borderBottom: "none",
-          opacity: "1 !important",
+          // opacity: "1 !important",
           boxShadow: "-4px 0px 3px rgba(0, 0, 0, 0.25)",
         }}
       >
-        {dropDownData.map((item) => {
+        {dropDownData.map((item, index) => {
+          const isLastItem = Boolean(index + 1 === dropDownData.length);
           return (
-            <Dropdown.Item key={item.categoryId}>
+            <Dropdown.Item className={!isLastItem ? "Item_item__eDdfj" : "last-menu-item"} key={item.categoryId}>
               {item.categoryName}
               {!!item.productTypes && (
                 <Dropdown.Submenu position="right">
                   <Box sx={{ borderBottom: "none" }}>
-                    {item.productTypes.map((i) => {
-                      return <Dropdown.Item key={i.productTypeId}>{i.productTypeName}</Dropdown.Item>;
+                    {item.productTypes.map((i, a) => {
+                      const isLastChildItem = Boolean(a + 1 === item.productTypes.length);
+                      return (
+                        <Dropdown.Item
+                          className={!isLastChildItem ? "child-item" : "last-child-item"}
+                          key={i.productTypeId}
+                        >
+                          {i.productTypeName}
+                        </Dropdown.Item>
+                      );
                     })}
                   </Box>
                 </Dropdown.Submenu>
@@ -107,13 +118,7 @@ const NavbarItems = ({ isOpen }) => {
         <NavbarItem to="/">
           <FormattedMessage id="title.aboutUs" />
         </NavbarItem>
-
-        {/* <Text>
-              <FormattedMessage id="title.products" />
-            </Text>
-            <TriangleDownIcon w="12px" mt={1.5} /> */}
         <ProductMenu dropDownData={dropDownData} />
-
         <NavbarItem to="/how">
           <FormattedMessage id="title.contact" />
         </NavbarItem>

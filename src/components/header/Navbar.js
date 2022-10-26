@@ -13,7 +13,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
     <Box
       w="100%"
       sx={{
-        opacity: 0.9,
+        // opacity: 0.9,
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         position: "fixed",
         top: 0,
@@ -30,7 +30,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         h={ResponsiveNavbarHeight}
         p={4}
         sx={{ px: isMobile ? "7%" : "11%" }}
-        bg={["#6B6E72 !important", "#6B6E72", "transparent", "transparent"]}
+        bg="rgb(107,110,114,0.9)"
         color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
         {...props}
       >

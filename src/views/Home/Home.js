@@ -22,7 +22,7 @@ import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
 import { subscribeNewMemberAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
 
 const slideImages = [
   {
@@ -91,7 +91,7 @@ const BestSaleSection = ({ isMobile }) => {
               color: "black",
             }}
           >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={1} />}
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
           </Button>
         </Box>
       </Box>
@@ -207,7 +207,7 @@ const SupportSection = ({ isMobile }) => {
               color: "black",
             }}
           >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={1} />}
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
           </Button>
         </Box>
       </SlideFade>
@@ -231,8 +231,11 @@ const SignUpSection = ({ isMobile }) => {
     <Box bg="#6B6E72" id="sign-up-section">
       <SlideFade ref={ref} in={inView} offsetY="100px">
         <Box sx={{ display: "flex", mt: "auto", mb: "auto", justifyContent: "center" }}>
-          <Box w="400px">
-            <Text pt={isMobile ? 10 : 20} fontSize="20px" color="#FFEA85" textAlign="center">
+          <Box>
+            <Text pt={isMobile ? 10 : 10} fontSize="50px" fontWeight="bold" color="#FFEA85" textAlign="center">
+              <FormattedMessage id="label.newsLetter" />
+            </Text>
+            <Text fontStyle="italic" fontSize="18px" color="#FFEA85" textAlign="center" fontWeight={300}>
               <FormattedMessage id="label.subscribeForInfo" />
             </Text>
             <VStack
@@ -241,9 +244,16 @@ const SignUpSection = ({ isMobile }) => {
               pb={isMobile ? "60px" : 20}
               w="100%"
             >
-              <InputGroup>
-                <InputLeftAddon children="Email" />
+              <InputGroup borderColor="#6B6E72">
+                <InputLeftAddon
+                  bg="#434343"
+                  w="80px"
+                  justifyContent="center"
+                  children={<EmailIcon boxSize={6} color="#FFEA85" />}
+                />
                 <Input
+                  w="400px"
+                  type="email"
                   value={email}
                   onChange={handleChangeInput}
                   variant="outline"
@@ -252,7 +262,7 @@ const SignUpSection = ({ isMobile }) => {
                 />
               </InputGroup>
               <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
-                <FormattedMessage id="button.subsrcibe" />
+                <FormattedMessage id="button.submit" />
               </Button>
             </VStack>
           </Box>

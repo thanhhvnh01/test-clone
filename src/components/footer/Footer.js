@@ -10,7 +10,7 @@ const InfomationSection = ({ isMobile }) => {
       <Logo />
       <Stack spacing="16px">
         <Text fontSize="xl" fontWeight="bold">
-          Andreahair.com
+          Andreahairvn.com
         </Text>
         <HStack spacing="12px" className="address">
           <Image src="icons/location_icon.svg" />
