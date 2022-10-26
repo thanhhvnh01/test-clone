@@ -1,11 +1,11 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
-export const ToggleButton = ({ toggle, isOpen }) => {
+export const ToggleButton = ({ toggle, isMobile }) => {
   return (
-    <Box display={{ base: "block", md: "none" }} onClick={toggle}>
-      {isOpen ? <CloseIcon /> : <HamburgerIcon />}
+    <Box display={isMobile ? "block" : "none"} onClick={toggle}>
+      <HamburgerIcon />
     </Box>
   );
 };

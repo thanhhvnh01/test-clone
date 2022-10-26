@@ -1,8 +1,35 @@
 {
     "/* title */": "page title, form title, tab title",
     "title.main": "Home page",
+    "title.allProducts": "All products",
+    "title.aboutUs": "About us",
+    "title.products": "Products",
+    "title.contact": "Contact",
+    "title.subsrcibe": "Subscribe",
+    "title.ru": "Russain",
+    "title.en": "English",
 
     "/* label */": "label",
-    "label.socialNetwork": "Social Network"
+    "label.socialNetwork": "Social Network",
+    "label.supportOnline": "Support Online",
+    "label.bestSelling": "Best Selling",
+    "label.subscribe": "Subscribe",
+    "label.subscribeForInfo": "Subcribe to get the latest promotion info",
+    "label.newsLetter": "Newsletter",
+
+    "/* info */": "info",
+    "info.address": "Address: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
+    "info.phoneNumber": "Phone number: +84356737790",
+    "info.email": "Email: duythanh.qn1@gmail.com",
+    "info.socialNetwork": "Social Network",
+    "info.shipping": "Shipping Method",
+    "info.payment": "Payment Method",
+
+    "/* button */": "button",
+    "button.submit": "submit",
+    "button.readMore": "Read more",
+    "button.more": "More",
+    "button.subsrcibe": "Subsrcibe"
+
 
 }

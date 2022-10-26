@@ -1,15 +1,43 @@
-import { Box, Center, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
+import useMobile from "@hooks/useMobile";
 import React from "react";
 // import { VisibilityContext } from "react-horizontal-scrolling-menu";
 
 const ProductCard = ({ title, image }) => {
+  const [isMobile] = useMobile();
+
   return (
-    <Box bg="#ffff" tabIndex={0} w="280px" h="380px" sx={{ mr: 10 }}>
-      <Image mx={2} src="/images/product_1.png" />
+    <Box
+      bg="#ffff"
+      tabIndex={0}
+      w={isMobile ? "112px" : "236px"}
+      h={isMobile ? "139px" : "318px"}
+      sx={{ border: "1px solid #AAAAAA" }}
+      mr={10}
+    >
+      <Image mb={3} mx={isMobile ? 2 : 5} w={isMobile ? "94px" : "198px"} src="/images/product_1.png" />
       <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>
-        <Text textTransform="uppercase" fontWeight="600" m="auto" sx={{}}>
-          {title}
-        </Text>
+        <VStack spacing="5px">
+          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={isMobile ? "12px" : "16px"}>
+            {title}
+          </Text>
+          <Text fontSize="11px" color="#FFB800">
+            {"(Single color hair)"}
+          </Text>
+          <Button
+            _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+            p={3}
+            borderRadius="206px"
+            bg="#FFB800"
+            variant="solid"
+            h="25px"
+            w="125px"
+          >
+            <Text fontSize="13px" textTransform="none">
+              Explore
+            </Text>
+          </Button>
+        </VStack>
       </Center>
     </Box>
   );

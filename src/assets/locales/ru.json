@@ -1,0 +1,33 @@
+{
+    "/* title */": "page title, form title, tab title",
+    "title.main": "Trang chủ",
+    "title.allProducts": "Все продукты",
+    "title.aboutUs": "О нас",
+    "title.products": "Товары",
+    "title.contact": "Контакт",
+    "title.subsrcibe": "Подписывайся",
+    "title.ru": "Русский",
+    "title.en": "Английский",
+
+    "/* label */": "label",
+    "label.socialNetwork": "Социальная сеть",
+    "label.supportOnline": "Поддержка онлайн",
+    "label.bestSelling": "Бестселлер",
+    "label.subscribe": "Подписывайся",
+    "label.subscribeForInfo": "Подписаться на нашу рассылку",
+    "label.newsLetter": "Новостная рассылка",
+
+    "/* info */": "info",
+    "info.address": "Адрес: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
+    "info.phoneNumber": "Номер телефона: +84356737790",
+    "info.email": "Эл.адрес: duythanh.qn1@gmail.com",
+    "info.socialNetwork": "Социальная сеть",
+    "info.shipping": "способ доставки",
+    "info.payment": "Метод оплаты",
+
+    "/* button */": "button",
+    "button.submit": "Разместить",
+    "button.subsrcibe": "подписываться",
+    "button.more": "Более",
+    "button.readMore": "Читать далее"
+}

@@ -52,7 +52,8 @@ const ProductSlider = () => {
         }}
       >
         <ChevronLeftIcon
-          color="#ffff"
+          color="#000000"
+          boxSize={8}
           onClick={() => {
             scrollPrev();
           }}
@@ -73,7 +74,8 @@ const ProductSlider = () => {
         }}
       >
         <ChevronRightIcon
-          color="#ffff"
+          color="#000000"
+          boxSize={8}
           onClick={() => {
             scrollNext();
           }}
@@ -96,7 +98,7 @@ const ProductSlider = () => {
         arrowClass="arrow"
       >
         {products.map((item, index) => {
-          return <ProductCard title={item.title} itemId={index} image={item.image} />;
+          return <ProductCard key={index} title={item.title} itemId={index} image={item.image} />;
         })}
       </ScrollMenu>
     </Box>
