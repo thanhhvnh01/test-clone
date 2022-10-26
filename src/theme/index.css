@@ -44,7 +44,8 @@ ul {
  
   color: #FFEA85;
   text-transform: uppercase;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
+  height: 45px;
 }
 
 .Submenu_right__yD0Kz{
@@ -54,6 +55,6 @@ ul {
 
 .Submenu_submenu__qO6cP{
   border-radius: 0;
-  background-color: #575757;
+  background-color: #6B6E72;
 }
 

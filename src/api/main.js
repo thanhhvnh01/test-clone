@@ -1,8 +1,8 @@
 import axios from "./base";
 
 // dropdown
-export const getProductForHomePageAPI = async () => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/home/all-products`, { __auth: false });
+export const getProductForHomePageAPI = async (lang) => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/categories/all?lang=${lang}`, { __auth: false });
 };
 
 // subscribe

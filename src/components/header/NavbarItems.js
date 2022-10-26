@@ -47,14 +47,21 @@ const ProductMenu = ({ dropDownData }) => {
         </Flex>
       }
     >
-      <Box bg="#575757" sx={{ border: "2px solid black", borderBottom: "none", opacity: "1 !important" }}>
+      <Box
+        bg="#575757"
+        sx={{
+          borderBottom: "none",
+          opacity: "1 !important",
+          boxShadow: "-4px 0px 3px rgba(0, 0, 0, 0.25)",
+        }}
+      >
         {dropDownData.map((item) => {
           return (
             <Dropdown.Item key={item.categoryId}>
               {item.categoryName}
               {!!item.productTypes && (
                 <Dropdown.Submenu position="right">
-                  <Box sx={{ border: "2px solid black", borderBottom: "none" }}>
+                  <Box sx={{ borderBottom: "none" }}>
                     {item.productTypes.map((i) => {
                       return <Dropdown.Item key={i.productTypeId}>{i.productTypeName}</Dropdown.Item>;
                     })}
@@ -69,17 +76,18 @@ const ProductMenu = ({ dropDownData }) => {
   );
 };
 
-const NavbarItems = ({ isOpen, onMouseOver, onMouseLeave }) => {
+const NavbarItems = ({ isOpen }) => {
+  const initLang = localStorage.getItem("language");
   const [dropDownData, setDropDownData] = useState([]);
 
-  const fetchDropDownData = async () => {
-    const res = await getProductForHomePageAPI();
+  const fetchDropDownData = async (initLang) => {
+    const res = await getProductForHomePageAPI(initLang);
     setDropDownData(res.data);
   };
 
   useEffect(() => {
-    fetchDropDownData();
-  }, []);
+    fetchDropDownData(initLang);
+  }, [initLang]);
 
   const signUpElement = document.getElementById("sign-up-section");
 

@@ -53,6 +53,7 @@ const ProductSlider = () => {
       >
         <ChevronLeftIcon
           color="#000000"
+          boxSize={8}
           onClick={() => {
             scrollPrev();
           }}
@@ -74,6 +75,7 @@ const ProductSlider = () => {
       >
         <ChevronRightIcon
           color="#000000"
+          boxSize={8}
           onClick={() => {
             scrollNext();
           }}
