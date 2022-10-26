@@ -49,7 +49,7 @@ const Home = () => {
         maxW={isMobile ? "100%" : "80%"}
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
-        <Box bg="#F5F5F5">
+        <Box>
           <BestSaleSection isMobile={isMobile} />
           <AboutUsSection isMobile={isMobile} />
           <SupportSection isMobile={isMobile} />
@@ -60,19 +60,58 @@ const Home = () => {
   );
 };
 
+const BestSaleSection = ({ isMobile }) => {
+  const { ref, inView } = useInView();
+  return (
+    <SlideFade ref={ref} in={inView} offsetY="100px">
+      <Box>
+        <Box pb={6}>
+          <Text
+            // sx={{ borderBottom: "4px solid black" }}
+            fontSize={isMobile ? "20px" : "40px"}
+            fontWeight="bold"
+            textAlign="center"
+            textTransform="uppercase"
+            pt={5}
+          >
+            <FormattedMessage id="label.bestSelling" />
+          </Text>
+          <Flex bg="black" w={97} h="3px" m="auto" />
+        </Box>
+        <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
+          <ProductSlider />
+          <Button
+            variant="link"
+            className="navbar-item"
+            sx={{
+              textTransform: "none",
+              textDecoration: "none",
+              display: "flex",
+              ml: "auto",
+              color: "black",
+            }}
+          >
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={1} />}
+          </Button>
+        </Box>
+      </Box>
+    </SlideFade>
+  );
+};
+
 const AboutUsSection = ({ content, isMobile }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
       {!isMobile ? (
-        <Flex bg="#F5F5F5" px={[10, 10, 10, 10, "50px"]} py={0} justifyContent="center">
-          <Grid templateColumns="repeat(2, 1fr)" gap={3}>
+        <Flex bg="#F5F5F5" px={[10, 10, 10, 10, "50px"]} my={5} justifyContent="center">
+          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
             <GridItem colSpan={1}>
               <Image src="/images/about_us_picture.png" />
             </GridItem>
-            <GridItem colSpan={1}>
-              <Box pt={20}>
-                <Box py={[1, 2, 3, 10, 15]}>
+            <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }}>
+              <Box>
+                <Box pb={[1, 2, 3, 5, 10]}>
                   <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
                     <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
                   </Text>
@@ -89,7 +128,11 @@ const AboutUsSection = ({ content, isMobile }) => {
                   </Text>
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
-                  <Button sx={{ color: " #2D3748", borderColor: "#2D3748" }}>
+                  <Button
+                    textTransform="none"
+                    _hover={{ backgroundColor: "#D8D8D8" }}
+                    sx={{ color: " #2D3748", borderColor: "#2D3748" }}
+                  >
                     <FormattedMessage id="button.readMore" />
                   </Button>
                 </Box>
@@ -121,54 +164,6 @@ const AboutUsSection = ({ content, isMobile }) => {
           </VStack>
         </Box>
       )}
-    </SlideFade>
-  );
-};
-
-const BestSaleSection = ({ isMobile }) => {
-  const { ref, inView } = useInView();
-  return (
-    <SlideFade ref={ref} in={inView} offsetY="100px">
-      <Box>
-        <Box pb={6}>
-          <Text
-            // sx={{ borderBottom: "4px solid black" }}
-            fontSize={isMobile ? "20px" : "40px"}
-            fontWeight="bold"
-            textAlign="center"
-            textTransform="uppercase"
-            pt={5}
-          >
-            <FormattedMessage id="label.bestSelling" />
-          </Text>
-          <Flex bg="black" w={97} h="3px" m="auto" />
-        </Box>
-        <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
-          {/* <Grid templateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)"} gap={3}>
-            {products.map((item, index) => {
-              return (
-                <GridItem key={index} mt={5} display="flex" justifyContent="center">
-                  <ProductCard title={item.title} itemId={index} />
-                </GridItem>
-              );
-            })}
-          </Grid> */}
-          <ProductSlider />
-          <Button
-            variant="link"
-            className="navbar-item"
-            sx={{
-              textTransform: "none",
-              textDecoration: "none",
-              display: "flex",
-              ml: "auto",
-              color: "black",
-            }}
-          >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon />}
-          </Button>
-        </Box>
-      </Box>
     </SlideFade>
   );
 };
@@ -212,7 +207,7 @@ const SupportSection = ({ isMobile }) => {
               color: "black",
             }}
           >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon />}
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={1} />}
           </Button>
         </Box>
       </SlideFade>
@@ -235,29 +230,33 @@ const SignUpSection = ({ isMobile }) => {
   return (
     <Box bg="#6B6E72" id="sign-up-section">
       <SlideFade ref={ref} in={inView} offsetY="100px">
-        <Text pt={isMobile ? 10 : 20} fontSize="20px" color="#FFEA85" textAlign="center">
-          <FormattedMessage id="label.subscribeForInfo" />
-        </Text>
-        <VStack
-          spacing="15px"
-          sx={{ justifyContent: "center", m: "auto", mt: 4 }}
-          pb={isMobile ? "60px" : "105px"}
-          w={isMobile ? "80%" : "25%"}
-        >
-          <InputGroup>
-            <InputLeftAddon children="Email" />
-            <Input
-              value={email}
-              onChange={handleChangeInput}
-              variant="outline"
-              bg="#fffff"
-              placeholder="examle@gmail.com"
-            />
-          </InputGroup>
-          <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
-            <FormattedMessage id="button.subsrcibe" />
-          </Button>
-        </VStack>
+        <Box sx={{ display: "flex", mt: "auto", mb: "auto", justifyContent: "center" }}>
+          <Box w="400px">
+            <Text pt={isMobile ? 10 : 20} fontSize="20px" color="#FFEA85" textAlign="center">
+              <FormattedMessage id="label.subscribeForInfo" />
+            </Text>
+            <VStack
+              spacing="15px"
+              sx={{ justifyContent: "center", m: "auto", mt: 4 }}
+              pb={isMobile ? "60px" : 20}
+              w="100%"
+            >
+              <InputGroup>
+                <InputLeftAddon children="Email" />
+                <Input
+                  value={email}
+                  onChange={handleChangeInput}
+                  variant="outline"
+                  bg="#fffff"
+                  placeholder="examle@gmail.com"
+                />
+              </InputGroup>
+              <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
+                <FormattedMessage id="button.subsrcibe" />
+              </Button>
+            </VStack>
+          </Box>
+        </Box>
       </SlideFade>
     </Box>
   );

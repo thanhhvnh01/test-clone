@@ -25,7 +25,9 @@ const ProductCard = ({ title, image }) => {
             {"(Single color hair)"}
           </Text>
           <Button p={3} borderRadius="206px" bg="#FFB800" variant="solid" h="25px">
-            <Text fontSize="13px">Explore</Text>
+            <Text fontSize="13px" textTransform="none">
+              Explore
+            </Text>
           </Button>
         </VStack>
       </Center>
