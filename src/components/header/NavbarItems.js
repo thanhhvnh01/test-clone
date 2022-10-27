@@ -107,7 +107,10 @@ const NavbarItems = ({ isOpen }) => {
   };
 
   return (
-    <Box display={{ base: isOpen ? "block" : "none", md: "block" }} flexBasis={{ base: "100%", md: "auto" }}>
+    <Box
+      display={[isOpen ? "block" : "none", isOpen ? "block" : "none", isOpen ? "block" : "none", "block", "block"]}
+      flexBasis={{ base: "100%", md: "auto" }}
+    >
       <Stack
         spacing={12}
         align="center"

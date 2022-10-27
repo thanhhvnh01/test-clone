@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   Box,
@@ -20,7 +20,7 @@ import { useInView } from "react-intersection-observer";
 // slider
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
-import { subscribeNewMemberAPI } from "@api/main";
+import { getBestSaleProductsAPI, subscribeNewMemberAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
 
@@ -40,17 +40,34 @@ const slideImages = [
 ];
 
 const Home = () => {
+  const initLang = localStorage.getItem("language");
+  const [productsData, setProductsData] = useState([]);
+
+  const fetchProductData = async (lang) => {
+    try {
+      const res = await getBestSaleProductsAPI(lang);
+      setProductsData(res.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchProductData(initLang);
+  }, [initLang]);
+
+  // console.log(productsData);
+
   const [isMobile] = useMobile();
   return (
     <>
       <ImageSlider images={slideImages} />
       <Container
         p={isMobile && 0}
-        maxW={isMobile ? "100%" : "80%"}
+        // maxW={isMobile ? "100%" : "80%"}
+        maxW={["100%", "100%", "100%", "80%", "80%"]}
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
         <Box>
-          <BestSaleSection isMobile={isMobile} />
+          <BestSaleSection isMobile={isMobile} data={productsData} />
           <AboutUsSection isMobile={isMobile} />
           <SupportSection isMobile={isMobile} />
         </Box>
@@ -60,7 +77,7 @@ const Home = () => {
   );
 };
 
-const BestSaleSection = ({ isMobile }) => {
+const BestSaleSection = ({ isMobile, data }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
@@ -79,7 +96,7 @@ const BestSaleSection = ({ isMobile }) => {
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
         <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
-          <ProductSlider />
+          <ProductSlider data={data} />
           <Button
             variant="link"
             className="navbar-item"
@@ -244,23 +261,25 @@ const SignUpSection = ({ isMobile }) => {
               pb={isMobile ? "60px" : 20}
               w="100%"
             >
-              <InputGroup borderColor="#6B6E72">
-                <InputLeftAddon
-                  bg="#434343"
-                  w="80px"
-                  justifyContent="center"
-                  children={<EmailIcon boxSize={6} color="#FFEA85" />}
-                />
-                <Input
-                  w="400px"
-                  type="email"
-                  value={email}
-                  onChange={handleChangeInput}
-                  variant="outline"
-                  bg="#fffff"
-                  placeholder="examle@gmail.com"
-                />
-              </InputGroup>
+              <Flex sx={{ display: "flex", mr: "auto", ml: "auto" }}>
+                <InputGroup borderColor="#6B6E72">
+                  <InputLeftAddon
+                    bg="#434343"
+                    w="80px"
+                    justifyContent="center"
+                    children={<EmailIcon boxSize={6} color="#FFEA85" />}
+                  />
+                  <Input
+                    w={["250px", "400px", "400px", "400px", "400px"]}
+                    type="email"
+                    value={email}
+                    onChange={handleChangeInput}
+                    variant="outline"
+                    bg="#fffff"
+                    placeholder="examle@gmail.com"
+                  />
+                </InputGroup>
+              </Flex>
               <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
                 <FormattedMessage id="button.submit" />
               </Button>

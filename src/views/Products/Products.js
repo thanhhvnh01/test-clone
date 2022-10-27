@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
+  Accordion,
   Box,
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +12,7 @@ import {
   Image,
   Input,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
@@ -58,12 +60,27 @@ const Products = () => {
             <Input w="234px" />
           </Flex>
           <Grid templateColumns="repeat(5, 1fr)">
-            <GridItem colSpan={1}>aa</GridItem>
+            <GridItem colSpan={1}>
+              <FilterSection />
+            </GridItem>
             <GridItem colSpan={4}>bb</GridItem>
           </Grid>
         </Box>
       </Container>
     </>
+  );
+};
+
+const FilterSection = () => {
+  return (
+    <VStack>
+      <Flex>
+        <FormattedMessage id="label.filter" />
+      </Flex>
+      <Box>
+        <Accordion></Accordion>
+      </Box>
+    </VStack>
   );
 };
 

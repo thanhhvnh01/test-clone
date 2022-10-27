@@ -1,28 +1,33 @@
 import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
-import useMobile from "@hooks/useMobile";
 import React from "react";
-// import { VisibilityContext } from "react-horizontal-scrolling-menu";
 
-const ProductCard = ({ title, image }) => {
-  const [isMobile] = useMobile();
-
+const ProductCard = ({ title, subtitle, image }) => {
   return (
     <Box
       bg="#ffff"
       tabIndex={0}
-      w={isMobile ? "112px" : "236px"}
-      h={isMobile ? "139px" : "318px"}
+      // w={isMobile ? "112px" : "236px"}
+      w={["112px", "112px", "112px", "236px", "236px"]}
+      // h={isMobile ? "139px" : "318px"}
+      h={["139px", "139px", "139px", "318px", "318px"]}
       sx={{ border: "1px solid #AAAAAA" }}
-      mr={10}
+      ml={[5, 5, 5, 2, 10]}
     >
-      <Image mb={3} mx={isMobile ? 2 : 5} w={isMobile ? "94px" : "198px"} src="/images/product_1.png" />
+      <Image
+        mb={3}
+        mx={[2, 2, 2, 5, 5]}
+        w={["94px", "94px", "94px", "198px", "198px"]}
+        h={["161px", "161px", "161px", "208px", "208px"]}
+        src={image}
+        alt="product"
+      />
       <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>
         <VStack spacing="5px">
-          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={isMobile ? "12px" : "16px"}>
+          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={["12px", "12px", "12px", "16px", "16px"]}>
             {title}
           </Text>
-          <Text fontSize="11px" color="#FFB800">
-            {"(Single color hair)"}
+          <Text fontSize="7px" color="#FFB800">
+            {`(${subtitle})`}
           </Text>
           <Button
             _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
@@ -33,7 +38,7 @@ const ProductCard = ({ title, image }) => {
             h="25px"
             w="125px"
           >
-            <Text fontSize="13px" textTransform="none">
+            <Text fontSize="9px" textTransform="none">
               Explore
             </Text>
           </Button>
