@@ -201,7 +201,7 @@ const SupportSection = ({ isMobile }) => {
             <FormattedMessage id="label.supportOnline" />
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
-          <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
             <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
               <SupporterCard isMobile={isMobile} />
             </GridItem>

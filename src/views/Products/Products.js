@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
-  Accordion,
   Box,
   Breadcrumb,
   BreadcrumbItem,
@@ -14,12 +13,17 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import ProductCard from "@components/ProductCard";
+import ProductFilter from "@components/ProductFilter";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
 const Products = () => {
   const [isMobile] = useMobile();
+  // filter
+  // const [selectedCategory, setSelectedCategory] = useState();
+  // const [selectedProductType, setSelectedProductType] = useState();
 
   return (
     <>
@@ -59,11 +63,13 @@ const Products = () => {
             </Text>
             <Input w="234px" />
           </Flex>
-          <Grid templateColumns="repeat(5, 1fr)">
-            <GridItem colSpan={1}>
+          <Grid templateColumns="repeat(13, 1fr)" gap={6}>
+            <GridItem colSpan={3}>
               <FilterSection />
             </GridItem>
-            <GridItem colSpan={4}>bb</GridItem>
+            <GridItem colSpan={10}>
+              <ProductSection />
+            </GridItem>
           </Grid>
         </Box>
       </Container>
@@ -74,14 +80,109 @@ const Products = () => {
 const FilterSection = () => {
   return (
     <VStack>
-      <Flex>
+      <Flex sx={{ width: "100%" }}>
         <FormattedMessage id="label.filter" />
       </Flex>
-      <Box>
-        <Accordion></Accordion>
+      <Box sx={{ width: "100%" }}>
+        <ProductFilter />
       </Box>
     </VStack>
   );
 };
+
+const ProductSection = () => {
+  return (
+    <Box>
+      <Flex pl={10} justifyContent="space-between">
+        <Text>Showing 13 items</Text>
+        <Text>Sort</Text>
+      </Flex>
+      <Grid
+        mt={7}
+        templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"]}
+      >
+        {data.map((item, index) => {
+          return (
+            <ProductCard
+              sx={{ mb: 5, border: "1px solid #AAAAAA !important", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+              key={index}
+              title={item.productName}
+              image={item.image}
+              subtitle={item.productTypeName}
+            />
+          );
+        })}
+      </Grid>
+    </Box>
+  );
+};
+
+const data = [
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+  {
+    productName: "lala",
+    productTypeName: "aa",
+    image: "/images/product_1.png",
+  },
+];
 
 export default Products;
