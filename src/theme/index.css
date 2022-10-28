@@ -1,3 +1,4 @@
+
 body {
     font-family: Poppins !important;
 }
@@ -114,3 +115,46 @@ ul {
   background-color: #6B6E72;
 }
 
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  list-style: none;
+  outline: none;
+  justify-content: flex-end;
+}
+.pagination > .active > a {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  color: #000000;
+  width: 33px !important;
+
+}
+.pagination > li > a {
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > li {
+  width: 33px !important;
+}
+.pagingateItem {
+  margin-top: 1px;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #000000;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}

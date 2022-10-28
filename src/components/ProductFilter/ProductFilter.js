@@ -8,11 +8,10 @@ import {
   Box,
   Checkbox,
   CheckboxGroup,
-  Radio,
-  RadioGroup,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+// import { FormattedMessage } from "react-intl";
 
 const ProductFilter = ({ selectedCategory }) => {
   //   const [categoryData, setCategoryData] = useState([]);
@@ -58,17 +57,17 @@ const ProductFilter = ({ selectedCategory }) => {
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <RadioGroup>
+                <CheckboxGroup>
                   <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    <Radio value="1">Category 1</Radio>
+                    <Checkbox>Category 1</Checkbox>
 
-                    <Radio value="2">Category 2</Radio>
+                    <Checkbox>Category 2</Checkbox>
 
-                    <Radio value="3">Category 3</Radio>
+                    <Checkbox>Category 3</Checkbox>
 
-                    <Radio value="5">Category 4</Radio>
+                    <Checkbox>Category 4</Checkbox>
                   </VStack>
-                </RadioGroup>
+                </CheckboxGroup>
               </AccordionPanel>
             </>
           )}
