@@ -133,6 +133,7 @@ ul {
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
+  font-weight: 500;
 }
 .pagination > li {
   width: 33px !important;
