@@ -4,7 +4,7 @@ import axios from "./base";
 
 // dropdown
 export const getProductForHomePageAPI = async (lang) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/categories/all?lang=${lang}`, { __auth: false });
+  return axios.get(`${process.env.REACT_APP_API_URL}/categories/product-types?lang=${lang}`, { __auth: false });
 };
 // best sale products
 export const getBestSaleProductsAPI = async (lang) => {
@@ -15,7 +15,7 @@ export const subscribeNewMemberAPI = async (email) => {
   return axios.post(`${process.env.REACT_APP_API_URL}/subscribe/new-subscriber`, email, { __auth: false });
 };
 
-//* end home section
+// * end home section
 
 // * product section
 // category

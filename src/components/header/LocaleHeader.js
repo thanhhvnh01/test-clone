@@ -15,10 +15,10 @@ const LocaleHeader = ({ isMobile, ...props }) => {
         color="#ffff"
         spacing="24px"
         justifyContent={isMobile ? "space-between" : "right"}
-        sx={{ ml: "auto", alignContent: "center" }}
+        sx={{ ml: "auto", alignContent: "center", justifyContent: isMobile ? "space-between" : "flex-end" }}
       >
-        <Text fontSize="12px">+84 973360301</Text>
-        <Text fontSize="12px">example@gmail.com</Text>
+        <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>+84 973360301</Text>
+        <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>example@gmail.com</Text>
 
         <ReactCountryFlag
           style={{
@@ -47,6 +47,7 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
       icon={<TriangleDownIcon />}
       iconSize="9px"
       variant="unstyled"
+      fontSize={["10px", "12px", "12px", "12px", "12px"]}
       bg="black"
       w="90px"
       borderColor="black"
@@ -60,7 +61,6 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
       <option value="en">
         <FormattedMessage id="title.en" />
       </option>
-
       <option value="ru">
         <FormattedMessage id="title.ru" />
       </option>

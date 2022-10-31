@@ -96,7 +96,8 @@ const BestSaleSection = ({ isMobile, data }) => {
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
         <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
-          <ProductSlider data={data} />
+          <ProductSlider data={data} isMobile={isMobile} />
+
           <Button
             variant="link"
             className="navbar-item"
@@ -106,6 +107,7 @@ const BestSaleSection = ({ isMobile, data }) => {
               display: "flex",
               ml: "auto",
               color: "black",
+              display: isMobile ? "none" : "block",
             }}
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
@@ -176,7 +178,14 @@ const AboutUsSection = ({ content, isMobile }) => {
               like Aldus PageMaker including versions of Lorem Ipsum. . .
             </Text>
             <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
-              <Button size="sm">Read more</Button>
+              <Button
+                size="sm"
+                textTransform="none"
+                _hover={{ backgroundColor: "#D8D8D8" }}
+                sx={{ color: " #2D3748", borderColor: "#2D3748" }}
+              >
+                Read more
+              </Button>
             </Box>
           </VStack>
         </Box>
@@ -249,10 +258,23 @@ const SignUpSection = ({ isMobile }) => {
       <SlideFade ref={ref} in={inView} offsetY="100px">
         <Box sx={{ display: "flex", mt: "auto", mb: "auto", justifyContent: "center" }}>
           <Box>
-            <Text pt={isMobile ? 10 : 10} fontSize="50px" fontWeight="bold" color="#FFEA85" textAlign="center">
+            <Text
+              pt={isMobile ? 10 : 10}
+              fontSize={["20px", "50px", "50px", "50px", "50px"]}
+              fontWeight="bold"
+              color="#FFEA85"
+              textAlign="center"
+              textTransform="uppercase"
+            >
               <FormattedMessage id="label.newsLetter" />
             </Text>
-            <Text fontStyle="italic" fontSize="18px" color="#FFEA85" textAlign="center" fontWeight={300}>
+            <Text
+              fontStyle="italic"
+              fontSize={["12px", "18px", "18px", "18px", "18px"]}
+              color="#FFEA85"
+              textAlign="center"
+              fontWeight={300}
+            >
               <FormattedMessage id="label.subscribeForInfo" />
             </Text>
             <VStack
@@ -268,6 +290,7 @@ const SignUpSection = ({ isMobile }) => {
                     w="80px"
                     justifyContent="center"
                     children={<EmailIcon boxSize={6} color="#FFEA85" />}
+                    size={["sm", "md", "md", "md", "md"]}
                   />
                   <Input
                     w={["250px", "400px", "400px", "400px", "400px"]}
@@ -280,7 +303,13 @@ const SignUpSection = ({ isMobile }) => {
                   />
                 </InputGroup>
               </Flex>
-              <Button onClick={handleSignUp} className="btn-sub" color="#FFEA85" borderColor="#FFEA85">
+              <Button
+                size={["sm", "md", "md", "md", "md"]}
+                onClick={handleSignUp}
+                className="btn-sub"
+                color="#FFEA85"
+                borderColor="#FFEA85"
+              >
                 <FormattedMessage id="button.submit" />
               </Button>
             </VStack>

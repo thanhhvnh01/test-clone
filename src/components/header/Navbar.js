@@ -1,6 +1,7 @@
+import { getProductForHomePageAPI } from "@api/main";
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ResponsiveNavbarHeight } from "src/theme/ResponsiveTheme";
 import LocaleHeader from "./LocaleHeader";
 import Logo from "./Logo";
@@ -41,6 +42,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
 };
 
 const Navbar = ({ ...props }) => {
+  const initLang = localStorage.getItem("language");
   const [isMobile] = useMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
@@ -48,14 +50,24 @@ const Navbar = ({ ...props }) => {
   const toggleOn = () => setOpen(true);
   const toggleOff = () => setOpen(false);
 
+  const [dropDownData, setDropDownData] = useState([]);
+
+  const fetchDropDownData = async (initLang) => {
+    const res = await getProductForHomePageAPI(initLang);
+    setDropDownData(res.data);
+  };
+
+  useEffect(() => {
+    fetchDropDownData(initLang);
+  }, [initLang]);
   // console.log(open);
 
   return (
     <NavBarContainer isMobile={isMobile} {...props}>
       <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
       <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
-      <NavbarItems isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
-      {isOpen && <NavbarVertical isOpen={isOpen} onClose={onClose} />}
+      <NavbarItems dropDownData={dropDownData} isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
+      {isOpen && <NavbarVertical data={dropDownData} isOpen={isOpen} onClose={onClose} />}
     </NavBarContainer>
   );
 };

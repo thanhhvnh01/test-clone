@@ -25,7 +25,7 @@ const NavbarItem = ({ children, isLast, to = "/", isProducts, ...rest }) => {
   );
 };
 
-const NavbarVertical = ({ isOpen, toggle, onClose }) => {
+const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
@@ -36,7 +36,7 @@ const NavbarVertical = ({ isOpen, toggle, onClose }) => {
           </NavbarItem>
 
           {/* <FormattedMessage id="title.products" /> */}
-          <ProductsAccordion />
+          <ProductsAccordion data={data} />
 
           <NavbarItem>
             <FormattedMessage id="title.contact" />

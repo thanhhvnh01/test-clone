@@ -1,4 +1,4 @@
-import { Avatar, Box, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
 const SupporterCard = ({ isMobile }) => {
@@ -16,6 +16,11 @@ const SupporterCard = ({ isMobile }) => {
         </Text>
         <Text fontSize={isMobile ? "11px" : "16px"}>Chuyên gia làm tóc</Text>
         <Text fontSize={isMobile ? "11px" : "16px"}>+84356737790</Text>
+        <HStack>
+          <Image h="20px" src="/icons/facebook_icon.svg" />
+          <Image h="20px" src="/icons/instagram_gif.gif" />
+          <Image h="20px" src="/icons/twitter_icon.svg" />
+        </HStack>
       </VStack>
     </Box>
   );

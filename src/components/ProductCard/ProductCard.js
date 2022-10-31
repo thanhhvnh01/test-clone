@@ -1,7 +1,7 @@
 import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
-const ProductCard = ({ title, subtitle, image, sx }) => {
+const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
   return (
     <Box
       bg="#ffff"
@@ -11,7 +11,7 @@ const ProductCard = ({ title, subtitle, image, sx }) => {
       // h={isMobile ? "139px" : "318px"}
       h={["248px", "248px", "248px", "318px", "318px"]}
       sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
-      ml={[5, 5, 5, 2, 10]}
+      ml={[1, 5, 5, 2, 10]}
     >
       <Image
         mb={3}
@@ -37,6 +37,7 @@ const ProductCard = ({ title, subtitle, image, sx }) => {
             variant="solid"
             h="25px"
             w="125px"
+            onClick={onClick}
           >
             <Text fontSize="9px" textTransform="none">
               Explore

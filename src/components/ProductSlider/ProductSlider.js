@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 // slick
 import Slider from "react-slick";
 
-const ProductSlider = ({ data }) => {
+const ProductSlider = ({ data, isMobile }) => {
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -13,7 +13,7 @@ const ProductSlider = ({ data }) => {
         className={className}
         onClick={onClick}
         _hover={{ color: "black" }}
-        sx={{ ...style }}
+        sx={{ ...style, display: isMobile ? "none" : "block" }}
         boxSize={8}
       />
     );
@@ -26,7 +26,7 @@ const ProductSlider = ({ data }) => {
         className={className}
         _hover={{ color: "black" }}
         onClick={onClick}
-        sx={{ ...style }}
+        sx={{ ...style, display: isMobile && "none" }}
         boxSize={8}
       />
     );
@@ -70,7 +70,7 @@ const ProductSlider = ({ data }) => {
   };
 
   return (
-    <Box p={12}>
+    <Box p={[3, 5, 5, 12, 12]} py={[6, 6, 6, 12, 12]}>
       <Slider {...settings}>
         {data?.map((item, index) => {
           return (

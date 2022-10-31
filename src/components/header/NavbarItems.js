@@ -1,7 +1,6 @@
-import { getProductForHomePageAPI } from "@api/main";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FormattedMessage } from "react-intl";
 import Dropdown from "react-multilevel-dropdown";
 
@@ -87,19 +86,7 @@ const ProductMenu = ({ dropDownData }) => {
   );
 };
 
-const NavbarItems = ({ isOpen }) => {
-  const initLang = localStorage.getItem("language");
-  const [dropDownData, setDropDownData] = useState([]);
-
-  const fetchDropDownData = async (initLang) => {
-    const res = await getProductForHomePageAPI(initLang);
-    setDropDownData(res.data);
-  };
-
-  useEffect(() => {
-    fetchDropDownData(initLang);
-  }, [initLang]);
-
+const NavbarItems = ({ isOpen, dropDownData }) => {
   const signUpElement = document.getElementById("sign-up-section");
 
   const handleScroll = () => {

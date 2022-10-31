@@ -8,6 +8,8 @@ import {
   Box,
   Checkbox,
   CheckboxGroup,
+  HStack,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
@@ -46,7 +48,7 @@ const ProductFilter = ({ selectedCategory }) => {
 
   return (
     <Box>
-      <Accordion allowMultiple>
+      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
         <AccordionItem>
           {({ isExpanded }) => (
             <>
@@ -81,7 +83,7 @@ const ProductFilter = ({ selectedCategory }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0}>
+              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
                 <CheckboxGroup>
                   <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
                     <Checkbox>Product1</Checkbox>
@@ -107,16 +109,32 @@ const ProductFilter = ({ selectedCategory }) => {
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
               <AccordionPanel py={3} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <Checkbox>Product1</Checkbox>
+                <Checkbox>
+                  <HStack>
+                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text>Color 1</Text>
+                  </HStack>
+                </Checkbox>
               </AccordionPanel>
-              <AccordionPanel py={3} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <Checkbox>Product2</Checkbox>
+              <AccordionPanel py={3}>
+                <Checkbox>
+                  <HStack>
+                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 2 </Text>
+                  </HStack>
+                </Checkbox>
               </AccordionPanel>
-              <AccordionPanel py={3} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <Checkbox>Product3</Checkbox>
+              <AccordionPanel py={3}>
+                <Checkbox>
+                  <HStack>
+                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 3</Text>
+                  </HStack>
+                </Checkbox>
               </AccordionPanel>
-              <AccordionPanel py={3} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <Checkbox>Product4</Checkbox>
+              <AccordionPanel py={3}>
+                <Checkbox>
+                  <HStack>
+                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 4 </Text>
+                  </HStack>
+                </Checkbox>
               </AccordionPanel>
             </>
           )}

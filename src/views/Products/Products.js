@@ -25,6 +25,7 @@ import MobileProductFilter from "@components/MobileProductFilter";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 // paging
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   const [isMobile] = useMobile();
@@ -35,14 +36,14 @@ const Products = () => {
 
   return (
     <>
-      <Image mt="95px" w="100%" h={["128px", "128px", "128px", "auto", "auto"]} src="/images/product_main.png" />
+      <Image mt="113px" w="100%" h={["128px", "128px", "128px", "auto", "auto"]} src="/images/product_main.png" />
 
       <Container
         bg="#ffff"
-        p={2}
+        p={isMobile ? 0 : 2}
         maxW={isMobile ? "100%" : "80%"}
         sx={{
-          mt: "-50px",
+          mt: "-100px",
           mb: "20px",
           minHeight: "120vh !important",
           mr: "auto",
@@ -53,13 +54,13 @@ const Products = () => {
           pb: "30px",
         }}
       >
-        <Box bg="#ffff" py="3">
+        <Box bg="#ffff" py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">Home</BreadcrumbLink>
+            <BreadcrumbItem color="#3182CE">
+              <BreadcrumbLink href="/home">Home</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">Products</BreadcrumbLink>
+            <BreadcrumbItem color="#3182CE">
+              <BreadcrumbLink href="/products">Products</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink href="#">All Products</BreadcrumbLink>
@@ -119,6 +120,7 @@ const FilterSection = () => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }}>
+        <BsFilter style={{ height: "19px", width: "19px" }} />
         <FormattedMessage id="label.filter" />
       </Flex>
       <Box sx={{ width: "100%" }}>
@@ -129,13 +131,26 @@ const FilterSection = () => {
 };
 
 const ProductSection = () => {
+  const navigate = useNavigate();
   // const [pageSize, setPageSize] = useState(5);
   // const [pageNumber, setPageNumber] = useState();
+
+  const handleOnClick = () => {
+    navigate("/product/details");
+  };
+
   return (
     <Box>
       <Flex display={["none", "none", "none", "flex", "flex"]} pl={[0, 0, 0, 10, 10]} justifyContent="space-between">
-        <Text>Showing 13 items</Text>
-        <Text>Sort</Text>
+        <HStack fontWeight="bold">
+          <Text>Showing</Text>
+          <Text color="#FFB800"> 12 </Text>
+          <Text>items </Text>
+        </HStack>
+        <HStack fontWeight="bold">
+          <BsFilterLeft />
+          <Text>Sort</Text>
+        </HStack>
       </Flex>
       <Grid
         mt={2}
@@ -155,6 +170,7 @@ const ProductSection = () => {
                 title={item.productName}
                 image={item.image}
                 subtitle={item.productTypeName}
+                onClick={handleOnClick}
               />
             </GridItem>
           );

@@ -5,6 +5,7 @@ import Navbar from "./header/Navbar";
 import { ChevronUpIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
+import useMobile from "@hooks/useMobile";
 
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
@@ -45,12 +46,13 @@ const ScrollToTopButton = () => {
 };
 
 const MainLayout = () => {
+  const [isMobile] = useMobile();
   return (
     <>
       <Navbar />
       <Outlet />
       <Footer />
-      <ScrollToTopButton />
+      {!isMobile && <ScrollToTopButton />}
     </>
   );
 };
