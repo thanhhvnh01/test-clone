@@ -34,7 +34,7 @@ const ProductsAccordion = ({ data }) => {
             </>
             <AccordionPanel p={0}>
               <Box>
-                <Accordion borderBottom="none" borderTop="none" allowMultiple>
+                <Accordion borderBottom="none" borderTop="none" allowToggle>
                   {data?.map((item, index) => {
                     return (
                       <AccordionItem key={index}>
