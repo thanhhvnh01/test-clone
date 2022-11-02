@@ -101,13 +101,13 @@ const BestSaleSection = ({ isMobile, data }) => {
           <Button
             variant="link"
             className="navbar-item"
+            fontWeight="500"
             sx={{
               textTransform: "none",
               textDecoration: "none",
-              display: "flex",
               ml: "auto",
               color: "black",
-              display: isMobile ? "none" : "block",
+              display: isMobile ? "none" : "flex",
             }}
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
@@ -124,40 +124,42 @@ const AboutUsSection = ({ content, isMobile }) => {
     <SlideFade ref={ref} in={inView} offsetY="100px">
       {!isMobile ? (
         <Flex bg="#F5F5F5" px={[10, 10, 10, 10, "50px"]} my={5} justifyContent="center">
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-            <GridItem colSpan={1}>
-              <Image src="/images/about_us_picture.png" />
-            </GridItem>
-            <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }}>
-              <Box>
-                <Box pb={[1, 2, 3, 5, 10]}>
-                  <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
-                    <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
-                  </Text>
-                  <Flex bg="black" w={97} h="3px" m="auto" />
+          <Flex mx="auto" justifyContent="center">
+            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+              <GridItem colSpan={1} display="flex" ml="auto">
+                <Image src="/images/about_us_picture.png" />
+              </GridItem>
+              <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
+                <Box>
+                  <Box pb={[1, 2, 3, 5, 10]}>
+                    <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
+                      <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
+                    </Text>
+                    <Flex bg="black" w={97} h="3px" m="auto" />
+                  </Box>
+                  <Box bg="#DFDFDF" p={7} borderRadius="17px">
+                    <Text textAlign="justify">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standa1rd dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                      also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+                      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. . .
+                    </Text>
+                  </Box>
+                  <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+                    <Button
+                      textTransform="none"
+                      _hover={{ backgroundColor: "#D8D8D8" }}
+                      sx={{ color: " #2D3748", borderColor: "#2D3748" }}
+                    >
+                      <FormattedMessage id="button.readMore" />
+                    </Button>
+                  </Box>
                 </Box>
-                <Box bg="#DFDFDF" p={7} borderRadius="17px">
-                  <Text textAlign="justify">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standa1rd dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum. . .
-                  </Text>
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
-                  <Button
-                    textTransform="none"
-                    _hover={{ backgroundColor: "#D8D8D8" }}
-                    sx={{ color: " #2D3748", borderColor: "#2D3748" }}
-                  >
-                    <FormattedMessage id="button.readMore" />
-                  </Button>
-                </Box>
-              </Box>
-            </GridItem>
-          </Grid>
+              </GridItem>
+            </Grid>
+          </Flex>
         </Flex>
       ) : (
         <Box bg="#F5F5F5" py={5}>
@@ -224,6 +226,7 @@ const SupportSection = ({ isMobile }) => {
           <Button
             variant="link"
             className="navbar-item"
+            fontWeight="500"
             sx={{
               textTransform: "none",
               textDecoration: "none",

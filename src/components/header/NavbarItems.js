@@ -3,6 +3,7 @@ import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import Dropdown from "react-multilevel-dropdown";
+import { useNavigate } from "react-router-dom";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -23,6 +24,16 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
 };
 
 const ProductMenu = ({ dropDownData }) => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = (category) => {
+    navigate(`/products?categoryId=${category.categoryId}`);
+  };
+
+  const handleSubmenuClick = (category, productType) => {
+    navigate(`/products?categoryId=${category.categoryId}&productTypeId=${productType.productTypeId}`);
+  };
+
   return (
     <Dropdown
       openOnHover
@@ -60,7 +71,13 @@ const ProductMenu = ({ dropDownData }) => {
           const isLastItem = Boolean(index + 1 === dropDownData.length);
           return (
             <Dropdown.Item className={!isLastItem ? "Item_item__eDdfj" : "last-menu-item"} key={item.categoryId}>
-              {item.categoryName}
+              <Text
+                onClick={() => {
+                  handleMenuClick(item);
+                }}
+              >
+                {item.categoryName}
+              </Text>
               {!!item.productTypes && (
                 <Dropdown.Submenu position="right">
                   <Box sx={{ borderBottom: "none" }}>
@@ -71,7 +88,13 @@ const ProductMenu = ({ dropDownData }) => {
                           className={!isLastChildItem ? "child-item" : "last-child-item"}
                           key={i.productTypeId}
                         >
-                          {i.productTypeName}
+                          <Text
+                            onClick={(e) => {
+                              handleSubmenuClick(item, i);
+                            }}
+                          >
+                            {i.productTypeName}
+                          </Text>
                         </Dropdown.Item>
                       );
                     })}
@@ -105,11 +128,11 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <NavbarItem to="/">
+        <NavbarItem to="/about-andeahair">
           <FormattedMessage id="title.aboutUs" />
         </NavbarItem>
         <ProductMenu dropDownData={dropDownData} />
-        <NavbarItem to="/how">
+        <NavbarItem to="/contact">
           <FormattedMessage id="title.contact" />
         </NavbarItem>
         <Flex

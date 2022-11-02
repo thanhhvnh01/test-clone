@@ -5,9 +5,11 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
+  Flex,
   Grid,
   GridItem,
   Image,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
@@ -52,21 +54,30 @@ const ProductDetails = ({ productId }) => {
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
-        <Box>
-          <Grid templateColumns="repeat(12,1fr)">
-            <GridItem colSpan={2}>
+        <Box mt={10}>
+          <Grid templateColumns="repeat(6,1fr)">
+            <GridItem colSpan={1}>
               <VStack>
-                <Image src="/images/product_main.png" />
-                <Image src="/images/product_main.png" />
-                <Image src="/images/product_main.png" />
-                <Image src="/images/product_main.png" />
-                <Image src="/images/product_main.png" />
+                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
               </VStack>
             </GridItem>
-            <GridItem colSpan={6}>
-              <Box p={5}>{/* <Image src={image} /> */}</Box>
+            <GridItem colSpan={3} mt="-7px">
+              <Flex justifyContent="center">
+                <Image w="500px" h="500px" src="/images/image_2.png" />
+              </Flex>
             </GridItem>
-            <GridItem colSpan={4}>cc</GridItem>
+            <GridItem colSpan={2}>
+              <Box>
+                <Text>Ten san pham</Text>
+                <Text>Ten san pham</Text>
+                <Text>Ten san pham</Text>
+                <Text>Ten san pham</Text>
+              </Box>
+            </GridItem>
           </Grid>
         </Box>
       </Container>

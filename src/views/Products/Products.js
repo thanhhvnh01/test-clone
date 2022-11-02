@@ -10,6 +10,8 @@ import {
   HStack,
   Image,
   Input,
+  InputGroup,
+  InputRightElement,
   Text,
   useDisclosure,
   VStack,
@@ -17,22 +19,49 @@ import {
 import ProductCard from "@components/ProductCard";
 import ProductFilter from "@components/ProductFilter";
 import useMobile from "@hooks/useMobile";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 // icon
 import { BsFilterLeft, BsFilter } from "react-icons/bs";
 import MobileProductFilter from "@components/MobileProductFilter";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "@chakra-ui/icons";
 // paging
 import ReactPaginate from "react-paginate";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FormProvider } from "@components/hook-form";
+import { useForm } from "react-hook-form";
+import { getProductsAPI } from "@api/main";
 
 const Products = () => {
   const [isMobile] = useMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const query = useLocation().search;
+  const categoryIdParam = new URLSearchParams(query).get("categoryId");
+  const productTypeId = new URLSearchParams(query).get("productTypeId");
   // filter
-  // const [selectedCategory, setSelectedCategory] = useState();
-  // const [selectedProductType, setSelectedProductType] = useState();
+  const [selectedProductType, setSelectedProductType] = useState();
+
+  // form
+  const methods = useForm({
+    mode: "all",
+  });
+
+  const {
+    watch,
+    setValue,
+    // formState: { isValid },
+  } = methods;
+
+  const categoryId = watch("categoryId");
+
+  console.log(categoryId);
+
+  useEffect(() => {
+    setValue("categoryId", categoryIdParam);
+    setSelectedProductType(productTypeId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryIdParam, productTypeId]);
 
   return (
     <>
@@ -67,56 +96,68 @@ const Products = () => {
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
-        <Box className="product-main" p={3} mt={2}>
-          {!isMobile ? (
-            <>
-              <Flex justifyContent="space-between">
-                <Text fontSize="2xl" fontWeight="bold">
-                  <FormattedMessage id="title.allProducts" />
-                </Text>
-                <Input w="234px" />
-              </Flex>
-              <Grid templateColumns="repeat(13, 1fr)" gap={6}>
-                <GridItem colSpan={3}>
-                  <FilterSection />
-                </GridItem>
-                <GridItem colSpan={10}>
-                  <ProductSection />
-                </GridItem>
-              </Grid>
-            </>
-          ) : (
-            <>
-              <Flex justifyContent="space-between">
-                <HStack onClick={onOpen}>
-                  <BsFilter style={{ height: "19px", width: "19px" }} />
-                  <Text fontWeight="bold">Filter</Text>
-                </HStack>
-                <HStack>
-                  <Text fontWeight="bold" color="#FFB800">
-                    30
+        <FormProvider methods={methods}>
+          <Box className="product-main" p={3} mt={2}>
+            {!isMobile ? (
+              <>
+                <Flex justifyContent="space-between">
+                  <Text fontSize="2xl" fontWeight="bold">
+                    <FormattedMessage id="title.allProducts" />
                   </Text>
-                  <Text fontWeight="bold">items</Text>
-                </HStack>
-                <HStack>
-                  <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-                  <Text fontWeight="bold">Sort:</Text>
-                  <Text color="#FFB800" fontWeight="bold">
-                    A-Z
-                  </Text>
-                </HStack>
-              </Flex>
-              <ProductSection />
-            </>
-          )}
-        </Box>
-        {isOpen && <MobileProductFilter isOpen={isOpen} onClose={onClose} />}
+                  <Box mb={2}>
+                    <InputGroup>
+                      <Input w="234px" />
+                      <InputRightElement children={<SearchIcon />} />
+                    </InputGroup>
+                  </Box>
+                </Flex>
+                <Grid templateColumns="repeat(13, 1fr)" gap={6}>
+                  <GridItem colSpan={3}>
+                    <FilterSection
+                      categoryId={categoryId}
+                      selectedProductType={selectedProductType}
+                      setValue={setValue}
+                    />
+                  </GridItem>
+                  <GridItem colSpan={10}>
+                    <ProductSection categoryId={categoryId} />
+                  </GridItem>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Flex justifyContent="space-between">
+                  <HStack onClick={onOpen}>
+                    <BsFilter style={{ height: "19px", width: "19px" }} />
+                    <Text fontWeight="bold">Filter</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold" color="#FFB800">
+                      30
+                    </Text>
+                    <Text fontWeight="bold">items</Text>
+                  </HStack>
+                  <HStack>
+                    <BsFilterLeft style={{ height: "19px", width: "19px" }} />
+                    <Text fontWeight="bold">Sort:</Text>
+                    <Text color="#FFB800" fontWeight="bold">
+                      A-Z
+                    </Text>
+                  </HStack>
+                </Flex>
+                <ProductSection categoryId={categoryId} />
+              </>
+            )}
+          </Box>
+
+          {isOpen && <MobileProductFilter isOpen={isOpen} onClose={onClose} />}
+        </FormProvider>
       </Container>
     </>
   );
 };
 
-const FilterSection = () => {
+const FilterSection = ({ categoryId, selectedProductType, setSelectedCategory, setValue }) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }}>
@@ -124,16 +165,30 @@ const FilterSection = () => {
         <FormattedMessage id="label.filter" />
       </Flex>
       <Box sx={{ width: "100%" }}>
-        <ProductFilter />
+        <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
       </Box>
     </VStack>
   );
 };
 
-const ProductSection = () => {
+const ProductSection = ({ categoryId }) => {
   const navigate = useNavigate();
-  // const [pageSize, setPageSize] = useState(5);
-  // const [pageNumber, setPageNumber] = useState();
+  const [pageSize] = useState(12);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [keyword] = useState("");
+  const [products, setProducts] = useState([]);
+
+  // get products
+  const fetchProductData = async (pageSize, pageNumber, keyword, lang, data) => {
+    try {
+      const productRes = await getProductsAPI(pageSize, pageNumber, keyword, lang, data);
+      setProducts(productRes.data.pageData);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchProductData(pageSize, pageNumber + 1, keyword, "en", { categoryId: Number(categoryId) });
+  }, [pageSize, pageNumber, keyword, categoryId]);
 
   const handleOnClick = () => {
     navigate("/product/details");
@@ -141,7 +196,12 @@ const ProductSection = () => {
 
   return (
     <Box>
-      <Flex display={["none", "none", "none", "flex", "flex"]} pl={[0, 0, 0, 10, 10]} justifyContent="space-between">
+      <Flex
+        display={["none", "none", "none", "flex", "flex"]}
+        pr={[0, 0, 0, 5, 5]}
+        pl={[0, 0, 0, 10, 12]}
+        justifyContent="space-between"
+      >
         <HStack fontWeight="bold">
           <Text>Showing</Text>
           <Text color="#FFB800"> 12 </Text>
@@ -156,9 +216,9 @@ const ProductSection = () => {
         mt={2}
         templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"]}
       >
-        {data.map((item, index) => {
+        {products.map((item, index) => {
           return (
-            <GridItem colSpan={1} key={index}>
+            <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
               <ProductCard
                 sx={{
                   mb: 5,
@@ -168,7 +228,7 @@ const ProductSection = () => {
                 }}
                 key={index}
                 title={item.productName}
-                image={item.image}
+                image={item.imageUrl}
                 subtitle={item.productTypeName}
                 onClick={handleOnClick}
               />
@@ -178,11 +238,27 @@ const ProductSection = () => {
       </Grid>
       <ReactPaginate
         breakLabel="..."
-        nextLabel={<ChevronRightIcon boxSize={5} color="#6B6E72" />}
+        nextLabel={
+          <ChevronRightIcon
+            boxSize={5}
+            color="#6B6E72"
+            onClick={() => {
+              setPageNumber(pageNumber + 1);
+            }}
+          />
+        }
         onPageChange={() => {}}
         pageRangeDisplayed={5}
         pageCount={5}
-        previousLabel={<ChevronLeftIcon boxSize={5} color="#6B6E72" />}
+        previousLabel={
+          <ChevronLeftIcon
+            boxSize={5}
+            color="#6B6E72"
+            onClick={() => {
+              setPageNumber(pageNumber - 1);
+            }}
+          />
+        }
         renderOnZeroPageCount={null}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
@@ -192,68 +268,5 @@ const ProductSection = () => {
     </Box>
   );
 };
-
-const data = [
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-  {
-    productName: "lala",
-    productTypeName: "aa",
-    image: "/images/product_1.png",
-  },
-];
 
 export default Products;

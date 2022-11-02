@@ -72,7 +72,7 @@ const ProductSlider = ({ data, isMobile }) => {
   return (
     <Box p={[3, 5, 5, 12, 12]} py={[6, 6, 6, 12, 12]}>
       <Slider {...settings}>
-        {data?.map((item, index) => {
+        {data.pageData?.map((item, index) => {
           return (
             <ProductCard
               key={index}

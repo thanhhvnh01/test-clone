@@ -1,4 +1,4 @@
-// import { getCategoriesAPI, getProductTypesAPI } from "@api/main";
+import { getCategoriesAPI, getProductTypesAPI } from "@api/main";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import {
   Accordion,
@@ -12,43 +12,48 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import { RHFCheckbox, RHFRadioGroup } from "@components/hook-form";
+import { arrayToSelectOptions } from "@utility/ultils";
+import React, { useEffect } from "react";
+import { useState } from "react";
 // import { FormattedMessage } from "react-intl";
 
-const ProductFilter = ({ selectedCategory }) => {
-  //   const [categoryData, setCategoryData] = useState([]);
-  //   const [productTypeData, setProductTypeData] = useState([]);
-  //   const [categoryData, setCategoryData] = useState([]);
+const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
+  const initLang = localStorage.getItem("language");
+  const [categoryData, setCategoryData] = useState([]);
+  const [productTypeData, setProductTypeData] = useState([]);
 
-  //   const fetchCategoryData = async () => {
-  //     try {
-  //       const categoryRes = await getCategoriesAPI(50, 1, "");
-  //       setCategoryData(categoryRes.data.pageData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const fetchCategoryData = async (initLang) => {
+    try {
+      const categoryRes = await getCategoriesAPI(initLang);
+      setCategoryData(categoryRes.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   useEffect(() => {
-  //     fetchCategoryData();
-  //   }, []);
+  useEffect(() => {
+    fetchCategoryData(initLang);
+  }, [initLang, categoryId]);
 
-  //   const fetchProductTypeData = async (data) => {
-  //     try {
-  //       const productTypeRes = await getProductTypesAPI(50, 1, "", data);
-  //       setProductTypeData(productTypeRes.data.pageData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const fetchProductTypeData = async (categoryId, lang) => {
+    try {
+      const productTypeRes = await getProductTypesAPI(categoryId, lang);
+      setProductTypeData(productTypeRes.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   useEffect(() => {
-  //     fetchProductTypeData(selectedCategory);
-  //   }, [selectedCategory]);
+  useEffect(() => {
+    if (!!categoryId) {
+      fetchProductTypeData(categoryId, initLang);
+    }
+  }, [categoryId, initLang]);
 
   return (
     <Box>
-      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
+      <Accordion defaultIndex={[0, 2]} allowMultiple>
         <AccordionItem>
           {({ isExpanded }) => (
             <>
@@ -60,15 +65,22 @@ const ProductFilter = ({ selectedCategory }) => {
               </AccordionButton>
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
                 <CheckboxGroup>
-                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    <Checkbox>Category 1</Checkbox>
-
-                    <Checkbox>Category 2</Checkbox>
-
-                    <Checkbox>Category 3</Checkbox>
-
-                    <Checkbox>Category 4</Checkbox>
-                  </VStack>
+                  <RHFRadioGroup
+                    name="categoryId"
+                    options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
+                  />
+                  {/* {categoryData?.map((item) => {
+                        return (
+                          <RHFCheckbox
+                            onChange={() => {
+                              handleSelectCategory(item);
+                            }}
+                            name={`category${item.categoryId}`}
+                            key={item.categoryId}
+                            label={item.categoryName}
+                          />
+                        );
+                      })} */}
                 </CheckboxGroup>
               </AccordionPanel>
             </>
@@ -86,13 +98,15 @@ const ProductFilter = ({ selectedCategory }) => {
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
                 <CheckboxGroup>
                   <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    <Checkbox>Product1</Checkbox>
-
-                    <Checkbox>Product2</Checkbox>
-
-                    <Checkbox>Product3</Checkbox>
-
-                    <Checkbox>Product4</Checkbox>
+                    {productTypeData?.map((item) => {
+                      return (
+                        <RHFCheckbox
+                          name={`productType${item.productTypeId}`}
+                          key={item.productTypeId}
+                          label={item.productTypeName}
+                        />
+                      );
+                    })}
                   </VStack>
                 </CheckboxGroup>
               </AccordionPanel>

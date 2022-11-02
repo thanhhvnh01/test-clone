@@ -19,18 +19,20 @@ export const subscribeNewMemberAPI = async (email) => {
 
 // * product section
 // category
-export const getCategoriesAPI = async (pageSize, pageNumber, keyword = "") => {
-  return axios.post(
-    `${process.env.REACT_APP_API_URL}/categories/search?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}`
-  );
+export const getCategoriesAPI = async (lang) => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/categories/all-enabled?lang=${lang}`);
 };
 
 // product type
-export const getProductTypesAPI = async (pageSize, pageNumber, keyword = "", data) => {
+export const getProductTypesAPI = async (categoryId, lang) => {
+  return axios.post(`${process.env.REACT_APP_API_URL}/product-types/all-enabled?categoryId=${categoryId}&lang=${lang}`);
+};
+
+// product
+export const getProductsAPI = async (pageSize, pageNumber, keyword = "", lang, data) => {
   return axios.post(
-    `${process.env.REACT_APP_API_URL}/product-types/search?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}`,
+    `${process.env.REACT_APP_API_URL}/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}&lang=${lang}`,
     data
   );
 };
-
 // * end category section

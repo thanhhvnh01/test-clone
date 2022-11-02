@@ -6,21 +6,22 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
     <Box
       bg="#ffff"
       tabIndex={0}
+      _hover={{ border: "2px solid #AAAAAA !important" }}
       // w={isMobile ? "112px" : "236px"}
-      w={["175px", "182px", "182px", "236px", "236px"]}
+      w={["175px", "182px", "182px", "216px", "216px"]}
       // h={isMobile ? "139px" : "318px"}
       h={["248px", "248px", "248px", "318px", "318px"]}
       sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
       ml={[1, 5, 5, 2, 10]}
     >
-      <Image
-        mb={3}
-        mx={[2, 2, 2, 5, 5]}
-        w={["152px", "152px", "152px", "198px", "198px"]}
-        h={["162px", "162px", "162px", "208px", "208px"]}
-        src={image}
-        alt="product"
-      />
+      <Center mb={3}>
+        <Image
+          w={["152px", "152px", "152px", "180px", "180px"]}
+          h={["162px", "162px", "162px", "208px", "208px"]}
+          src={image}
+          alt="product"
+        />
+      </Center>
       <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>
         <VStack spacing="5px">
           <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={["12px", "12px", "12px", "16px", "16px"]}>
