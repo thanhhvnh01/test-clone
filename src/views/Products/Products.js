@@ -135,10 +135,14 @@ const Products = () => {
         <Box bg="#ffff" py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
             <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/home">Home</BreadcrumbLink>
+              <BreadcrumbLink href="/home">
+                <FormattedMessage id="label.home" />
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+              <BreadcrumbLink href="/products">
+                <FormattedMessage id="label.products" />
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink href="#">{}</BreadcrumbLink>
@@ -184,9 +188,25 @@ const Products = () => {
             ) : (
               <>
                 <Flex justifyContent="space-between">
+                  <HStack onClick={onOpen}>
+                    <BsFilter style={{ height: "19px", width: "19px" }} />
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.filter" />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold" color="#FFB800">
+                      30
+                    </Text>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.items" />
+                    </Text>
+                  </HStack>
                   <HStack>
                     <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-                    <Text fontWeight="bold">Sort:</Text>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.sort" />
+                    </Text>
                     <Text color="#FFB800" fontWeight="bold">
                       A-Z
                     </Text>
@@ -263,6 +283,19 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handl
         justifyContent="space-between"
       >
         <HStack fontWeight="bold">
+          <Text>
+            <FormattedMessage id="label.showing" />
+          </Text>
+          <Text color="#FFB800"> 12 </Text>
+          <Text>
+            <FormattedMessage id="label.items" />{" "}
+          </Text>
+        </HStack>
+        <HStack fontWeight="bold">
+          <BsFilterLeft />
+          <Text>
+            <FormattedMessage id="label.sort" />
+          </Text>
           <Text>Showing</Text>
           <Text color="#FFB800"> {data.length} </Text>
           <Text>items </Text>
@@ -314,7 +347,9 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handl
             );
           })
         ) : (
-          <Text> No items here</Text>
+          <Text>
+            <FormattedMessage id="label.noitemhere" />
+          </Text>
         )}
       </Grid>
       <ReactPaginate

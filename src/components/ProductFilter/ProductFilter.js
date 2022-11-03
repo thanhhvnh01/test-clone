@@ -15,6 +15,7 @@ import RHFCheckbox from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { FormattedMessage } from "react-intl";
 // import { FormattedMessage } from "react-intl";
 
 const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
@@ -73,7 +74,9 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  <Text fontWeight="bold">Category</Text>
+                  <Text fontWeight="bold">
+                    <FormattedMessage id="label.category" />
+                  </Text>
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
@@ -118,6 +121,29 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
+                  <FormattedMessage id="label.productstype" />
+                </Box>
+                {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
+              </AccordionButton>
+              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
+                <CheckboxGroup>
+                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
+                    <RHFCheckbox
+                      name="productTypes"
+                      options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
+                    />
+                  </VStack>
+                </CheckboxGroup>
+              </AccordionPanel>
+            </>
+          )}
+        </AccordionItem>
+        <AccordionItem>
+          {({ isExpanded }) => (
+            <>
+              <AccordionButton py={3}>
+                <Box flex="1" textAlign="left">
+                  <FormattedMessage id="label.color" />
                   <Text fontWeight="bold">Color</Text>
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
