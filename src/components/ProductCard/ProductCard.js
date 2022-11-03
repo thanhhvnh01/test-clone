@@ -23,7 +23,7 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
         />
       </Center>
       <Center h="26%" sx={{ display: "flex", alignContent: "center" }}>
-        <VStack spacing="5px">
+        <VStack spacing="5px" px={1}>
           <Text
             textTransform="uppercase"
             fontWeight="600"

@@ -153,7 +153,7 @@ const Products = () => {
                   <Text fontSize="2xl" fontWeight="bold">
                     <FormattedMessage id="title.allProducts" />
                   </Text>
-                  <Box mb={2}>
+                  <Box mb={2} mr={[3, 3, 3, 8, 3]}>
                     <InputGroup>
                       <Input w="234px" onChange={handleKeywordChange} value={keyword} />
                       <InputRightElement children={<SearchIcon />} />
@@ -184,12 +184,27 @@ const Products = () => {
             ) : (
               <>
                 <Flex justifyContent="space-between">
-                  <HStack>
-                    <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-                    <Text fontWeight="bold">Sort:</Text>
-                    <Text color="#FFB800" fontWeight="bold">
-                      A-Z
-                    </Text>
+                  <HStack fontWeight="bold">
+                    <HStack>
+                      <BsFilterLeft style={{ height: "19px", width: "19px" }} />
+                      <Text>Sort:</Text>
+                    </HStack>
+                    <Select
+                      onChange={(e) => {
+                        handleRequestSort(e);
+                      }}
+                      variant="unstyled"
+                      borderColor="#ffff"
+                      fontWeight="bold"
+                      textColor="#FFA800"
+                    >
+                      <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold" }}>
+                        A-Z
+                      </option>
+                      <option value={OrderByTypeEnum.Desc} style={{ fontWeight: "bold" }}>
+                        Z-A
+                      </option>
+                    </Select>
                   </HStack>
                   <HStack>
                     <Text fontWeight="bold" color="#FFB800">

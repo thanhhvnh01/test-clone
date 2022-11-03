@@ -17,7 +17,16 @@ export default function RHFCheckbox({ name, options, value, isColor, ...other })
                 <Checkbox key={index} value={`${item.id}`}>
                   {!!isColor ? (
                     <HStack>
-                      <Box bg={`${item.condition[0]}`} width="15px" height="15px" borderRadius="50%" />{" "}
+                      <Box
+                        bg={
+                          item.condition.length > 1
+                            ? `linear-gradient(to bottom,${item.condition[0]}, ${item.condition[2]} 100%)`
+                            : `${item.condition[0]}`
+                        }
+                        width="15px"
+                        height="15px"
+                        borderRadius="50%"
+                      />{" "}
                       <Text>{item.label}</Text>
                     </HStack>
                   ) : (
