@@ -4,6 +4,8 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Checkbox,
+  CheckboxGroup,
   Container,
   Flex,
   Grid,
@@ -13,7 +15,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React from "react";
+import React, { useState } from "react";
 
 const ProductDetails = ({ productId }) => {
   const [isMobile] = useMobile();
@@ -21,6 +23,8 @@ const ProductDetails = ({ productId }) => {
   // const [imageIndex, setImageIndex] = useState(0);
 
   // const getImageUrl = () => {};
+  const [demo, setDemo] = useState();
+  console.log(demo);
 
   return (
     <>
@@ -77,6 +81,17 @@ const ProductDetails = ({ productId }) => {
                 <Text>Ten san pham</Text>
                 <Text>Ten san pham</Text>
               </Box>
+              <CheckboxGroup
+                onChange={(e) => {
+                  console.log(e);
+                  setDemo(e);
+                }}
+                value={demo}
+              >
+                <Checkbox value={"1"}>aaa</Checkbox>
+                <Checkbox value="2">aba</Checkbox>
+                <Checkbox value="3">aac</Checkbox>
+              </CheckboxGroup>
             </GridItem>
           </Grid>
         </Box>

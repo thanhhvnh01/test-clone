@@ -1,20 +1,32 @@
 // form
-import { Checkbox } from "@chakra-ui/react";
+import { Box, Checkbox, CheckboxGroup, HStack, Text } from "@chakra-ui/react";
 import { useFormContext, Controller } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
-export default function RHFCheckbox({ name, label, onChange, ...other }) {
+export default function RHFCheckbox({ name, options, value, isColor, ...other }) {
   const { control } = useFormContext();
-
   return (
     <Controller
       name={name}
       render={({ field }) => {
         return (
-          <Checkbox {...field} onChange={(e) => field.onChange(e.target.checked)} isChecked={field.value} value={name}>
-            {label}
-          </Checkbox>
+          <CheckboxGroup onChange={(e) => field.onChange(e)}>
+            {options?.map((item, index) => {
+              return (
+                <Checkbox key={index} value={`${item.id}`}>
+                  {!!isColor ? (
+                    <HStack>
+                      <Box bg={`${item.condition[0]}`} width="15px" height="15px" borderRadius="50%" />{" "}
+                      <Text>{item.label}</Text>
+                    </HStack>
+                  ) : (
+                    item.label
+                  )}
+                </Checkbox>
+              );
+            })}
+          </CheckboxGroup>
         );
       }}
       control={control}

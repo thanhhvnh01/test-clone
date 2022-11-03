@@ -1,4 +1,4 @@
-import { getCategoriesAPI, getProductTypesAPI } from "@api/main";
+import { getCategoriesAPI, getColorAPI, getProductTypesAPI } from "@api/main";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import {
   Accordion,
@@ -6,13 +6,11 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Checkbox,
   CheckboxGroup,
-  HStack,
-  Text,
   VStack,
 } from "@chakra-ui/react";
-import { RHFCheckbox, RHFRadioGroup } from "@components/hook-form";
+import { RHFRadioGroup } from "@components/hook-form";
+import RHFCheckbox from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -22,6 +20,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
   const initLang = localStorage.getItem("language");
   const [categoryData, setCategoryData] = useState([]);
   const [productTypeData, setProductTypeData] = useState([]);
+  const [colorData, setColorData] = useState([]);
 
   const fetchCategoryData = async (initLang) => {
     try {
@@ -51,9 +50,23 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
     }
   }, [categoryId, initLang]);
 
+  // fetch color
+  const fetchColorData = async (lang) => {
+    try {
+      const colorRes = await getColorAPI(lang);
+      setColorData(colorRes.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchColorData(initLang);
+  }, [initLang]);
+
   return (
     <Box>
-      <Accordion defaultIndex={[0, 2]} allowMultiple>
+      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
         <AccordionItem>
           {({ isExpanded }) => (
             <>
@@ -69,18 +82,6 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
                     name="categoryId"
                     options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
                   />
-                  {/* {categoryData?.map((item) => {
-                        return (
-                          <RHFCheckbox
-                            onChange={() => {
-                              handleSelectCategory(item);
-                            }}
-                            name={`category${item.categoryId}`}
-                            key={item.categoryId}
-                            label={item.categoryName}
-                          />
-                        );
-                      })} */}
                 </CheckboxGroup>
               </AccordionPanel>
             </>
@@ -98,15 +99,10 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
                 <CheckboxGroup>
                   <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    {productTypeData?.map((item) => {
-                      return (
-                        <RHFCheckbox
-                          name={`productType${item.productTypeId}`}
-                          key={item.productTypeId}
-                          label={item.productTypeName}
-                        />
-                      );
-                    })}
+                    <RHFCheckbox
+                      name="productTypes"
+                      options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
+                    />
                   </VStack>
                 </CheckboxGroup>
               </AccordionPanel>
@@ -122,33 +118,16 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel py={3} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <Checkbox>
-                  <HStack>
-                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text>Color 1</Text>
-                  </HStack>
-                </Checkbox>
-              </AccordionPanel>
-              <AccordionPanel py={3}>
-                <Checkbox>
-                  <HStack>
-                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 2 </Text>
-                  </HStack>
-                </Checkbox>
-              </AccordionPanel>
-              <AccordionPanel py={3}>
-                <Checkbox>
-                  <HStack>
-                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 3</Text>
-                  </HStack>
-                </Checkbox>
-              </AccordionPanel>
-              <AccordionPanel py={3}>
-                <Checkbox>
-                  <HStack>
-                    <Box bg="#FF0000" width="15px" height="15px" borderRadius="50%" /> <Text> Color 4 </Text>
-                  </HStack>
-                </Checkbox>
+              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
+                <CheckboxGroup>
+                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
+                    <RHFCheckbox
+                      name="colors"
+                      isColor
+                      options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
+                    />
+                  </VStack>
+                </CheckboxGroup>
               </AccordionPanel>
             </>
           )}

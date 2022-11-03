@@ -8,9 +8,9 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
       tabIndex={0}
       _hover={{ border: "2px solid #AAAAAA !important" }}
       // w={isMobile ? "112px" : "236px"}
-      w={["175px", "182px", "182px", "216px", "216px"]}
+      maxW={["175px", "182px", "182px", "216px", "216px"]}
       // h={isMobile ? "139px" : "318px"}
-      h={["248px", "248px", "248px", "318px", "318px"]}
+      maxH={["248px", "248px", "248px", "318px", "318px"]}
       sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
       ml={[1, 5, 5, 2, 10]}
     >
@@ -22,9 +22,15 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
           alt="product"
         />
       </Center>
-      <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>
+      <Center h="26%" sx={{ display: "flex", alignContent: "center" }}>
         <VStack spacing="5px">
-          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={["12px", "12px", "12px", "16px", "16px"]}>
+          <Text
+            textTransform="uppercase"
+            fontWeight="600"
+            m="auto"
+            fontSize={["12px", "12px", "12px", "16px", "16px"]}
+            textAlign="center"
+          >
             {title}
           </Text>
           <Text fontSize="7px" color="#FFB800">

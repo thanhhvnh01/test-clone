@@ -28,6 +28,11 @@ export const getProductTypesAPI = async (categoryId, lang) => {
   return axios.post(`${process.env.REACT_APP_API_URL}/product-types/all-enabled?categoryId=${categoryId}&lang=${lang}`);
 };
 
+// color
+export const getColorAPI = async (lang) => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/colors/all-enabled?lang=${lang}`);
+};
+
 // product
 export const getProductsAPI = async (pageSize, pageNumber, keyword = "", lang, data) => {
   return axios.post(

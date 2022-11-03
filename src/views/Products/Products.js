@@ -41,6 +41,11 @@ const Products = () => {
   const productTypeId = new URLSearchParams(query).get("productTypeId");
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
+  const [keyword, setKeyword] = useState("");
+  // product data
+  const [pageSize] = useState(12);
+  const [pageNumber] = useState(0);
+  const [products, setProducts] = useState([]);
 
   // form
   const methods = useForm({
@@ -54,14 +59,47 @@ const Products = () => {
   } = methods;
 
   const categoryId = watch("categoryId");
+  const productTypes = watch("productTypes");
+  const colors = watch("colors");
 
-  console.log(categoryId);
+  // action ( reset productTypes when categoryId changed )
+  useEffect(() => {
+    setValue("productTypes", []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId]);
+
+  // get products
+  const fetchProductData = async (pageSize, pageNumber, keyword, lang, data) => {
+    try {
+      const productRes = await getProductsAPI(pageSize, pageNumber, keyword, lang, data);
+      setProducts(productRes.data.pageData);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const productTypeIds = productTypes?.map((i) => {
+      return Number(i);
+    });
+    const colorIds = colors?.map((i) => {
+      return Number(i);
+    });
+    fetchProductData(pageSize, pageNumber + 1, keyword, "en", {
+      categoryId: Number(categoryId),
+      productTypeIds: productTypeIds,
+      colorIds: colorIds,
+    });
+  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors]);
 
   useEffect(() => {
     setValue("categoryId", categoryIdParam);
     setSelectedProductType(productTypeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIdParam, productTypeId]);
+
+  // * actions
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+  };
 
   return (
     <>
@@ -92,7 +130,7 @@ const Products = () => {
               <BreadcrumbLink href="/products">Products</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">All Products</BreadcrumbLink>
+              <BreadcrumbLink href="#">{}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -106,7 +144,7 @@ const Products = () => {
                   </Text>
                   <Box mb={2}>
                     <InputGroup>
-                      <Input w="234px" />
+                      <Input w="234px" onChange={handleKeywordChange} value={keyword} />
                       <InputRightElement children={<SearchIcon />} />
                     </InputGroup>
                   </Box>
@@ -120,7 +158,13 @@ const Products = () => {
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
-                    <ProductSection categoryId={categoryId} />
+                    <ProductSection
+                      categoryId={categoryId}
+                      keyword={keyword}
+                      pageSize={pageSize}
+                      pageNumber={pageNumber}
+                      data={products}
+                    />
                   </GridItem>
                 </Grid>
               </>
@@ -145,7 +189,13 @@ const Products = () => {
                     </Text>
                   </HStack>
                 </Flex>
-                <ProductSection categoryId={categoryId} />
+                <ProductSection
+                  categoryId={categoryId}
+                  keyword={keyword}
+                  pageSize={pageSize}
+                  pageNumber={pageNumber}
+                  data={products}
+                />
               </>
             )}
           </Box>
@@ -171,24 +221,8 @@ const FilterSection = ({ categoryId, selectedProductType, setSelectedCategory, s
   );
 };
 
-const ProductSection = ({ categoryId }) => {
+const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data }) => {
   const navigate = useNavigate();
-  const [pageSize] = useState(12);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [keyword] = useState("");
-  const [products, setProducts] = useState([]);
-
-  // get products
-  const fetchProductData = async (pageSize, pageNumber, keyword, lang, data) => {
-    try {
-      const productRes = await getProductsAPI(pageSize, pageNumber, keyword, lang, data);
-      setProducts(productRes.data.pageData);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    fetchProductData(pageSize, pageNumber + 1, keyword, "en", { categoryId: Number(categoryId) });
-  }, [pageSize, pageNumber, keyword, categoryId]);
 
   const handleOnClick = () => {
     navigate("/product/details");
@@ -216,25 +250,29 @@ const ProductSection = ({ categoryId }) => {
         mt={2}
         templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"]}
       >
-        {products.map((item, index) => {
-          return (
-            <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
-              <ProductCard
-                sx={{
-                  mb: 5,
-                  mx: "auto",
-                  border: "1px solid #AAAAAA !important",
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                }}
-                key={index}
-                title={item.productName}
-                image={item.imageUrl}
-                subtitle={item.productTypeName}
-                onClick={handleOnClick}
-              />
-            </GridItem>
-          );
-        })}
+        {data.length > 0 ? (
+          data?.map((item, index) => {
+            return (
+              <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
+                <ProductCard
+                  sx={{
+                    mb: 5,
+                    mx: "auto",
+                    border: "1px solid #AAAAAA !important",
+                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  }}
+                  key={index}
+                  title={item.productName}
+                  image={item.imageUrl}
+                  subtitle={item.productTypeName}
+                  onClick={handleOnClick}
+                />
+              </GridItem>
+            );
+          })
+        ) : (
+          <Text> No items here</Text>
+        )}
       </Grid>
       <ReactPaginate
         breakLabel="..."
@@ -243,7 +281,7 @@ const ProductSection = ({ categoryId }) => {
             boxSize={5}
             color="#6B6E72"
             onClick={() => {
-              setPageNumber(pageNumber + 1);
+              // setPageNumber(pageNumber + 1);
             }}
           />
         }
@@ -255,11 +293,10 @@ const ProductSection = ({ categoryId }) => {
             boxSize={5}
             color="#6B6E72"
             onClick={() => {
-              setPageNumber(pageNumber - 1);
+              // setPageNumber(pageNumber - 1);
             }}
           />
         }
-        renderOnZeroPageCount={null}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         pageClassName={"pagingateItem"}
