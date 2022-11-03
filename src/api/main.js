@@ -10,6 +10,13 @@ export const getProductForHomePageAPI = async (lang) => {
 export const getBestSaleProductsAPI = async (lang) => {
   return axios.get(`${process.env.REACT_APP_API_URL}/products/best-selling?lang=${lang}`, { __auth: false });
 };
+// supporter
+export const getSupportersAPI = async (pageSize, pageNumber) => {
+  return axios.get(
+    `${process.env.REACT_APP_API_URL}/supporters/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}`,
+    { __auth: false }
+  );
+};
 // subscribe
 export const subscribeNewMemberAPI = async (email) => {
   return axios.post(`${process.env.REACT_APP_API_URL}/subscribe/new-subscriber`, email, { __auth: false });
@@ -34,9 +41,9 @@ export const getColorAPI = async (lang) => {
 };
 
 // product
-export const getProductsAPI = async (pageSize, pageNumber, keyword = "", lang, data) => {
+export const getProductsAPI = async (pageSize, pageNumber, orderByTypeId, orderBy, keyword = "", lang, data) => {
   return axios.post(
-    `${process.env.REACT_APP_API_URL}/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}&lang=${lang}`,
+    `${process.env.REACT_APP_API_URL}/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}&lang=${lang}&orderByTypeId=${orderByTypeId}&orderBy=${orderBy}`,
     data
   );
 };

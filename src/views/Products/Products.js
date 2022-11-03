@@ -3,6 +3,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Button,
   Container,
   Flex,
   Grid,
@@ -12,6 +13,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Select,
   Text,
   useDisclosure,
   VStack,
@@ -31,6 +33,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FormProvider } from "@components/hook-form";
 import { useForm } from "react-hook-form";
 import { getProductsAPI } from "@api/main";
+import { OrderByTypeEnum } from "@utility/constant";
 
 const Products = () => {
   const [isMobile] = useMobile();
@@ -46,32 +49,30 @@ const Products = () => {
   const [pageSize] = useState(12);
   const [pageNumber] = useState(0);
   const [products, setProducts] = useState([]);
+  const [orderBy] = useState("productName");
+  const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
 
   // form
   const methods = useForm({
     mode: "all",
   });
 
-  const {
-    watch,
-    setValue,
-    // formState: { isValid },
-  } = methods;
+  const { watch, setValue } = methods;
 
   const categoryId = watch("categoryId");
   const productTypes = watch("productTypes");
   const colors = watch("colors");
 
-  // action ( reset productTypes when categoryId changed )
+  //* action ( reset productTypes when categoryId changed )
   useEffect(() => {
     setValue("productTypes", []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);
 
   // get products
-  const fetchProductData = async (pageSize, pageNumber, keyword, lang, data) => {
+  const fetchProductData = async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
     try {
-      const productRes = await getProductsAPI(pageSize, pageNumber, keyword, lang, data);
+      const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
       setProducts(productRes.data.pageData);
     } catch (error) {}
   };
@@ -83,12 +84,12 @@ const Products = () => {
     const colorIds = colors?.map((i) => {
       return Number(i);
     });
-    fetchProductData(pageSize, pageNumber + 1, keyword, "en", {
-      categoryId: Number(categoryId),
+    fetchProductData(pageSize, pageNumber + 1, orderByType, orderBy, keyword, "en", {
+      categoryId: !!categoryId ? Number(categoryId) : null,
       productTypeIds: productTypeIds,
       colorIds: colorIds,
     });
-  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors]);
+  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy]);
 
   useEffect(() => {
     setValue("categoryId", categoryIdParam);
@@ -99,6 +100,16 @@ const Products = () => {
   // * actions
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
+  };
+
+  const handleClearFilter = () => {
+    setValue("productTypes", []);
+    setValue("colors", []);
+  };
+
+  const handleRequestSort = (e) => {
+    e.preventDefault();
+    setOrderByType(e.target.value);
   };
 
   return (
@@ -159,6 +170,7 @@ const Products = () => {
                       categoryId={categoryId}
                       selectedProductType={selectedProductType}
                       setValue={setValue}
+                      handleClearFilter={handleClearFilter}
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
@@ -167,6 +179,7 @@ const Products = () => {
                       keyword={keyword}
                       pageSize={pageSize}
                       pageNumber={pageNumber}
+                      handleRequestSort={handleRequestSort}
                       data={products}
                     />
                   </GridItem>
@@ -198,6 +211,17 @@ const Products = () => {
                       A-Z
                     </Text>
                   </HStack>
+                  <HStack>
+                    <Text fontWeight="bold" color="#FFB800">
+                      {products.length}
+                    </Text>
+                    <Text fontWeight="bold">items</Text>
+                  </HStack>
+
+                  <HStack onClick={onOpen}>
+                    <BsFilter style={{ height: "19px", width: "19px" }} />
+                    <Text fontWeight="bold">Filter</Text>
+                  </HStack>
                 </Flex>
                 <ProductSection
                   categoryId={categoryId}
@@ -210,19 +234,31 @@ const Products = () => {
             )}
           </Box>
 
-          {isOpen && <MobileProductFilter isOpen={isOpen} onClose={onClose} />}
+          {isOpen && <MobileProductFilter isOpen={isOpen} onClose={onClose} categoryId={categoryId} />}
         </FormProvider>
       </Container>
     </>
   );
 };
 
-const FilterSection = ({ categoryId, selectedProductType, setSelectedCategory, setValue }) => {
+const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter }) => {
   return (
     <VStack>
-      <Flex sx={{ width: "100%" }}>
-        <BsFilter style={{ height: "19px", width: "19px" }} />
-        <FormattedMessage id="label.filter" />
+      <Flex sx={{ width: "100%" }} justifyContent="space-between">
+        <HStack>
+          <BsFilter style={{ height: "19px", width: "19px" }} />
+          <FormattedMessage id="label.filter" />
+        </HStack>
+        <Button
+          onClick={handleClearFilter}
+          fontWeight="500"
+          textTransform="none"
+          variant="ghost"
+          fontSize="14px"
+          h="23px"
+        >
+          Clear all filter
+        </Button>
       </Flex>
       <Box sx={{ width: "100%" }}>
         <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
@@ -231,7 +267,7 @@ const FilterSection = ({ categoryId, selectedProductType, setSelectedCategory, s
   );
 };
 
-const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data }) => {
+const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handleRequestSort }) => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -260,6 +296,31 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data }) => 
           <Text>
             <FormattedMessage id="label.sort" />
           </Text>
+          <Text>Showing</Text>
+          <Text color="#FFB800"> {data.length} </Text>
+          <Text>items </Text>
+        </HStack>
+        <HStack fontWeight="bold">
+          <HStack>
+            <BsFilterLeft style={{ height: "19px", width: "19px" }} />
+            <Text>Sort:</Text>
+          </HStack>
+          <Select
+            onChange={(e) => {
+              handleRequestSort(e);
+            }}
+            variant="unstyled"
+            borderColor="#ffff"
+            fontWeight="bold"
+            textColor="#FFA800"
+          >
+            <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold" }}>
+              A-Z
+            </option>
+            <option value={OrderByTypeEnum.Desc} style={{ fontWeight: "bold" }}>
+              Z-A
+            </option>
+          </Select>
         </HStack>
       </Flex>
       <Grid
@@ -275,7 +336,6 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data }) => 
                     mb: 5,
                     mx: "auto",
                     border: "1px solid #AAAAAA !important",
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                   }}
                   key={index}
                   title={item.productName}

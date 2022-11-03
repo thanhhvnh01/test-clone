@@ -11,7 +11,7 @@ export default function RHFCheckbox({ name, options, value, isColor, ...other })
       name={name}
       render={({ field }) => {
         return (
-          <CheckboxGroup onChange={(e) => field.onChange(e)}>
+          <CheckboxGroup onChange={(e) => field.onChange(e)} value={field.value}>
             {options?.map((item, index) => {
               return (
                 <Checkbox key={index} value={`${item.id}`}>

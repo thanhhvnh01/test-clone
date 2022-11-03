@@ -20,7 +20,7 @@ import { useInView } from "react-intersection-observer";
 // slider
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
-import { getBestSaleProductsAPI, subscribeNewMemberAPI } from "@api/main";
+import { getBestSaleProductsAPI, getSupportersAPI, subscribeNewMemberAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
 
@@ -42,11 +42,12 @@ const slideImages = [
 const Home = () => {
   const initLang = localStorage.getItem("language");
   const [productsData, setProductsData] = useState([]);
+  const [supporterData, setSupporterData] = useState([]);
 
   const fetchProductData = async (lang) => {
     try {
       const res = await getBestSaleProductsAPI(lang);
-      setProductsData(res.data);
+      setProductsData(res.data.pageData);
     } catch (error) {}
   };
 
@@ -54,7 +55,16 @@ const Home = () => {
     fetchProductData(initLang);
   }, [initLang]);
 
-  // console.log(productsData);
+  const fetchSupporterData = async () => {
+    try {
+      const res = await getSupportersAPI(3, 1);
+      setSupporterData(res.data.pageData);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchSupporterData();
+  }, []);
 
   const [isMobile] = useMobile();
   return (
@@ -69,7 +79,7 @@ const Home = () => {
         <Box>
           <BestSaleSection isMobile={isMobile} data={productsData} />
           <AboutUsSection isMobile={isMobile} />
-          <SupportSection isMobile={isMobile} />
+          <SupportSection isMobile={isMobile} data={supporterData} />
         </Box>
       </Container>
       <SignUpSection isMobile={isMobile} />
@@ -110,7 +120,7 @@ const BestSaleSection = ({ isMobile, data }) => {
               display: isMobile ? "none" : "flex",
             }}
           >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
           </Button>
         </Box>
       </Box>
@@ -196,7 +206,7 @@ const AboutUsSection = ({ content, isMobile }) => {
   );
 };
 
-const SupportSection = ({ isMobile }) => {
+const SupportSection = ({ isMobile, data }) => {
   const { ref, inView } = useInView();
   return (
     <Box bgImage="url('/backgrounds/support_background.png')">
@@ -213,15 +223,18 @@ const SupportSection = ({ isMobile }) => {
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
           <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
-            <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
-              <SupporterCard isMobile={isMobile} />
-            </GridItem>
-            <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
-              <SupporterCard isMobile={isMobile} />
-            </GridItem>
-            <GridItem colSpan={1} p={isMobile ? "10px" : "50px"}>
-              <SupporterCard isMobile={isMobile} />
-            </GridItem>
+            {data?.map((item, index) => {
+              return (
+                <GridItem key={index} colSpan={1} p={isMobile ? "10px" : "50px"}>
+                  <SupporterCard
+                    isMobile={isMobile}
+                    image={item.avatarUrl}
+                    name={item.supporterName}
+                    email={item.email}
+                  />
+                </GridItem>
+              );
+            })}
           </Grid>
           <Button
             variant="link"
@@ -236,7 +249,7 @@ const SupportSection = ({ isMobile }) => {
               color: "black",
             }}
           >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0} />}
+            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
           </Button>
         </Box>
       </SlideFade>

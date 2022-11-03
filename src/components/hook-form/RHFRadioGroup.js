@@ -19,7 +19,7 @@ export default function RHFRadioGroup({ name, options, getOptionLabel, isBoolean
           <>
             <RadioGroup
               colorScheme="yellow"
-              sx={{ m: "0px !important", ...sx }}
+              sx={{ m: "0px !important", touchAction: "none", ...sx }}
               onChange={(e) => {
                 field.onChange(e);
               }}
@@ -28,7 +28,7 @@ export default function RHFRadioGroup({ name, options, getOptionLabel, isBoolean
             >
               <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
                 {options.map((option, index) => (
-                  <Radio key={index} value={option.id}>
+                  <Radio key={index} value={option.id} sx={{ touchAction: "none" }}>
                     {option.label}
                   </Radio>
                 ))}
