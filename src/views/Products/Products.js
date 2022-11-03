@@ -212,23 +212,6 @@ const Products = () => {
                   </HStack>
                   <HStack>
                     <Text fontWeight="bold" color="#FFB800">
-                      30
-                    </Text>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.items" />
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.sort" />
-                    </Text>
-                    <Text color="#FFB800" fontWeight="bold">
-                      A-Z
-                    </Text>
-                  </HStack>
-                  <HStack>
-                    <Text fontWeight="bold" color="#FFB800">
                       {products.length}
                     </Text>
                     <Text fontWeight="bold">items</Text>
@@ -302,19 +285,10 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handl
           <Text>
             <FormattedMessage id="label.showing" />
           </Text>
-          <Text color="#FFB800"> 12 </Text>
+          <Text color="#FFB800">{data.length} </Text>
           <Text>
             <FormattedMessage id="label.items" />{" "}
           </Text>
-        </HStack>
-        <HStack fontWeight="bold">
-          <BsFilterLeft />
-          <Text>
-            <FormattedMessage id="label.sort" />
-          </Text>
-          <Text>Showing</Text>
-          <Text color="#FFB800"> {data.length} </Text>
-          <Text>items </Text>
         </HStack>
         <HStack fontWeight="bold">
           <HStack>
