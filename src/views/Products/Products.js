@@ -135,7 +135,7 @@ const Products = () => {
         <Box bg="#ffff" py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
             <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/home">
+              <BreadcrumbLink href="/">
                 <FormattedMessage id="label.home" />
               </BreadcrumbLink>
             </BreadcrumbItem>
