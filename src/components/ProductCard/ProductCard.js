@@ -6,15 +6,15 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
     <Box
       bg="#ffff"
       tabIndex={0}
-      _hover={{ border: "2px solid #AAAAAA !important" }}
+      _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
       // w={isMobile ? "112px" : "236px"}
       maxW={["175px", "182px", "182px", "216px", "216px"]}
       // h={isMobile ? "139px" : "318px"}
-      maxH={["248px", "248px", "248px", "318px", "318px"]}
+      h={["248px", "248px", "248px", "318px", "318px"]}
       sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
       ml={[1, 5, 5, 2, 10]}
     >
-      <Center mb={3}>
+      <Center mb={2}>
         <Image
           w={["152px", "152px", "152px", "180px", "180px"]}
           h={["162px", "162px", "162px", "208px", "208px"]}
@@ -28,12 +28,12 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
             textTransform="uppercase"
             fontWeight="600"
             m="auto"
-            fontSize={["12px", "12px", "12px", "16px", "16px"]}
+            fontSize={["12px", "12px", "12px", "15px", "15px"]}
             textAlign="center"
           >
             {title}
           </Text>
-          <Text fontSize="7px" color="#FFB800">
+          <Text fontSize="10px" color="#FFB800">
             {`(${subtitle})`}
           </Text>
           <Button
@@ -46,7 +46,7 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
             w="125px"
             onClick={onClick}
           >
-            <Text fontSize="9px" textTransform="none">
+            <Text fontSize={["9px", "9px", "9px", "12px", "12px"]} textTransform="none">
               Explore
             </Text>
           </Button>

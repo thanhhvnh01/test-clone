@@ -11,12 +11,12 @@ const routes = [
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "home", element: <Home /> },
+      { path: "/", element: <Home /> },
       { path: "products", element: <Products /> },
       { path: "product/details", element: <ProductDetails /> },
       { path: "about-andeahair", element: <AboutUs /> },
       { path: "contact", element: <Contact /> },
-      { path: "/", element: <Navigate to="/home" /> },
+      { path: "/", element: <Navigate to="/" /> },
     ],
   },
 ];
