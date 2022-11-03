@@ -91,30 +91,32 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             </>
           )}
         </AccordionItem>
-        <AccordionItem>
-          {({ isExpanded }) => (
-            <>
-              <AccordionButton py={3}>
-                <Box flex="1" textAlign="left">
-                  <Text fontWeight="bold">
-                    <FormattedMessage id="label.productstype" />
-                  </Text>
-                </Box>
-                {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
-              </AccordionButton>
-              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <CheckboxGroup>
-                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    <RHFCheckbox
-                      name="productTypes"
-                      options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
-                    />
-                  </VStack>
-                </CheckboxGroup>
-              </AccordionPanel>
-            </>
-          )}
-        </AccordionItem>
+        {!!categoryId && (
+          <AccordionItem>
+            {({ isExpanded }) => (
+              <>
+                <AccordionButton py={3}>
+                  <Box flex="1" textAlign="left">
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.productstype" />
+                    </Text>
+                  </Box>
+                  {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
+                </AccordionButton>
+                <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
+                  <CheckboxGroup>
+                    <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
+                      <RHFCheckbox
+                        name="productTypes"
+                        options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
+                      />
+                    </VStack>
+                  </CheckboxGroup>
+                </AccordionPanel>
+              </>
+            )}
+          </AccordionItem>
+        )}
         <AccordionItem>
           {({ isExpanded }) => (
             <>
