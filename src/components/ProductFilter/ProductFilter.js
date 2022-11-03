@@ -14,6 +14,7 @@ import RHFCheckbox from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { FormattedMessage } from "react-intl";
 // import { FormattedMessage } from "react-intl";
 
 const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
@@ -72,7 +73,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  Category
+                  <FormattedMessage id="label.category" />
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
@@ -92,7 +93,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  Product Type
+                  <FormattedMessage id="label.productstype" />
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
@@ -114,7 +115,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  Color
+                  <FormattedMessage id="label.color" />
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
