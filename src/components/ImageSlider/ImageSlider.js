@@ -10,7 +10,7 @@ const ImageSlider = ({ images }) => {
   const [isMobile] = useMobile();
 
   return (
-    <Container p={isMobile && 0} maxW={isMobile ? "100%" : "80%"}>
+    <Container p={isMobile && 0} maxW={isMobile ? "100%" : "1200px"}>
       <Box
         h={ResponsiveImage}
         sx={{ mt: isMobile ? "87px" : "130px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}

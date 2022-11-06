@@ -157,7 +157,7 @@ const Products = () => {
       <Container
         bg="#ffff"
         p={isMobile ? 0 : 2}
-        maxW={isMobile ? "100%" : "1150px"}
+        maxW={isMobile ? "100%" : "1200px"}
         sx={{
           mt: "-100px",
           mb: "20px",

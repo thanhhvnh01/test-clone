@@ -32,7 +32,7 @@ const AboutUs = () => {
       <Box>
         <Container
           p={isMobile ? 0 : 2}
-          maxW={isMobile ? "100%" : "1150px"}
+          maxW={isMobile ? "100%" : "1200px"}
           height="100%"
           bg="url('/backgrounds/support_background.png')"
           sx={{
