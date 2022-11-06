@@ -31,7 +31,7 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
       <DrawerOverlay />
       <DrawerContent bg="#61656B">
         <VStack alignItems="left" spacing={0}>
-          <NavbarItem>
+          <NavbarItem to="/about-andeahair">
             <FormattedMessage id="title.aboutUs" />
           </NavbarItem>
 

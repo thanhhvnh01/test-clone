@@ -10,21 +10,29 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import useMobile from "@hooks/useMobile";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
 const AboutUs = () => {
+  const [isMobile] = useMobile();
   return (
     <>
       <Box>
-        <AspectRatio mt="113px" w="100%" h={["128px", "128px", "128px", "620", "620"]}>
-          <iframe src="https://www.youtube.com/embed/okz5RIZRT0U" />
+        <AspectRatio
+          _before={{ p: "0px !important" }}
+          mt="113px"
+          w="100%"
+          h={["128px", "128px", "128px", "620", "620"]}
+        >
+          <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
         </AspectRatio>
       </Box>
       <Box>
         <Container
-          maxW="8xl"
-          width="1257px"
+          mb={5}
+          p={isMobile ? 0 : 2}
+          maxW={isMobile ? "100%" : "80%"}
           height="100%"
           bg="url('/backgrounds/support_background.png')"
           sx={{
@@ -39,7 +47,7 @@ const AboutUs = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="/aboutsUs">
+                <BreadcrumbLink href="/about-andeahair">
                   <FormattedMessage id="title.aboutUs" />
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -48,9 +56,9 @@ const AboutUs = () => {
               </BreadcrumbItem>
             </Breadcrumb>
           </Box>
-          <Box>
+          <Box px={[4, 5, 5, "255px", "255px"]}>
             <Text
-              fontSize={["32px", "96px", "96px", "96px", "96px"]}
+              fontSize={["32px", "43px", "43px", "96px", "96px"]}
               fontWeight="regular"
               color="#000000"
               textAlign="center"
@@ -64,15 +72,20 @@ const AboutUs = () => {
               color="#000000"
               textAlign="center"
               textTransform="capitalize"
-              px="255px"
+              px={[2, 5, 5, "255px", "255px"]}
             >
               "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..." "There is
               no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
             </Text>
             <Center>
-              <Image maxWidth="500px" px={0} pt={10} src="/images/about_us_1.png" />
+              <Image
+                maxWidth={["376px", "500px", "500px", "500px", "500px"]}
+                px={[2, 5, 5, "255px", "255px"]}
+                pt={10}
+                src="/images/about_us_1.png"
+              />
             </Center>
-            <Box>
+            <Box px={[2, 5, 5, "255px", "255px"]}>
               <Box pt={10}>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -80,7 +93,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   What is Lorem Ipsum?
                 </Text>
@@ -90,7 +102,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   It is a long established fact that a reader will be distracted by the readable content of a page when
                   looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
@@ -108,7 +119,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   What is Lorem Ipsum?
                 </Text>
@@ -118,7 +128,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   It is a long established fact that a reader will be distracted by the readable content of a page when
                   looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
@@ -136,7 +145,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   What is Lorem Ipsum?
                 </Text>
@@ -146,7 +154,6 @@ const AboutUs = () => {
                   color="#000000"
                   textAlign="center"
                   textTransform="capitalize"
-                  px="255px"
                 >
                   It is a long established fact that a reader will be distracted by the readable content of a page when
                   looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
