@@ -9,6 +9,7 @@ import {
   Container,
   Image,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
@@ -21,22 +22,22 @@ const AboutUs = () => {
       <Box>
         <AspectRatio
           _before={{ p: "0px !important" }}
-          mt="113px"
+          mt={isMobile ? "87px" : "113px"}
           w="100%"
-          h={["128px", "128px", "128px", "620", "620"]}
+          h={["184px", "128px", "128px", "620", "620"]}
         >
           <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
         </AspectRatio>
       </Box>
       <Box>
         <Container
-          mb={5}
           p={isMobile ? 0 : 2}
-          maxW={isMobile ? "100%" : "80%"}
+          maxW={isMobile ? "100%" : "1150px"}
           height="100%"
           bg="url('/backgrounds/support_background.png')"
           sx={{
             boxShadow: "0px -5px 4px 1px rgba(0, 0, 0, 0.38)",
+            paddingBottom: "30px !important",
           }}
         >
           <Box py={3} px={3}>
@@ -56,9 +57,10 @@ const AboutUs = () => {
               </BreadcrumbItem>
             </Breadcrumb>
           </Box>
-          <Box px={[4, 5, 5, "255px", "255px"]}>
+          <Box px={[4, 5, 5, "200px", "200px"]}>
             <Text
-              fontSize={["32px", "43px", "43px", "96px", "96px"]}
+              fontFamily="Cinzel Decorative"
+              fontSize={["32px", "43px", "43px", "90px", "90px"]}
               fontWeight="regular"
               color="#000000"
               textAlign="center"
@@ -72,21 +74,15 @@ const AboutUs = () => {
               color="#000000"
               textAlign="center"
               textTransform="capitalize"
-              px={[2, 5, 5, "255px", "255px"]}
             >
               "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..." "There is
               no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
             </Text>
             <Center>
-              <Image
-                maxWidth={["376px", "500px", "500px", "500px", "500px"]}
-                px={[2, 5, 5, "255px", "255px"]}
-                pt={10}
-                src="/images/about_us_1.png"
-              />
+              <Image maxWidth={["376px", "500px", "500px", "500px", "500px"]} pt={10} src="/images/about_us_1.png" />
             </Center>
-            <Box px={[2, 5, 5, "255px", "255px"]}>
-              <Box pt={10}>
+            <VStack pt={14} spacing={14}>
+              <Box>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
                   fontWeight="bold"
@@ -112,7 +108,7 @@ const AboutUs = () => {
                   humour and the like).
                 </Text>
               </Box>
-              <Box pt={10}>
+              <Box>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
                   fontWeight="bold"
@@ -138,7 +134,7 @@ const AboutUs = () => {
                   humour and the like).
                 </Text>
               </Box>
-              <Box pt={10}>
+              <Box>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
                   fontWeight="bold"
@@ -164,7 +160,7 @@ const AboutUs = () => {
                   humour and the like).
                 </Text>
               </Box>
-            </Box>
+            </VStack>
           </Box>
         </Container>
       </Box>
