@@ -1,9 +1,8 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
+import DropDownSubmenu from "@components/DropDownSubmenu";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import Dropdown from "react-multilevel-dropdown";
-import { useNavigate } from "react-router-dom";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -20,92 +19,6 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
         {children}
       </Flex>
     </Link>
-  );
-};
-
-const ProductMenu = ({ dropDownData }) => {
-  const navigate = useNavigate();
-
-  const handleMenuClick = (category) => {
-    navigate(`/products?categoryId=${category.categoryId}`);
-  };
-
-  const handleSubmenuClick = (category, productType) => {
-    navigate(`/products?categoryId=${category.categoryId}&productTypeId=${productType.productTypeId}`);
-  };
-
-  return (
-    <Dropdown
-      openOnHover
-      position="right"
-      className="dropdown"
-      title={
-        <Flex
-          alignContent="center"
-          justifyContent="center"
-          fontSize="18px"
-          fontWeight="500"
-          textTransform="uppercase"
-          //   display="block"
-        >
-          <HStack className="navbar-item" justifyContent="center">
-            <Link href="/products">
-              <Text>
-                <FormattedMessage id="title.products" />
-              </Text>
-            </Link>
-            <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
-          </HStack>
-        </Flex>
-      }
-    >
-      <Box
-        bg="#575757"
-        sx={{
-          borderBottom: "none",
-          // opacity: "1 !important",
-          boxShadow: "-4px 0px 3px rgba(0, 0, 0, 0.25)",
-        }}
-      >
-        {dropDownData.map((item, index) => {
-          const isLastItem = Boolean(index + 1 === dropDownData.length);
-          return (
-            <Dropdown.Item className={!isLastItem ? "Item_item__eDdfj" : "last-menu-item"} key={item.categoryId}>
-              <Text
-                onClick={() => {
-                  handleMenuClick(item);
-                }}
-              >
-                {item.categoryName}
-              </Text>
-              {!!item.productTypes && (
-                <Dropdown.Submenu position="right">
-                  <Box sx={{ borderBottom: "none" }}>
-                    {item.productTypes.map((i, a) => {
-                      const isLastChildItem = Boolean(a + 1 === item.productTypes.length);
-                      return (
-                        <Dropdown.Item
-                          className={!isLastChildItem ? "child-item" : "last-child-item"}
-                          key={i.productTypeId}
-                        >
-                          <Text
-                            onClick={(e) => {
-                              handleSubmenuClick(item, i);
-                            }}
-                          >
-                            {i.productTypeName}
-                          </Text>
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </Box>
-                </Dropdown.Submenu>
-              )}
-            </Dropdown.Item>
-          );
-        })}
-      </Box>
-    </Dropdown>
   );
 };
 
@@ -131,7 +44,29 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         <NavbarItem to="/about-andeahair">
           <FormattedMessage id="title.aboutUs" />
         </NavbarItem>
-        <ProductMenu dropDownData={dropDownData} />
+        {/* <ProductMenu dropDownData={dropDownData} /> */}
+        <DropDownSubmenu
+          data={dropDownData}
+          title={
+            <Flex
+              alignContent="center"
+              justifyContent="center"
+              fontSize="18px"
+              fontWeight="500"
+              textTransform="uppercase"
+              //   display="block"
+            >
+              <HStack className="navbar-item" justifyContent="center">
+                <Link href="/products">
+                  <Text>
+                    <FormattedMessage id="title.products" />
+                  </Text>
+                </Link>
+                <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
+              </HStack>
+            </Flex>
+          }
+        />
         <NavbarItem to="/contact">
           <FormattedMessage id="title.contact" />
         </NavbarItem>

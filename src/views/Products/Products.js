@@ -14,14 +14,17 @@ import {
   InputGroup,
   InputRightElement,
   Select,
+  Skeleton,
+  SkeletonText,
   Text,
   useDisclosure,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import ProductCard from "@components/ProductCard";
 import ProductFilter from "@components/ProductFilter";
 import useMobile from "@hooks/useMobile";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 // icon
 import { BsFilterLeft, BsFilter } from "react-icons/bs";
@@ -34,10 +37,14 @@ import { FormProvider } from "@components/hook-form";
 import { useForm } from "react-hook-form";
 import { getProductsAPI } from "@api/main";
 import { OrderByTypeEnum } from "@utility/constant";
+import { getErrorMessage } from "@api/handleApiError";
+import { debounce } from "lodash";
 
 const Products = () => {
+  // hooks
   const [isMobile] = useMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const query = useLocation().search;
   const categoryIdParam = new URLSearchParams(query).get("categoryId");
@@ -47,10 +54,11 @@ const Products = () => {
   const [keyword, setKeyword] = useState("");
   // product data
   const [pageSize] = useState(12);
-  const [pageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
   const [products, setProducts] = useState([]);
   const [orderBy] = useState("productName");
   const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
+  const [isLoading, setIsLoading] = useState(false);
 
   // form
   const methods = useForm({
@@ -62,20 +70,38 @@ const Products = () => {
   const categoryId = watch("categoryId");
   const productTypes = watch("productTypes");
   const colors = watch("colors");
+  // console.log(pageNumber);
 
   //* action ( reset productTypes when categoryId changed )
   useEffect(() => {
-    setValue("productTypes", []);
+    if (!!productTypeId) {
+      setValue("productTypes", [productTypeId]);
+    } else setValue("productTypes", []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId]);
+  }, [categoryId, productTypeId]);
 
-  // get products
-  const fetchProductData = async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
-    try {
-      const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
-      setProducts(productRes.data.pageData);
-    } catch (error) {}
-  };
+  // * get products
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchProductData = useCallback(
+    debounce(async (pageSize, pageNumber, orderByType, orderBy, keyword, lang, data) => {
+      try {
+        setIsLoading(true);
+        const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
+        setProducts(productRes.data.pageData);
+      } catch (error) {
+        console.log(error);
+        toast({
+          title: "Api error",
+          description: getErrorMessage(error),
+          status: "error",
+          duration: 3000,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }, 400),
+    []
+  );
 
   useEffect(() => {
     const productTypeIds = productTypes?.map((i) => {
@@ -89,6 +115,8 @@ const Products = () => {
       productTypeIds: productTypeIds,
       colorIds: colorIds,
     });
+    setPageNumber(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy]);
 
   useEffect(() => {
@@ -104,12 +132,17 @@ const Products = () => {
 
   const handleClearFilter = () => {
     setValue("productTypes", []);
+    setValue("categoryId", "");
     setValue("colors", []);
   };
 
   const handleRequestSort = (e) => {
     e.preventDefault();
     setOrderByType(e.target.value);
+  };
+
+  const handlePageChange = (e) => {
+    setPageNumber(e.selected);
   };
 
   return (
@@ -124,7 +157,7 @@ const Products = () => {
       <Container
         bg="#ffff"
         p={isMobile ? 0 : 2}
-        maxW={isMobile ? "100%" : "80%"}
+        maxW={isMobile ? "100%" : "1150px"}
         sx={{
           mt: "-100px",
           mb: "20px",
@@ -186,6 +219,8 @@ const Products = () => {
                       pageNumber={pageNumber}
                       handleRequestSort={handleRequestSort}
                       data={products}
+                      handlePageChange={handlePageChange}
+                      isLoading={isLoading}
                     />
                   </GridItem>
                 </Grid>
@@ -271,7 +306,7 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
   );
 };
 
-const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handleRequestSort }) => {
+const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }) => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -320,24 +355,39 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handl
       </Flex>
       <Grid
         mt={2}
-        templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)"]}
+        templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]}
       >
         {data.length > 0 ? (
           data?.map((item, index) => {
             return (
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
-                <ProductCard
-                  sx={{
-                    mb: 5,
-                    mx: "auto",
-                    border: "1px solid #AAAAAA !important",
-                  }}
-                  key={index}
-                  title={item.productName}
-                  image={item.imageUrl}
-                  subtitle={item.productTypeName}
-                  onClick={handleOnClick}
-                />
+                {isLoading ? (
+                  <Box w="200px" mb={5}>
+                    <Skeleton
+                      h={["162px", "162px", "162px", "278px", "278px"]}
+                      w={["175px", "182px", "182px", "100%", "200px"]}
+                    />
+                    <SkeletonText mt={3} noOfLines={2} spacing="2" />
+                    <HStack mt={2}>
+                      <Skeleton h="47px" w="48px" />
+                      <Skeleton h="47px" w="48px" />
+                      <Skeleton h="47px" w="48px" />
+                    </HStack>
+                  </Box>
+                ) : (
+                  <ProductCard
+                    sx={{
+                      mb: 5,
+                      mx: "auto",
+                      border: "1px solid #AAAAAA !important",
+                    }}
+                    key={index}
+                    title={item.productName}
+                    image={item.imageUrl}
+                    subtitle={item.productTypeName}
+                    onClick={handleOnClick}
+                  />
+                )}
               </GridItem>
             );
           })
@@ -358,7 +408,7 @@ const ProductSection = ({ categoryId, keyword, pageSize, pageNumber, data, handl
             }}
           />
         }
-        onPageChange={() => {}}
+        onPageChange={handlePageChange}
         pageRangeDisplayed={5}
         pageCount={5}
         previousLabel={

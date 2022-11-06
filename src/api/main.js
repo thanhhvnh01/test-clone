@@ -43,7 +43,11 @@ export const getColorAPI = async (lang) => {
 // product
 export const getProductsAPI = async (pageSize, pageNumber, orderByTypeId, orderBy, keyword = "", lang, data) => {
   return axios.post(
-    `${process.env.REACT_APP_API_URL}/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}&lang=${lang}&orderByTypeId=${orderByTypeId}&orderBy=${orderBy}`,
+    `${
+      process.env.REACT_APP_API_URL
+    }/products/all-enabled?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${encodeURI(
+      keyword
+    )}&lang=${lang}&orderByTypeId=${orderByTypeId}&orderBy=${orderBy}`,
     data
   );
 };

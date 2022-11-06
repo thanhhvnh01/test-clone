@@ -4,27 +4,27 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Checkbox,
-  CheckboxGroup,
+  Button,
+  Center,
   Container,
-  Flex,
   Grid,
   GridItem,
+  HStack,
   Image,
   Text,
-  VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React, { useState } from "react";
+import React from "react";
+import ContactModal from "./ContactModal";
 
 const ProductDetails = ({ productId }) => {
   const [isMobile] = useMobile();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   // const [image, setImage] = useState();
   // const [imageIndex, setImageIndex] = useState(0);
 
   // const getImageUrl = () => {};
-  const [demo, setDemo] = useState();
-  console.log(demo);
 
   return (
     <>
@@ -32,7 +32,7 @@ const ProductDetails = ({ productId }) => {
       <Container
         bg="#ffff"
         p={2}
-        maxW={isMobile ? "100%" : "80%"}
+        maxW={isMobile ? "100%" : "1150px"}
         sx={{
           mt: "-100px",
           mb: "20px",
@@ -59,42 +59,31 @@ const ProductDetails = ({ productId }) => {
           </Breadcrumb>
         </Box>
         <Box mt={10}>
-          <Grid templateColumns="repeat(6,1fr)">
-            <GridItem colSpan={1}>
-              <VStack>
-                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-              </VStack>
+          <Grid templateColumns="repeat(7,1fr)">
+            <GridItem colSpan={4}>
+              <Center>
+                <Image maxW="700px" maxH="620px" src="/images/image_2.png" />
+              </Center>
+              <Center>
+                <HStack spacing="27px">
+                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                </HStack>
+              </Center>
             </GridItem>
-            <GridItem colSpan={3} mt="-7px">
-              <Flex justifyContent="center">
-                <Image w="500px" h="500px" src="/images/image_2.png" />
-              </Flex>
-            </GridItem>
-            <GridItem colSpan={2}>
+            <GridItem colSpan={3}>
               <Box>
-                <Text>Ten san pham</Text>
-                <Text>Ten san pham</Text>
-                <Text>Ten san pham</Text>
-                <Text>Ten san pham</Text>
+                <Text fontWeight="bold">Ten san pham</Text>
+                <Button onClick={onOpen}>Contact</Button>
+                <Text fontWeight="bold">Color:</Text>
               </Box>
-              <CheckboxGroup
-                onChange={(e) => {
-                  console.log(e);
-                  setDemo(e);
-                }}
-                value={demo}
-              >
-                <Checkbox value={"1"}>aaa</Checkbox>
-                <Checkbox value="2">aba</Checkbox>
-                <Checkbox value="3">aac</Checkbox>
-              </CheckboxGroup>
             </GridItem>
           </Grid>
         </Box>
+        {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} />}
       </Container>
     </>
   );
