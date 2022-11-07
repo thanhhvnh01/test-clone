@@ -55,4 +55,10 @@ export const getProductsAPI = async (pageSize, pageNumber, orderByTypeId, orderB
 export const getProductDetailsAPI = async (productId, lang) => {
   return axios.get(`${process.env.REACT_APP_API_URL}/products/${productId}?productId=${productId}&lang=${lang}`);
 };
+
+export const getRelateProductAPI = async (pageSize, pageNumber, productId, lang) => {
+  return axios.post(
+    `${process.env.REACT_APP_API_URL}/products/${productId}/related?&lang=${lang}&pageSize=${pageSize}&pageNumber=${pageNumber}`
+  );
+};
 // * end category section

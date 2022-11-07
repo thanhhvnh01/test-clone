@@ -26,10 +26,8 @@
     "label.category": "Category",
     "label.productstype": "Products Type",
     "label.color": "Color",
+    "label.relatedProduct":"Related Products",
     
-
-
-
     "/* info */": "info",
     "info.address": "Address: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
     "info.phoneNumber": "Phone number: +84356737790",

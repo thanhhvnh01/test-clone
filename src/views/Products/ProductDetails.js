@@ -1,4 +1,4 @@
-import { getProductDetailsAPI } from "@api/main";
+import { getProductDetailsAPI, getRelateProductAPI } from "@api/main";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -8,6 +8,7 @@ import {
   Button,
   Center,
   Container,
+  Flex,
   Grid,
   GridItem,
   HStack,
@@ -16,8 +17,10 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import ProductSlider from "@components/ProductSlider";
 import useMobile from "@hooks/useMobile";
 import React, { useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { useLocation } from "react-router-dom";
 import ContactModal from "./ContactModal";
 
@@ -27,6 +30,8 @@ const ProductDetails = () => {
   const productId = new URLSearchParams(query).get("productId");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState();
+  const [relatedProductData, setRelatedProductData] = useState([]);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const fetchData = async (productId) => {
     if (!!productId) {
@@ -39,13 +44,24 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchData(productId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
-  console.log(data);
-  // const [image, setImage] = useState();
-  // const [imageIndex, setImageIndex] = useState(0);
+  console.log(relatedProductData);
 
-  // const getImageUrl = () => {};
+  const fetchRelatedProductData = async () => {
+    if (!!productId) {
+      try {
+        const productRes = await getRelateProductAPI(12, 1, productId);
+        setRelatedProductData(productRes.data.pageData);
+      } catch (error) {}
+    }
+  };
+
+  useEffect(() => {
+    fetchRelatedProductData(productId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productId]);
 
   return (
     <>
@@ -83,22 +99,50 @@ const ProductDetails = () => {
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={4}>
               <Center>
-                <Image maxW="700px" maxH="620px" src={data?.imageUrls[0]} />
+                <Image
+                  sx={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
+                  maxW="560px"
+                  maxH="520px"
+                  src={data?.imageUrls[imageIndex]}
+                />
               </Center>
-              <Center>
+              <Center mt={4}>
                 <HStack spacing="27px">
-                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
-                  <Image maxW="90px" maxH="90px" src="/images/image_1.png" />
+                  {data?.imageUrls.map((image, index) => {
+                    return (
+                      <Image
+                        onClick={() => {
+                          setImageIndex(index);
+                        }}
+                        sx={{
+                          boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);",
+                          cursor: "pointer",
+                          border: "1px solid #AAAAAA",
+                        }}
+                        key={index}
+                        w="90px"
+                        h="90px"
+                        src={image}
+                      />
+                    );
+                  })}
                 </HStack>
               </Center>
             </GridItem>
             <GridItem colSpan={3}>
               <VStack alignItems="flex-start" p={3} sx={{ borderBottom: "1px solid black" }}>
                 <Text fontWeight="bold">{data?.productName}</Text>
-                <Button onClick={onOpen}>Contact</Button>
+                <Button
+                  _hover={{
+                    boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);",
+                  }}
+                  variant="solid"
+                  bg="tomato"
+                  color="#ffff"
+                  onClick={onOpen}
+                >
+                  Contact
+                </Button>
                 <HStack>
                   <Text fontWeight="bold">Color: </Text>
                   <Text>{data?.colorName}</Text>
@@ -118,6 +162,39 @@ const ProductDetails = () => {
               </VStack>
             </GridItem>
           </Grid>
+        </Box>
+        <Box>
+          <Box pb={6}>
+            <Text
+              // sx={{ borderBottom: "4px solid black" }}
+              fontSize={isMobile ? "20px" : "32px"}
+              fontWeight="bold"
+              textAlign="center"
+              textTransform="uppercase"
+              pt={5}
+            >
+              <FormattedMessage id="label.relatedProduct" />
+            </Text>
+            <Flex bg="black" w={97} h="3px" m="auto" />
+          </Box>
+          <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
+            <ProductSlider data={relatedProductData} isMobile={isMobile} />
+
+            <Button
+              variant="link"
+              className="navbar-item"
+              fontWeight="500"
+              sx={{
+                textTransform: "none",
+                textDecoration: "none",
+                ml: "auto",
+                color: "black",
+                display: isMobile ? "none" : "flex",
+              }}
+            >
+              <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
+            </Button>
+          </Box>
         </Box>
         {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} />}
       </Container>

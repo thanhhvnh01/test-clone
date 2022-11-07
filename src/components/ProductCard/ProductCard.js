@@ -17,7 +17,7 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
       // h={isMobile ? "139px" : "318px"}
       h={["248px", "248px", "248px", "411px", "411px"]}
       sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
-      ml={[1, 5, 5, 2, 10]}
+      ml={[1, 5, 5, 2, 2]}
       position="relative"
     >
       <Image
