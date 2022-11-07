@@ -29,7 +29,7 @@ import { FormattedMessage } from "react-intl";
 // icon
 import { BsFilterLeft, BsFilter } from "react-icons/bs";
 import MobileProductFilter from "@components/MobileProductFilter";
-import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 // paging
 import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -65,12 +65,15 @@ const Products = () => {
     mode: "all",
   });
 
-  const { watch, setValue } = methods;
+  const {
+    watch,
+    setValue,
+    formState: { isDirty },
+  } = methods;
 
   const categoryId = watch("categoryId");
   const productTypes = watch("productTypes");
   const colors = watch("colors");
-  // console.log(pageNumber);
 
   //* action ( reset productTypes when categoryId changed )
   useEffect(() => {
@@ -204,6 +207,7 @@ const Products = () => {
                 <Grid templateColumns="repeat(13, 1fr)" gap={6}>
                   <GridItem colSpan={3}>
                     <FilterSection
+                      isDirty={isDirty}
                       categoryId={categoryId}
                       selectedProductType={selectedProductType}
                       setValue={setValue}
@@ -230,7 +234,9 @@ const Products = () => {
                   <HStack fontWeight="bold">
                     <HStack>
                       <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-                      <Text>Sort:</Text>
+                      <Text>
+                        <FormattedMessage id="label.sort" />:
+                      </Text>
                     </HStack>
                     <Select
                       onChange={(e) => {
@@ -272,14 +278,21 @@ const Products = () => {
             )}
           </Box>
 
-          {isOpen && <MobileProductFilter isOpen={isOpen} onClose={onClose} categoryId={categoryId} />}
+          {isOpen && (
+            <MobileProductFilter
+              isOpen={isOpen}
+              onClose={onClose}
+              categoryId={categoryId}
+              handleClearFilter={handleClearFilter}
+            />
+          )}
         </FormProvider>
       </Container>
     </>
   );
 };
 
-const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter }) => {
+const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter, isDirty }) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
@@ -287,16 +300,21 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
           <BsFilter style={{ height: "19px", width: "19px" }} />
           <FormattedMessage id="label.filter" />
         </HStack>
-        <Button
-          onClick={handleClearFilter}
-          fontWeight="500"
-          textTransform="none"
-          variant="ghost"
-          fontSize="14px"
-          h="23px"
-        >
-          Clear all filter
-        </Button>
+        {isDirty && (
+          <Button
+            onClick={handleClearFilter}
+            fontWeight="500"
+            textTransform="none"
+            variant="solid"
+            fontSize="14px"
+            rightIcon={<SmallCloseIcon />}
+            p={3}
+            bg="#FFA800"
+            h="23px"
+          >
+            <FormattedMessage id="button.clearFilter" />
+          </Button>
+        )}
       </Flex>
       <Box sx={{ width: "100%" }}>
         <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
@@ -332,7 +350,9 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
         <HStack fontWeight="bold">
           <HStack>
             <BsFilterLeft style={{ height: "19px", width: "19px" }} />
-            <Text>Sort:</Text>
+            <Text>
+              <FormattedMessage id="label.sort" />:
+            </Text>
           </HStack>
           <Select
             onChange={(e) => {
@@ -356,40 +376,44 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
         mt={2}
         templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]}
       >
+        {isLoading &&
+          [...Array(12)].map((e, i) => {
+            return (
+              <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={i}>
+                <Box w="200px" mb={5}>
+                  <Skeleton
+                    h={["162px", "162px", "162px", "278px", "278px"]}
+                    w={["175px", "182px", "182px", "100%", "200px"]}
+                  />
+                  <SkeletonText mt={3} noOfLines={2} spacing="2" />
+                  <HStack mt={2}>
+                    <Skeleton h="47px" w="48px" />
+                    <Skeleton h="47px" w="48px" />
+                    <Skeleton h="47px" w="48px" />
+                  </HStack>
+                </Box>
+              </GridItem>
+            );
+          })}
         {data.length > 0 ? (
           data?.map((item, index) => {
             return (
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
-                {isLoading ? (
-                  <Box w="200px" mb={5}>
-                    <Skeleton
-                      h={["162px", "162px", "162px", "278px", "278px"]}
-                      w={["175px", "182px", "182px", "100%", "200px"]}
-                    />
-                    <SkeletonText mt={3} noOfLines={2} spacing="2" />
-                    <HStack mt={2}>
-                      <Skeleton h="47px" w="48px" />
-                      <Skeleton h="47px" w="48px" />
-                      <Skeleton h="47px" w="48px" />
-                    </HStack>
-                  </Box>
-                ) : (
-                  <ProductCard
-                    sx={{
-                      mb: 5,
-                      mx: "auto",
-                      border: "1px solid #AAAAAA !important",
-                    }}
-                    key={index}
-                    title={item.productName}
-                    thumbImage={item.mainImageUrl}
-                    images={item.imageUrls}
-                    subtitle={item.productTypeName}
-                    onClick={() => {
-                      handleOnClick(item);
-                    }}
-                  />
-                )}
+                <ProductCard
+                  sx={{
+                    mb: 5,
+                    mx: "auto",
+                    border: "1px solid #AAAAAA !important",
+                  }}
+                  key={index}
+                  title={item.productName}
+                  thumbImage={item.mainImageUrl}
+                  images={item.imageUrls}
+                  subtitle={item.productTypeName}
+                  onClick={() => {
+                    handleOnClick(item);
+                  }}
+                />
               </GridItem>
             );
           })
@@ -401,27 +425,11 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
       </Grid>
       <ReactPaginate
         breakLabel="..."
-        nextLabel={
-          <ChevronRightIcon
-            boxSize={5}
-            color="#6B6E72"
-            onClick={() => {
-              // setPageNumber(pageNumber + 1);
-            }}
-          />
-        }
+        nextLabel={<ChevronRightIcon boxSize={5} color="#6B6E72" />}
         onPageChange={handlePageChange}
         pageRangeDisplayed={5}
         pageCount={5}
-        previousLabel={
-          <ChevronLeftIcon
-            boxSize={5}
-            color="#6B6E72"
-            onClick={() => {
-              // setPageNumber(pageNumber - 1);
-            }}
-          />
-        }
+        previousLabel={<ChevronLeftIcon boxSize={5} color="#6B6E72" />}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         pageClassName={"pagingateItem"}

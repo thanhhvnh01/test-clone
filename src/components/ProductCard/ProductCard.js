@@ -16,7 +16,7 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
       maxW={["175px", "182px", "182px", "270px", "270px"]}
       // h={isMobile ? "139px" : "318px"}
       h={["248px", "248px", "248px", "411px", "411px"]}
-      sx={{ ...sx, border: "1px solid #AAAAAA !important" }}
+      sx={{ ...sx, border: "1px solid #AAAAAA !important", cursor: "pointer" }}
       ml={[1, 5, 5, 2, 2]}
       position="relative"
     >

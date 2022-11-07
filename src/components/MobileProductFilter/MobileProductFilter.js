@@ -3,7 +3,7 @@ import ProductFilter from "@components/ProductFilter";
 // icon
 import { BsFilter } from "react-icons/bs";
 
-const MobileProductFilter = ({ isOpen, onClose, categoryId, setValue }) => {
+const MobileProductFilter = ({ isOpen, onClose, categoryId, setValue, handleClearFilter }) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
@@ -19,8 +19,7 @@ const MobileProductFilter = ({ isOpen, onClose, categoryId, setValue }) => {
         <DrawerBody p={0}>
           <ProductFilter setValue={setValue} categoryId={categoryId} />
           <HStack p={5} justifyContent="center">
-            <Button>Reset</Button>
-            <Button>Apply</Button>
+            <Button onClick={handleClearFilter}>Reset</Button>
           </HStack>
         </DrawerBody>
       </DrawerContent>

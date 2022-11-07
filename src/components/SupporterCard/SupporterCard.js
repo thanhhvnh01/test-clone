@@ -2,7 +2,9 @@ import { Avatar, Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
 const SupporterCard = ({ isMobile, image, name, email, phoneNumber, fb, ig, whatsapp }) => {
-  // const handleClick = () => {};
+  const handleClick = (url) => {
+    window.open(url);
+  };
   return (
     <Box bg="#FFFF" py={3} sx={{ border: "1px solid #AAAAAA" }}>
       <Avatar w="71px" h="71px" sx={{ display: "flex", m: "auto", my: 3 }} src={image} />
@@ -12,8 +14,14 @@ const SupporterCard = ({ isMobile, image, name, email, phoneNumber, fb, ig, what
         </Text>
         <Text fontSize={isMobile ? "11px" : "16px"}>{email}</Text>
         <Text fontSize={isMobile ? "11px" : "16px"}>{phoneNumber}</Text>
-        <HStack>
-          <Image h="20px" src="/icons/facebook_gif.gif" />
+        <HStack sx={{ cursor: "pointer" }}>
+          <Image
+            onClick={() => {
+              handleClick(fb);
+            }}
+            h="20px"
+            src="/icons/facebook_gif.gif"
+          />
           <Image h="20px" src="/icons/instagram_gif.gif" />
           <Image h="20px" src="/icons/whatsapp_gif.gif" />
         </HStack>

@@ -49,7 +49,7 @@ const AboutUs = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="/about-andeahair">
+                <BreadcrumbLink href="/about-us">
                   <FormattedMessage id="title.aboutUs" />
                 </BreadcrumbLink>
               </BreadcrumbItem>

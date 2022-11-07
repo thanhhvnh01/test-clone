@@ -27,6 +27,8 @@
     "label.productstype": "Products Type",
     "label.color": "Color",
     "label.relatedProduct":"Related Products",
+    "label.productDetails":"Product Details",
+    "label.substance":"Substance",
     
     "/* info */": "info",
     "info.address": "Address: Quan Nhan, Dong Da, Ha Noi City, Vietnam",
@@ -40,7 +42,8 @@
     "button.submit": "submit",
     "button.readMore": "Read more",
     "button.more": "More",
-    "button.subsrcibe": "Subsrcibe"
+    "button.subsrcibe": "Subsrcibe",
+    "button.clearFilter": "Clear all filter"
 
 
 }
