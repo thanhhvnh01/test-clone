@@ -51,4 +51,8 @@ export const getProductsAPI = async (pageSize, pageNumber, orderByTypeId, orderB
     data
   );
 };
+
+export const getProductDetailsAPI = async (productId, lang) => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/products/${productId}?productId=${productId}&lang=${lang}`);
+};
 // * end category section

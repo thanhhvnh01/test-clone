@@ -1,3 +1,4 @@
+import { getProductDetailsAPI } from "@api/main";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -13,14 +14,34 @@ import {
   Image,
   Text,
   useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import ContactModal from "./ContactModal";
 
-const ProductDetails = ({ productId }) => {
+const ProductDetails = () => {
   const [isMobile] = useMobile();
+  const query = useLocation().search;
+  const productId = new URLSearchParams(query).get("productId");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [data, setData] = useState();
+
+  const fetchData = async (productId) => {
+    if (!!productId) {
+      try {
+        const res = await getProductDetailsAPI(productId);
+        setData(res.data);
+      } catch (error) {}
+    }
+  };
+
+  useEffect(() => {
+    fetchData(productId);
+  }, [productId]);
+
+  console.log(data);
   // const [image, setImage] = useState();
   // const [imageIndex, setImageIndex] = useState(0);
 
@@ -54,7 +75,7 @@ const ProductDetails = ({ productId }) => {
               <BreadcrumbLink href="#">Products</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">All Products</BreadcrumbLink>
+              <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -62,7 +83,7 @@ const ProductDetails = ({ productId }) => {
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={4}>
               <Center>
-                <Image maxW="700px" maxH="620px" src="/images/image_2.png" />
+                <Image maxW="700px" maxH="620px" src={data?.imageUrls[0]} />
               </Center>
               <Center>
                 <HStack spacing="27px">
@@ -75,11 +96,26 @@ const ProductDetails = ({ productId }) => {
               </Center>
             </GridItem>
             <GridItem colSpan={3}>
-              <Box>
-                <Text fontWeight="bold">Ten san pham</Text>
+              <VStack alignItems="flex-start" p={3} sx={{ borderBottom: "1px solid black" }}>
+                <Text fontWeight="bold">{data?.productName}</Text>
                 <Button onClick={onOpen}>Contact</Button>
-                <Text fontWeight="bold">Color:</Text>
-              </Box>
+                <HStack>
+                  <Text fontWeight="bold">Color: </Text>
+                  <Text>{data?.colorName}</Text>
+                </HStack>
+                <HStack>
+                  <Box
+                    width="35px"
+                    height="35px"
+                    bg={
+                      data?.colorCode.length > 1
+                        ? `linear-gradient(to bottom,${data?.colorCode[0]}, ${data?.colorCode[2]} 100%)`
+                        : `${data?.colorCode[0]}`
+                    }
+                    borderRadius="50%"
+                  />
+                </HStack>
+              </VStack>
             </GridItem>
           </Grid>
         </Box>

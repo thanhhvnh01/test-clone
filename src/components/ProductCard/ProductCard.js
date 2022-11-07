@@ -1,7 +1,9 @@
 import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
-const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
+const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
+  const [hoverImage, setHoverImage] = useState(null);
+  console.log(hoverImage);
   return (
     <Box
       onClick={() => {
@@ -18,7 +20,12 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
       ml={[1, 5, 5, 2, 10]}
       position="relative"
     >
-      <Image w="100%" h={["162px", "162px", "162px", "278px", "278px"]} src={image} alt="product" />
+      <Image
+        w="100%"
+        h={["162px", "162px", "162px", "278px", "278px"]}
+        src={hoverImage === null ? thumbImage : images[hoverImage]}
+        alt="product"
+      />
       <Box mt={1}>
         <VStack spacing="5px" px={1} display="block">
           <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={["12px", "12px", "12px", "15px", "15px"]}>
@@ -30,9 +37,22 @@ const ProductCard = ({ title, subtitle, image, sx, onClick }) => {
             {`${subtitle}`}
           </Text>
           <HStack display="flex">
-            <Image h="47px" w="48px" src={image} />
-            <Image h="47px" w="48px" src={image} />
-            <Image h="47px" w="48px" src={image} />
+            {images?.map((image, index) => {
+              return (
+                <Image
+                  onMouseEnter={() => {
+                    setHoverImage(index);
+                  }}
+                  onMouseLeave={() => {
+                    setHoverImage(null);
+                  }}
+                  h="47px"
+                  w="48px"
+                  key={index}
+                  src={image}
+                />
+              );
+            })}
           </HStack>
         </Box>
       </Box>

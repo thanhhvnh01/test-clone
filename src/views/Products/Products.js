@@ -115,7 +115,6 @@ const Products = () => {
       productTypeIds: productTypeIds,
       colorIds: colorIds,
     });
-    setPageNumber(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy]);
 
@@ -309,8 +308,8 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
 const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }) => {
   const navigate = useNavigate();
 
-  const handleOnClick = () => {
-    navigate("/product/details");
+  const handleOnClick = (item) => {
+    navigate(`/product/details?productId=${item.productId}`);
   };
 
   return (
@@ -383,9 +382,12 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
                     }}
                     key={index}
                     title={item.productName}
-                    image={item.imageUrl}
+                    thumbImage={item.mainImageUrl}
+                    images={item.imageUrls}
                     subtitle={item.productTypeName}
-                    onClick={handleOnClick}
+                    onClick={() => {
+                      handleOnClick(item);
+                    }}
                   />
                 )}
               </GridItem>
