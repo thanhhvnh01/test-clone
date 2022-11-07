@@ -34,11 +34,10 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
           <NavbarItem to="/about-andeahair">
             <FormattedMessage id="title.aboutUs" />
           </NavbarItem>
-
           {/* <FormattedMessage id="title.products" /> */}
           <ProductsAccordion data={data} />
 
-          <NavbarItem>
+          <NavbarItem to="/contact-andeahair">
             <FormattedMessage id="title.contact" />
           </NavbarItem>
           <NavbarItem>

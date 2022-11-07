@@ -27,6 +27,17 @@
     "label.category": "Категория",
     "label.productstype": "Тип продуктов",
     "label.color": "Цвет",
+    "label.contactUs": "Свяжитесь с нами",
+    "label.any": "Есть вопросы или замечания? Просто напишите нам сообщение!",
+    "label.ContactInformation": "Контакты",
+    "label.firstName": "Имя",
+    "label.lastName": "Фамилия",
+    "label.Email": "Эл. адрес",
+    "label.phoneNumber": "Номер телефона",
+    "label.Message": "Сообщение",
+    "label.sendMessage": "Отправить сообщение",
+    "label.Saysomething": "Скажите что-нибудь, чтобы начать живой чат!",
+
 
     "/* info */": "info",
     "info.address": "Адрес: Quan Nhan, Dong Da, Ha Noi City, Vietnam",

@@ -26,7 +26,17 @@
     "label.category": "Category",
     "label.productstype": "Products Type",
     "label.color": "Color",
-    
+    "label.contactUs": "Contact Us",
+    "label.any": "Any question or remarks? Just write us a message!",
+    "label.ContactInformation": "Contact Information",
+    "label.firstName": "First Name",
+    "label.lastName": "Last Name",
+    "label.Email": "Email",
+    "label.phoneNumber": "Phone Number",
+    "label.Message": "Message",
+    "label.sendMessage": " Send Message",
+    "label.Saysomething": "Say something to start a live chat!",
+   
 
 
 
