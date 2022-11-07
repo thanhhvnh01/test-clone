@@ -13,6 +13,7 @@ import {
   InputLeftAddon,
   SlideFade,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import ImageSlider from "@components/ImageSlider";
@@ -23,6 +24,7 @@ import SupporterCard from "@components/SupporterCard";
 import { getBestSaleProductsAPI, getSupportersAPI, subscribeNewMemberAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
+import { getErrorMessage } from "@api/handleApiError";
 
 const slideImages = [
   {
@@ -41,6 +43,7 @@ const slideImages = [
 
 const Home = () => {
   const initLang = localStorage.getItem("language");
+  const toast = useToast();
   const [productsData, setProductsData] = useState([]);
   const [supporterData, setSupporterData] = useState([]);
 
@@ -48,22 +51,38 @@ const Home = () => {
     try {
       const res = await getBestSaleProductsAPI(lang);
       setProductsData(res.data.pageData);
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
   };
 
   useEffect(() => {
     fetchProductData(initLang);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initLang]);
 
   const fetchSupporterData = async () => {
     try {
       const res = await getSupportersAPI(3, 1);
       setSupporterData(res.data.pageData);
-    } catch (error) {}
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
   };
 
   useEffect(() => {
     fetchSupporterData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isMobile] = useMobile();
@@ -71,9 +90,9 @@ const Home = () => {
     <>
       <ImageSlider images={slideImages} />
       <Container
-        p={isMobile && 0}
+        p={0}
         // maxW={isMobile ? "100%" : "80%"}
-        maxW={["100%", "100%", "100%", "80%", "1200px"]}
+        maxW={["100%", "100%", "100%", "1200px", "1200px"]}
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
         <Box>
@@ -231,6 +250,9 @@ const SupportSection = ({ isMobile, data }) => {
                     image={item.avatarUrl}
                     name={item.supporterName}
                     email={item.email}
+                    fb={item.facebookUrl}
+                    ig={item.instagramUrl}
+                    whatsapp={item.whatsappPhoneNumber}
                   />
                 </GridItem>
               );
@@ -260,13 +282,23 @@ const SupportSection = ({ isMobile, data }) => {
 const SignUpSection = ({ isMobile }) => {
   const { ref, inView } = useInView();
   const [email, setEmail] = useState("");
+  const toast = useToast();
 
   const handleChangeInput = (e) => {
     setEmail(e.target.value);
   };
 
   const handleSignUp = async () => {
-    await subscribeNewMemberAPI({ email });
+    try {
+      await subscribeNewMemberAPI({ email });
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
   };
 
   return (

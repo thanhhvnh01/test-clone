@@ -41,10 +41,9 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <NavbarItem to="/about-andeahair">
+        <NavbarItem to="/about-us">
           <FormattedMessage id="title.aboutUs" />
         </NavbarItem>
-        {/* <ProductMenu dropDownData={dropDownData} /> */}
         <DropDownSubmenu
           data={dropDownData}
           title={
