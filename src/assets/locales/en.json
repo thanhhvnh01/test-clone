@@ -31,10 +31,9 @@
     "label.ContactInformation": "Contact Information",
     "label.firstName": "First Name",
     "label.lastName": "Last Name",
-    "label.Email": "Email",
+    "label.email": "Email",
     "label.phoneNumber": "Phone Number",
     "label.Message": "Message",
-    "label.sendMessage": " Send Message",
     "label.Saysomething": "Say something to start a live chat!",
     "label.relatedProduct":"Related Products",
     "label.productDetails":"Product Details",
@@ -53,7 +52,12 @@
     "button.readMore": "Read more",
     "button.more": "More",
     "button.subsrcibe": "Subsrcibe",
-    "button.clearFilter": "Clear all filter"
+    "button.sendMessage": " Send Message",
+    "button.clearFilter": "Clear all filter",
 
+    "/* placeholder */": "placeholder",
+    "placeholder.message": "Write your message...",
 
+    "/* toast */": "toast",
+    "toast.messageContactSuccess": "We've received your message, we'll contact you later"
 }

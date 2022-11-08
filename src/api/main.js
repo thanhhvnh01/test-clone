@@ -61,4 +61,12 @@ export const getRelateProductAPI = async (pageSize, pageNumber, productId, lang)
     `${process.env.REACT_APP_API_URL}/products/${productId}/related?&lang=${lang}&pageSize=${pageSize}&pageNumber=${pageNumber}`
   );
 };
-// * end category section
+// * end product section
+
+// * contact section
+
+export const sendMessageAPI = async (data) => {
+  return axios.post(`${process.env.REACT_APP_API_URL}/contacts`, data);
+};
+
+// * end contact section

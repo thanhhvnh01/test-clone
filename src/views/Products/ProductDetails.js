@@ -282,7 +282,7 @@ const ProductDetails = () => {
             </Button>
           </Box>
         </Box>
-        {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} />}
+        {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} productId={productId} />}
       </Container>
     </>
   );
