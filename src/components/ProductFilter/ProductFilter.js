@@ -7,7 +7,6 @@ import {
   AccordionPanel,
   Box,
   Checkbox,
-  CheckboxGroup,
   Flex,
   Text,
   VStack,
@@ -30,6 +29,10 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
     try {
       const categoryRes = await getCategoriesAPI(initLang);
       setCategoryData(categoryRes.data);
+      if (!!categoryId) {
+        const item = categoryRes.data?.filter((i) => i.categoryId === Number(categoryId));
+        setCategoryName(item[0].categoryName);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +40,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
 
   useEffect(() => {
     fetchCategoryData(initLang);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initLang, categoryId]);
 
   const fetchProductTypeData = async (categoryId, lang) => {
@@ -83,18 +87,13 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
-                <CheckboxGroup>
-                  <RHFRadioGroup
-                    resetProductTypes={() => {
-                      setValue("productTypes", []);
-                    }}
-                    setCategoryName={(item) => {
-                      setValue("categoryName", item);
-                    }}
-                    name="categoryId"
-                    options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
-                  />
-                </CheckboxGroup>
+                <RHFRadioGroup
+                  resetProductTypes={() => {
+                    setValue("productTypes", []);
+                  }}
+                  name="categoryId"
+                  options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
+                />
               </AccordionPanel>
             </>
           )}
@@ -112,14 +111,12 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
                 </AccordionButton>
                 <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
-                  <CheckboxGroup>
-                    <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={2}>
-                      <RHFCheckbox
-                        name="productTypes"
-                        options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
-                      />
-                    </VStack>
-                  </CheckboxGroup>
+                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={2}>
+                    <RHFCheckbox
+                      name="productTypes"
+                      options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
+                    />
+                  </VStack>
                 </AccordionPanel>
               </>
             )}

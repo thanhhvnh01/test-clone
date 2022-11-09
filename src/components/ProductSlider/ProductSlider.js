@@ -77,7 +77,8 @@ const ProductSlider = ({ data, isMobile }) => {
             <ProductCard
               sx={{
                 mx: "auto",
-                // border: "1px solid #AAAAAA !important",
+                mb: 1,
+                transition: "transform .2s",
               }}
               key={index}
               title={item.productName}

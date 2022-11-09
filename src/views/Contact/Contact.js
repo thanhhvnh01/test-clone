@@ -190,8 +190,8 @@ const Contact = () => {
                 </Box>
               </GridItem>
               <GridItem colSpan={6} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
-                <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                  <Box w="100%" p={6} py={10}>
+                <Box w="100%" p={6} py={10}>
+                  <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                     <Grid templateColumns="repeat(2,1fr)" gap={10}>
                       <GridItem colSpan={1}>
                         <Box>
@@ -253,8 +253,8 @@ const Contact = () => {
                         <FormattedMessage id="button.sendMessage" />
                       </Button>
                     </Box>
-                  </Box>
-                </FormProvider>
+                  </FormProvider>
+                </Box>
               </GridItem>
             </Grid>
           </Flex>

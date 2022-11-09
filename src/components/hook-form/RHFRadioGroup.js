@@ -33,7 +33,6 @@ export default function RHFRadioGroup({
               onChange={(e) => {
                 field.onChange(e);
                 resetProductTypes();
-                console.log(e);
               }}
               value={Number(field.value)}
               {...other}

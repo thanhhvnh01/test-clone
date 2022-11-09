@@ -30,7 +30,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         wrap="wrap"
         h={ResponsiveNavbarHeight}
         p={4}
-        px={["7%", "7%", "7%", "11%", "18.3%"]}
+        px={["7%", "7%", "7%", "10.5%", "18.3%"]}
         bg="rgb(107,110,114,0.9)"
         color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
         {...props}

@@ -25,6 +25,7 @@ import { getBestSaleProductsAPI, getSupportersAPI, subscribeNewMemberAPI } from 
 import ProductSlider from "@components/ProductSlider";
 import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
 import { getErrorMessage } from "@api/handleApiError";
+import { useNavigate } from "react-router-dom";
 
 const slideImages = [
   {
@@ -44,6 +45,7 @@ const slideImages = [
 const Home = () => {
   const initLang = localStorage.getItem("language");
   const toast = useToast();
+  const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
   const [supporterData, setSupporterData] = useState([]);
 
@@ -96,8 +98,8 @@ const Home = () => {
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
       >
         <Box>
-          <BestSaleSection isMobile={isMobile} data={productsData} />
-          <AboutUsSection isMobile={isMobile} />
+          <BestSaleSection isMobile={isMobile} data={productsData} navigate={navigate} />
+          <AboutUsSection isMobile={isMobile} navigate={navigate} />
           <SupportSection isMobile={isMobile} data={supporterData} />
         </Box>
       </Container>
@@ -147,7 +149,7 @@ const BestSaleSection = ({ isMobile, data }) => {
   );
 };
 
-const AboutUsSection = ({ content, isMobile }) => {
+const AboutUsSection = ({ content, isMobile, navigate }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
@@ -178,6 +180,9 @@ const AboutUsSection = ({ content, isMobile }) => {
                   </Box>
                   <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
                     <Button
+                      onClick={() => {
+                        navigate("/about-us");
+                      }}
                       textTransform="none"
                       _hover={{ backgroundColor: "#D8D8D8" }}
                       sx={{ color: " #2D3748", borderColor: "#2D3748" }}
@@ -326,9 +331,9 @@ const SignUpSection = ({ isMobile }) => {
               <FormattedMessage id="label.subscribeForInfo" />
             </Text>
             <VStack
-              spacing="15px"
+              spacing="20px"
               sx={{ justifyContent: "center", m: "auto", mt: 4 }}
-              pb={isMobile ? "60px" : 20}
+              pb={isMobile ? "60px" : "60px"}
               w="100%"
             >
               <Flex sx={{ display: "flex", mr: "auto", ml: "auto" }}>

@@ -53,7 +53,7 @@ const Products = () => {
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
   const [keyword, setKeyword] = useState("");
-  // const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState();
   // product data
   const [pageSize] = useState(9);
   const [pageNumber, setPageNumber] = useState(0);
@@ -195,7 +195,9 @@ const Products = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#"></BreadcrumbLink>
+              <BreadcrumbLink href="#">
+                {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
+              </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -205,7 +207,7 @@ const Products = () => {
               <>
                 <Flex justifyContent="space-between">
                   <Text fontSize="2xl" fontWeight="bold">
-                    <FormattedMessage id="title.allProducts" />
+                    {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
                   </Text>
                 </Flex>
                 <Grid templateColumns="repeat(13, 1fr)" gap={6}>
@@ -216,6 +218,7 @@ const Products = () => {
                       selectedProductType={selectedProductType}
                       setValue={setValue}
                       handleClearFilter={handleClearFilter}
+                      setCategoryName={setCategoryName}
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
@@ -441,9 +444,11 @@ const ProductSection = ({
             );
           })
         ) : (
-          <Text>
-            <FormattedMessage id="label.noitemhere" />
-          </Text>
+          <GridItem colSpan={3}>
+            <Text textAlign="center">
+              <FormattedMessage id="label.noitemhere" />
+            </Text>
+          </GridItem>
         )}
       </Grid>
       <ReactPaginate
