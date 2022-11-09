@@ -14,7 +14,6 @@ import {
   GridItem,
   HStack,
   Image,
-  ListItem,
   Text,
   UnorderedList,
   useDisclosure,
@@ -22,6 +21,13 @@ import {
 } from "@chakra-ui/react";
 import ProductSlider from "@components/ProductSlider";
 import useMobile from "@hooks/useMobile";
+import {
+  HairStyleDisplayConfig,
+  LengthMeasureUnitDisplayConfig,
+  MaterialTypeDisplayConfig,
+  OriginDisplayConfig,
+  WeightMeasureUnitDisplayConfig,
+} from "@utility/constant";
 import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -98,6 +104,12 @@ const ProductDetails = () => {
             </BreadcrumbItem>
             <BreadcrumbItem color="#3182CE">
               <BreadcrumbLink href="#">Products</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem color="#3182CE">
+              <BreadcrumbLink href="#">{data?.categoryName}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem color="#3182CE">
+              <BreadcrumbLink href="#">{data?.productTypeName}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
@@ -188,26 +200,50 @@ const ProductDetails = () => {
                 </HStack>
               </VStack>
               <VStack alignItems="flex-start" p={3}>
-                <VStack>
-                  <Text fontWeight="bold">
-                    <FormattedMessage id="label.productDetails" />
-                  </Text>
+                <VStack alignItems="flex-start">
                   <UnorderedList>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
+                    <HStack>
+                      <Text fontWeight="bold">
+                        <FormattedMessage id="label.material" />:{" "}
+                      </Text>
+                      <Text>
+                        <FormattedMessage id={`enum.${MaterialTypeDisplayConfig[data?.materialTypeId]}`} />
+                      </Text>
+                    </HStack>
+                    <HStack>
+                      <Text fontWeight="bold">
+                        <FormattedMessage id="label.origin" />:{" "}
+                      </Text>
+                      <Text>
+                        <FormattedMessage id={`enum.${OriginDisplayConfig[data?.originId]}`} />
+                      </Text>
+                    </HStack>
+                    <HStack>
+                      <Text fontWeight="bold">
+                        <FormattedMessage id="label.length" />:
+                      </Text>
+                      <Text>
+                        {data?.fromLength} - {data?.toLength}{" "}
+                        <FormattedMessage id={`enum.${LengthMeasureUnitDisplayConfig[data?.measureUnitLengthId]}`} />
+                      </Text>
+                    </HStack>
+                    <HStack>
+                      <Text fontWeight="bold">
+                        <FormattedMessage id="label.weight" />:
+                      </Text>
+                      <Text>
+                        {data?.weight}{" "}
+                        <FormattedMessage id={`enum.${WeightMeasureUnitDisplayConfig[data?.measureUnitWeightId]}`} />
+                      </Text>
+                    </HStack>
+                    <HStack>
+                      <Text fontWeight="bold">
+                        <FormattedMessage id="label.hairStyle" />:{" "}
+                      </Text>
+                      <Text>
+                        <FormattedMessage id={`enum.${HairStyleDisplayConfig[data?.hairStyleId]}`} />
+                      </Text>
+                    </HStack>
                   </UnorderedList>
                 </VStack>
               </VStack>
@@ -217,33 +253,25 @@ const ProductDetails = () => {
         <Box mt={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
-              <AspectRatio _before={{ p: "0px !important" }} w="100%" h={["184px", "128px", "128px", "620px", "620px"]}>
+              <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["184px", "128px", "128px", "400px", "400px"]}>
                 <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
               </AspectRatio>
             </GridItem>
             <GridItem colSpan={[7, 3, 3, 3, 3]}>
               <VStack alignItems="flex-start" p={3}>
-                <VStack>
-                  <Text fontWeight="bold">
-                    <FormattedMessage id="label.productDetails" />
-                  </Text>
-                  <UnorderedList>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                    <ListItem>
-                      <FormattedMessage id="label.substance" />
-                    </ListItem>
-                  </UnorderedList>
+                <VStack alignItems="flex-start">
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.advantage" />:
+                    </Text>
+                    <Text>{data?.advantage}</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.disadvantage" />:
+                    </Text>
+                    <Text>{data?.disadvantage}</Text>
+                  </HStack>
                 </VStack>
               </VStack>
             </GridItem>

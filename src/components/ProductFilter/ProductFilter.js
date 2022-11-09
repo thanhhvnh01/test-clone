@@ -6,7 +6,9 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Checkbox,
   CheckboxGroup,
+  Flex,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -18,7 +20,7 @@ import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 // import { FormattedMessage } from "react-intl";
 
-const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
+const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryName }) => {
   const initLang = localStorage.getItem("language");
   const [categoryData, setCategoryData] = useState([]);
   const [productTypeData, setProductTypeData] = useState([]);
@@ -69,7 +71,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
   return (
     <Box>
       <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
-        <AccordionItem>
+        <AccordionItem borderTop="none">
           {({ isExpanded }) => (
             <>
               <AccordionButton py={3}>
@@ -80,9 +82,15 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
+              <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <CheckboxGroup>
                   <RHFRadioGroup
+                    resetProductTypes={() => {
+                      setValue("productTypes", []);
+                    }}
+                    setCategoryName={(item) => {
+                      setValue("categoryName", item);
+                    }}
                     name="categoryId"
                     options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
                   />
@@ -91,8 +99,8 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             </>
           )}
         </AccordionItem>
-        {!!categoryId && (
-          <AccordionItem>
+        {productTypeData.length > 0 && !!categoryId && (
+          <AccordionItem borderTop="none">
             {({ isExpanded }) => (
               <>
                 <AccordionButton py={3}>
@@ -103,9 +111,9 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
                   </Box>
                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
                 </AccordionButton>
-                <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
+                <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
                   <CheckboxGroup>
-                    <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
+                    <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={2}>
                       <RHFCheckbox
                         name="productTypes"
                         options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
@@ -117,7 +125,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
             )}
           </AccordionItem>
         )}
-        <AccordionItem>
+        <AccordionItem borderTop="none" borderBottom="none">
           {({ isExpanded }) => (
             <>
               <AccordionButton py={3}>
@@ -128,21 +136,24 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} sx={{ borderTop: "1px solid #e2e8f0" }}>
-                <CheckboxGroup>
-                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={3}>
-                    <RHFCheckbox
-                      name="colors"
-                      isColor
-                      options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
-                    />
-                  </VStack>
-                </CheckboxGroup>
+              <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
+                <VStack p={0} alignItems="flex-start" px={4} spacing={2} py={2}>
+                  <RHFCheckbox
+                    name="colors"
+                    isColor
+                    options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
+                  />
+                </VStack>
               </AccordionPanel>
             </>
           )}
         </AccordionItem>
       </Accordion>
+      <Flex justifyContent="left" mt="2">
+        <Checkbox fontWeight="bold" colorScheme="yellow">
+          <FormattedMessage id="label.bestSelling" />
+        </Checkbox>
+      </Flex>
     </Box>
   );
 };

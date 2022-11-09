@@ -14,13 +14,13 @@ export default function RHFCheckbox({ name, options, value, isColor, ...other })
           <CheckboxGroup onChange={(e) => field.onChange(e)} value={field.value}>
             {options?.map((item, index) => {
               return (
-                <Checkbox key={index} value={`${item.id}`}>
+                <Checkbox colorScheme="yellow" key={index} value={`${item.id}`}>
                   {!!isColor ? (
                     <HStack>
                       <Box
                         bg={
                           item.condition.length > 1
-                            ? `linear-gradient(to bottom,${item.condition[0]}, ${item.condition[2]} 100%)`
+                            ? `linear-gradient(to bottom,${item.condition[0]}, ${item.condition[1]} 100%)`
                             : `${item.condition[0]}`
                         }
                         width="15px"

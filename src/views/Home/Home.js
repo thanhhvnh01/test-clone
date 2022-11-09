@@ -124,7 +124,7 @@ const BestSaleSection = ({ isMobile, data }) => {
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
         </Box>
-        <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
+        <Box bg="#FFFF" p={isMobile ? 0 : 0}>
           <ProductSlider data={data} isMobile={isMobile} />
 
           <Button

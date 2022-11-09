@@ -10,12 +10,18 @@ const DropDownSubmenu = ({ title, data }) => {
 
   const handleMenuClick = (category) => {
     if (submenuOpen) {
-      navigate(`/products?categoryId=${category.categoryId}`);
+      navigate("/products", { state: { categoryId: category.categoryId, categoryName: category.categoryName } });
     }
   };
 
   const handleSubmenuClick = (category, productType) => {
-    navigate(`/products?categoryId=${category.categoryId}&productTypeId=${productType.productTypeId}`);
+    navigate("/products", {
+      state: {
+        categoryId: category.categoryId,
+        categoryName: category.categoryName,
+        productTypeId: productType.productTypeId,
+      },
+    });
   };
 
   return (

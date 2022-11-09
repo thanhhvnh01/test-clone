@@ -70,14 +70,14 @@ const ProductSlider = ({ data, isMobile }) => {
   };
 
   return (
-    <Box py={[6, 6, 6, 12, 12]}>
+    <Box py={[6, 6, 6, 0, 0]}>
       <Slider {...settings}>
         {data?.map((item, index) => {
           return (
             <ProductCard
               sx={{
                 mx: "auto",
-                border: "1px solid #AAAAAA !important",
+                // border: "1px solid #AAAAAA !important",
               }}
               key={index}
               title={item.productName}

@@ -3,6 +3,7 @@ import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import DropDownSubmenu from "@components/DropDownSubmenu";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -23,6 +24,7 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
 };
 
 const NavbarItems = ({ isOpen, dropDownData }) => {
+  const navigate = useNavigate();
   const signUpElement = document.getElementById("sign-up-section");
 
   const handleScroll = () => {
@@ -56,11 +58,14 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
               //   display="block"
             >
               <HStack className="navbar-item" justifyContent="center">
-                <Link href="/products">
-                  <Text>
-                    <FormattedMessage id="title.products" />
-                  </Text>
-                </Link>
+                <Text
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => {
+                    navigate("/products");
+                  }}
+                >
+                  <FormattedMessage id="title.products" />
+                </Text>
                 <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
               </HStack>
             </Flex>

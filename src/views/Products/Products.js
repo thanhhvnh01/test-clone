@@ -45,16 +45,19 @@ const Products = () => {
   const [isMobile] = useMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const initLang = localStorage.getItem("language");
 
-  const query = useLocation().search;
-  const categoryIdParam = new URLSearchParams(query).get("categoryId");
-  const productTypeId = new URLSearchParams(query).get("productTypeId");
+  const { state } = useLocation();
+  const categoryIdParam = state?.categoryId;
+  const productTypeId = state?.productTypeId;
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
   const [keyword, setKeyword] = useState("");
+  // const [categoryName, setCategoryName] = useState("");
   // product data
-  const [pageSize] = useState(12);
+  const [pageSize] = useState(9);
   const [pageNumber, setPageNumber] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
   const [products, setProducts] = useState([]);
   const [orderBy] = useState("productName");
   const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
@@ -75,13 +78,19 @@ const Products = () => {
   const productTypes = watch("productTypes");
   const colors = watch("colors");
 
-  //* action ( reset productTypes when categoryId changed )
+  useEffect(() => {
+    if (pageNumber !== 0) {
+      setPageNumber(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, productTypes]);
+
   useEffect(() => {
     if (!!productTypeId) {
-      setValue("productTypes", [productTypeId]);
-    } else setValue("productTypes", []);
+      setValue("productTypes", [String(productTypeId)]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryId, productTypeId]);
+  }, [productTypeId]);
 
   // * get products
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,9 +99,10 @@ const Products = () => {
       try {
         setIsLoading(true);
         const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
+        const pageCount = productRes.data.paging.totalItem / 9;
+        setPageCount(pageCount);
         setProducts(productRes.data.pageData);
       } catch (error) {
-        console.log(error);
         toast({
           title: "Api error",
           description: getErrorMessage(error),
@@ -113,13 +123,13 @@ const Products = () => {
     const colorIds = colors?.map((i) => {
       return Number(i);
     });
-    fetchProductData(pageSize, pageNumber + 1, orderByType, orderBy, keyword, "en", {
+    fetchProductData(pageSize, pageNumber + 1, orderByType, orderBy, keyword, initLang, {
       categoryId: !!categoryId ? Number(categoryId) : null,
       productTypeIds: productTypeIds,
       colorIds: colorIds,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy]);
+  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy, initLang]);
 
   useEffect(() => {
     setValue("categoryId", categoryIdParam);
@@ -134,7 +144,7 @@ const Products = () => {
 
   const handleClearFilter = () => {
     setValue("productTypes", []);
-    setValue("categoryId", "");
+    setValue("categoryId", null);
     setValue("colors", []);
   };
 
@@ -185,7 +195,7 @@ const Products = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">{}</BreadcrumbLink>
+              <BreadcrumbLink href="#"></BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -197,12 +207,6 @@ const Products = () => {
                   <Text fontSize="2xl" fontWeight="bold">
                     <FormattedMessage id="title.allProducts" />
                   </Text>
-                  <Box mb={2} mr={[3, 3, 3, 8, 3]}>
-                    <InputGroup>
-                      <Input w="234px" onChange={handleKeywordChange} value={keyword} />
-                      <InputRightElement children={<SearchIcon />} />
-                    </InputGroup>
-                  </Box>
                 </Flex>
                 <Grid templateColumns="repeat(13, 1fr)" gap={6}>
                   <GridItem colSpan={3}>
@@ -216,6 +220,7 @@ const Products = () => {
                   </GridItem>
                   <GridItem colSpan={10}>
                     <ProductSection
+                      pageCount={pageCount}
                       categoryId={categoryId}
                       keyword={keyword}
                       pageSize={pageSize}
@@ -223,6 +228,7 @@ const Products = () => {
                       handleRequestSort={handleRequestSort}
                       data={products}
                       handlePageChange={handlePageChange}
+                      handleKeywordChange={handleKeywordChange}
                       isLoading={isLoading}
                     />
                   </GridItem>
@@ -268,6 +274,7 @@ const Products = () => {
                   </HStack>
                 </Flex>
                 <ProductSection
+                  pageCount={pageCount}
                   categoryId={categoryId}
                   keyword={keyword}
                   pageSize={pageSize}
@@ -292,7 +299,7 @@ const Products = () => {
   );
 };
 
-const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter, isDirty }) => {
+const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter, setCategoryName }) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
@@ -300,30 +307,42 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
           <BsFilter style={{ height: "19px", width: "19px" }} />
           <FormattedMessage id="label.filter" />
         </HStack>
-        {isDirty && (
-          <Button
-            onClick={handleClearFilter}
-            fontWeight="500"
-            textTransform="none"
-            variant="solid"
-            fontSize="14px"
-            rightIcon={<SmallCloseIcon />}
-            p={3}
-            bg="#FFA800"
-            h="23px"
-          >
-            <FormattedMessage id="button.clearFilter" />
-          </Button>
-        )}
+        <Button
+          onClick={handleClearFilter}
+          fontWeight="500"
+          textTransform="none"
+          variant="solid"
+          fontSize="14px"
+          rightIcon={<SmallCloseIcon />}
+          p={3}
+          bg="#FFA800"
+          h="23px"
+        >
+          <FormattedMessage id="button.clearFilter" />
+        </Button>
       </Flex>
       <Box sx={{ width: "100%" }}>
-        <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
+        <ProductFilter
+          setCategoryName={setCategoryName}
+          setValue={setValue}
+          categoryId={categoryId}
+          setSelectedCategory={setSelectedCategory}
+        />
       </Box>
     </VStack>
   );
 };
 
-const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }) => {
+const ProductSection = ({
+  data,
+  handleRequestSort,
+  handlePageChange,
+  handleKeywordChange,
+  keyword,
+  isLoading,
+  pageCount,
+  pageNumber,
+}) => {
   const navigate = useNavigate();
 
   const handleOnClick = (item) => {
@@ -332,13 +351,19 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
 
   return (
     <Box>
+      <Flex mb={2}>
+        <InputGroup display="flex" justifyContent="flex-end" mr={[0, 0, 0, 3, 5]}>
+          <Input w="234px" onChange={handleKeywordChange} value={keyword} />
+          <InputRightElement children={<SearchIcon />} />
+        </InputGroup>
+      </Flex>
       <Flex
         display={["none", "none", "none", "flex", "flex"]}
-        pr={[0, 0, 0, 5, 5]}
-        pl={[0, 0, 0, 10, 12]}
+        pr={[0, 0, 0, 0, 5]}
+        pl={[0, 0, 0, 5, 12]}
         justifyContent="space-between"
       >
-        <HStack fontWeight="bold">
+        <HStack>
           <Text>
             <FormattedMessage id="label.showing" />
           </Text>
@@ -347,7 +372,7 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
             <FormattedMessage id="label.items" />{" "}
           </Text>
         </HStack>
-        <HStack fontWeight="bold">
+        <HStack>
           <HStack>
             <BsFilterLeft style={{ height: "19px", width: "19px" }} />
             <Text>
@@ -360,13 +385,12 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
             }}
             variant="unstyled"
             borderColor="#ffff"
-            fontWeight="bold"
             textColor="#FFA800"
           >
-            <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold" }}>
+            <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold", textAlign: "center" }}>
               A-Z
             </option>
-            <option value={OrderByTypeEnum.Desc} style={{ fontWeight: "bold" }}>
+            <option value={OrderByTypeEnum.Desc} style={{ fontWeight: "bold", textAlign: "center" }}>
               Z-A
             </option>
           </Select>
@@ -377,7 +401,7 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
         templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]}
       >
         {isLoading &&
-          [...Array(12)].map((e, i) => {
+          [...Array(9)].map((e, i) => {
             return (
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={i}>
                 <Box w="200px" mb={5}>
@@ -401,9 +425,8 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
                 <ProductCard
                   sx={{
-                    mb: 5,
+                    mb: 1,
                     mx: "auto",
-                    border: "1px solid #AAAAAA !important",
                   }}
                   key={index}
                   title={item.productName}
@@ -428,12 +451,13 @@ const ProductSection = ({ data, handleRequestSort, handlePageChange, isLoading }
         nextLabel={<ChevronRightIcon boxSize={5} color="#6B6E72" />}
         onPageChange={handlePageChange}
         pageRangeDisplayed={5}
-        pageCount={5}
+        pageCount={pageCount}
         previousLabel={<ChevronLeftIcon boxSize={5} color="#6B6E72" />}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         pageClassName={"pagingateItem"}
         activeClassName={"active"}
+        forcePage={pageNumber}
       />
     </Box>
   );

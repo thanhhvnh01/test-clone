@@ -48,7 +48,7 @@ const Contact = () => {
         />
       </Box>
       <Container
-        p={[0, 0, 0, 5, 5]}
+        p={0}
         // maxW={isMobile ? "100%" : "80%"}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
         sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}

@@ -58,10 +58,10 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
       size="xs"
       pb={1}
     >
-      <option value="en">
+      <option value="en" style={{ textAlign: "center" }}>
         <FormattedMessage id="title.en" />
       </option>
-      <option value="ru">
+      <option value="ru" style={{ textAlign: "center" }}>
         <FormattedMessage id="title.ru" />
       </option>
     </Select>

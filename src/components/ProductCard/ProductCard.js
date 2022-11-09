@@ -3,7 +3,8 @@ import React, { useState } from "react";
 
 const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
   const [hoverImage, setHoverImage] = useState(null);
-  console.log(hoverImage);
+  const [isHover, setIsHover] = useState(false);
+
   return (
     <Box
       onClick={() => {
@@ -13,12 +14,18 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
       tabIndex={0}
       _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
       // w={isMobile ? "112px" : "236px"}
-      maxW={["175px", "182px", "182px", "270px", "270px"]}
+      w={["175px", "182px", "182px", "270px", "270px"]}
       // h={isMobile ? "139px" : "318px"}
-      h={["248px", "248px", "248px", "411px", "411px"]}
-      sx={{ ...sx, border: "1px solid #AAAAAA !important", cursor: "pointer" }}
-      ml={[1, 5, 5, 2, 2]}
-      position="relative"
+      h={["248px", "248px", "248px", "390px", "390px"]}
+      sx={{ ...sx, cursor: "pointer" }}
+      // ml={[1, 5, 5, 12, 2]}
+      // position={isHover ? "absoluite" : "relative"}
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
+      }}
     >
       <Image
         w="100%"
@@ -28,32 +35,40 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick }) => {
       />
       <Box mt={1}>
         <VStack spacing="5px" px={1} display="block">
-          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={["12px", "12px", "12px", "15px", "15px"]}>
+          <Text
+            textTransform="uppercase"
+            fontWeight="600"
+            m="auto"
+            fontSize={["12px", "12px", "12px", "13px", "13px"]}
+            noOfLines={2}
+          >
             {title}
           </Text>
         </VStack>
-        <Box position="absolute" sx={{ bottom: 0 }} mb={2} ml={1}>
-          <Text textTransform="none" fontSize="10px" color="#AAAAAA">
+        <Box sx={{ bottom: 0 }} mb={2} ml={1}>
+          <Text textTransform="none" fontSize="12px" color="#AAAAAA">
             {`${subtitle}`}
           </Text>
-          <HStack display="flex">
-            {images?.map((image, index) => {
-              return (
-                <Image
-                  onMouseEnter={() => {
-                    setHoverImage(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoverImage(null);
-                  }}
-                  h="47px"
-                  w="48px"
-                  key={index}
-                  src={image}
-                />
-              );
-            })}
-          </HStack>
+          {isHover && (
+            <HStack display="flex">
+              {images?.map((image, index) => {
+                return (
+                  <Image
+                    onMouseEnter={() => {
+                      setHoverImage(index);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverImage(null);
+                    }}
+                    h="47px"
+                    w="48px"
+                    key={index}
+                    src={image}
+                  />
+                );
+              })}
+            </HStack>
+          )}
         </Box>
       </Box>
     </Box>
