@@ -9,11 +9,11 @@ import {
   GridItem,
   Grid,
   Button,
-  Input,
   VStack,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { CgMail, CgPhone } from "react-icons/cg";
 import { ImLocation2 } from "react-icons/im";
@@ -21,11 +21,72 @@ import { Image } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
-import { getSupportersAPI } from "@api/main";
+import { getSupportersAPI, sendMessageAPI } from "@api/main";
+import { FormProvider, RHFInput } from "@components/hook-form";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { PhoneNumberRegExp } from "@utility/ultils";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { getErrorMessage } from "@api/handleApiError";
 
 const Contact = () => {
   const [isMobile] = useMobile();
   const [supporterData, setSupporterData] = useState([]);
+
+  const intl = useIntl();
+  const toast = useToast();
+
+  const defaultValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+  };
+  const ContactSchema = yup.object().shape({
+    firstName: yup.string().required().max(256),
+    lastName: yup.string().required().max(256),
+    email: yup.string().required().max(256),
+    phoneNumber: yup.string().matches(PhoneNumberRegExp, intl.formatMessage({ id: "formError.phoneNumber" })),
+    message: yup.string().required(),
+  });
+
+  const methods = useForm({
+    mode: "all",
+    defaultValues,
+    resolver: yupResolver(ContactSchema),
+  });
+
+  const {
+    handleSubmit,
+    formState: { isDirty, isValid },
+  } = methods;
+
+  const onSubmit = async (data) => {
+    const formData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      message: data.message,
+    };
+    try {
+      await sendMessageAPI(formData);
+      toast({
+        title: "Success",
+        description: intl.formatMessage({ id: "toast.messageContactSuccess" }),
+        status: "success",
+        duration: 3000,
+      });
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
 
   const fetchSupporterData = async () => {
     try {
@@ -129,60 +190,76 @@ const Contact = () => {
                 </Box>
               </GridItem>
               <GridItem colSpan={6} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
-                <Box w="100%" p={6} py={10}>
-                  <Grid templateColumns="repeat(2,1fr)" gap={10}>
-                    <GridItem colSpan={1}>
-                      <Box>
-                        <Text>
-                          <FormattedMessage id="label.firstName" />
-                        </Text>
-                        <Input variant="flushed" />
-                      </Box>
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                      <Box>
-                        <Text>
-                          <FormattedMessage id="label.lastName" />
-                        </Text>
-                        <Input variant="flushed" />
-                      </Box>
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                      <Box>
-                        <Text>
-                          <FormattedMessage id="label.Email" />
-                        </Text>
-                        <Input variant="flushed" />
-                      </Box>
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                      <Box>
-                        <Text>
-                          <FormattedMessage id="label.phoneNumber" />
-                        </Text>
-                        <Input variant="flushed" />
-                      </Box>
-                    </GridItem>
-                    <GridItem colSpan={2}>
-                      <Box>
-                        <Text>
-                          <FormattedMessage id="label.Message" />
-                        </Text>
-                        <Input placeholder="Write your message..." variant="flushed" />
-                      </Box>
-                    </GridItem>
-                  </Grid>
-                  <Box sx={{ display: "flex", mt: 10 }}>
-                    <Button ml="auto" p={6} bg="#000000" variant="solid" fontWeight="500" textTransform="none">
-                      <FormattedMessage id="label.sendMessage" />
-                    </Button>
+                <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+                  <Box w="100%" p={6} py={10}>
+                    <Grid templateColumns="repeat(2,1fr)" gap={10}>
+                      <GridItem colSpan={1}>
+                        <Box>
+                          <Text>
+                            <FormattedMessage id="label.firstName" />
+                          </Text>
+                          <RHFInput name="firstName" variant="flushed" />
+                        </Box>
+                      </GridItem>
+                      <GridItem colSpan={1}>
+                        <Box>
+                          <Text>
+                            <FormattedMessage id="label.lastName" />
+                          </Text>
+                          <RHFInput name="lastName" variant="flushed" />
+                        </Box>
+                      </GridItem>
+                      <GridItem colSpan={1}>
+                        <Box>
+                          <Text>
+                            <FormattedMessage id="label.email" />
+                          </Text>
+                          <RHFInput name="email" variant="flushed" />
+                        </Box>
+                      </GridItem>
+                      <GridItem colSpan={1}>
+                        <Box>
+                          <Text>
+                            <FormattedMessage id="label.phoneNumber" />
+                          </Text>
+                          <RHFInput name="phoneNumber" variant="flushed" />
+                        </Box>
+                      </GridItem>
+                      <GridItem colSpan={2}>
+                        <Box>
+                          <Text>
+                            <FormattedMessage id="label.Message" />
+                          </Text>
+                          <RHFInput
+                            placeholder={intl.formatMessage({ id: "placeholder.message" })}
+                            name="message"
+                            variant="flushed"
+                          />
+                        </Box>
+                      </GridItem>
+                    </Grid>
+                    <Box sx={{ display: "flex", mt: 10 }}>
+                      <Button
+                        _hover={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
+                        disabled={!isDirty || !isValid}
+                        type="submit"
+                        ml="auto"
+                        p={6}
+                        bg="#000000"
+                        variant="solid"
+                        fontWeight="500"
+                        textTransform="none"
+                      >
+                        <FormattedMessage id="button.sendMessage" />
+                      </Button>
+                    </Box>
                   </Box>
-                </Box>
+                </FormProvider>
               </GridItem>
             </Grid>
           </Flex>
         ) : (
-          <Box>
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Grid templateColumns="repeat(1, 1fr)" gap={6}>
               <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
                 <Box w="100%" p={6} py={10}>
@@ -190,23 +267,24 @@ const Contact = () => {
                     <GridItem colSpan={1}>
                       <Box>
                         <Text>
-                          <FormattedMessage id="label.lastName" />
+                          <FormattedMessage id="label.firstName" />
                         </Text>
-                        <Input variant="flushed" />
+                        <RHFInput name="firstName" variant="flushed" />
                       </Box>
                     </GridItem>
                     <GridItem colSpan={1}>
                       <Box>
-                        <Text>Last Name</Text>
-                        <Input variant="flushed" />
+                        <FormattedMessage id="label.lastName" />
+                        <Text></Text>
+                        <RHFInput name="lastName" variant="flushed" />
                       </Box>
                     </GridItem>
                     <GridItem colSpan={1}>
                       <Box>
                         <Text>
-                          <FormattedMessage id="label.Email" />
+                          <FormattedMessage id="label.email" />
                         </Text>
-                        <Input variant="flushed" />
+                        <RHFInput name="email" variant="flushed" />
                       </Box>
                     </GridItem>
                     <GridItem colSpan={1}>
@@ -214,7 +292,7 @@ const Contact = () => {
                         <Text>
                           <FormattedMessage id="label.phoneNumber" />
                         </Text>
-                        <Input variant="flushed" />
+                        <RHFInput name="phoneNumber" variant="flushed" />
                       </Box>
                     </GridItem>
                     <GridItem colSpan={2}>
@@ -222,13 +300,26 @@ const Contact = () => {
                         <Text>
                           <FormattedMessage id="label.Message" />
                         </Text>
-                        <Input placeholder="Write your message..." variant="flushed" />
+                        <RHFInput
+                          placeholder={intl.formatMessage({ id: "placeholder.message" })}
+                          name="message"
+                          variant="flushed"
+                        />
                       </Box>
                     </GridItem>
                   </Grid>
                   <Box sx={{ display: "flex", mt: 10, justifyContent: "center" }}>
-                    <Button p={6} bg="#000000" variant="solid" fontWeight="500" textTransform="none">
-                      <FormattedMessage id="label.sendMessage" />
+                    <Button
+                      _hover={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
+                      disabled={!isDirty || !isValid}
+                      type="submit"
+                      p={6}
+                      bg="#000000"
+                      variant="solid"
+                      fontWeight="500"
+                      textTransform="none"
+                    >
+                      <FormattedMessage id="button.sendMessage" />
                     </Button>
                   </Box>
                 </Box>
@@ -269,7 +360,7 @@ const Contact = () => {
                 </Box>
               </GridItem>
             </Grid>
-          </Box>
+          </FormProvider>
         )}
 
         <Box bgImage="url('/backgrounds/support_background.png')">
