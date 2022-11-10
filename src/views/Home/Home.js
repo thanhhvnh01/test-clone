@@ -214,12 +214,15 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
             </Text>
             <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
               <Button
+                onClick={() => {
+                  navigate("/about-us");
+                }}
                 size="sm"
                 textTransform="none"
                 _hover={{ backgroundColor: "#D8D8D8" }}
                 sx={{ color: " #2D3748", borderColor: "#2D3748" }}
               >
-                Read more
+                <FormattedMessage id="button.readMore" />
               </Button>
             </Box>
           </VStack>

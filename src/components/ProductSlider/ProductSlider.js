@@ -4,8 +4,15 @@ import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 // slick
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 
 const ProductSlider = ({ data, isMobile }) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = (item) => {
+    navigate(`/product/details?productId=${item.productId}`);
+  };
+
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -47,8 +54,6 @@ const ProductSlider = ({ data, isMobile }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true,
         },
       },
       {
@@ -59,38 +64,69 @@ const ProductSlider = ({ data, isMobile }) => {
           initialSlide: 2,
         },
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
     ],
+  };
+
+  var mobileSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
   };
 
   return (
     <Box py={[6, 6, 6, 0, 0]}>
-      <Slider {...settings}>
-        {data?.map((item, index) => {
-          return (
-            <ProductCard
-              sx={{
-                mx: "auto",
-                mb: 1,
-                transition: "transform .2s",
-              }}
-              key={index}
-              isBestSelling={item.isBestSelling}
-              title={item.productName}
-              thumbImage={item.mainImageUrl}
-              images={item.imageUrls}
-              subtitle={item.productTypeName}
-              onClick={() => {}}
-            />
-          );
-        })}
-      </Slider>
+      {isMobile ? (
+        <Slider {...mobileSettings}>
+          {data?.map((item, index) => {
+            return (
+              <ProductCard
+                sx={{
+                  mx: "auto",
+                  mb: 1,
+                  transition: "transform .2s",
+                }}
+                key={index}
+                isBestSelling={item.isBestSelling}
+                title={item.productName}
+                thumbImage={item.mainImageUrl}
+                images={item.imageUrls}
+                subtitle={item.productTypeName}
+                onClick={() => {
+                  handleOnClick(item);
+                }}
+              />
+            );
+          })}
+        </Slider>
+      ) : (
+        <Slider {...settings}>
+          {data?.map((item, index) => {
+            return (
+              <ProductCard
+                sx={{
+                  mx: "auto",
+                  mb: 1,
+                  transition: "transform .2s",
+                }}
+                key={index}
+                isBestSelling={item.isBestSelling}
+                title={item.productName}
+                thumbImage={item.mainImageUrl}
+                images={item.imageUrls}
+                subtitle={item.productTypeName}
+                onClick={() => {
+                  handleOnClick(item);
+                }}
+              />
+            );
+          })}
+        </Slider>
+      )}
     </Box>
   );
 };

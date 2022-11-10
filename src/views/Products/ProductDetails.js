@@ -233,7 +233,7 @@ const ProductDetails = () => {
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>
-                <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
+                <iframe title="video" src={data?.videoUrl} />
               </AspectRatio>
             </GridItem>
             <GridItem sx={{ mt: "auto", mb: "auto", display: "flex" }} colSpan={[7, 3, 3, 3, 3]}>

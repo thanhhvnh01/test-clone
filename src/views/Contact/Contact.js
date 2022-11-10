@@ -112,7 +112,7 @@ const Contact = () => {
         p={0}
         // maxW={isMobile ? "100%" : "80%"}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
-        sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
+        sx={{ mt: 0, minHeight: "100vh !important", mr: "auto", ml: "auto" }}
       >
         <Box py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>

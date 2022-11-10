@@ -142,15 +142,17 @@ const SignUpSection = ({ isMobile }) => {
                 <InputGroup borderColor="#6B6E72">
                   <InputLeftAddon
                     bg="#434343"
+                    borderColor="#898B8E"
                     justifyContent="center"
                     children={<EmailIcon boxSize={5} color="#FFEA85" />}
-                    h={["30px", "30px", "30px", "32px", "30px"]}
+                    h={["30px", "30px", "30px", "32px", "32px"]}
                     w={["50px", "50px", "50px", "60px", "60px"]}
                     size={["sm", "md", "md", "md", "md"]}
                   />
                   <Input
+                    borderColor="#898B8E"
                     w={["250px", "350px", "350px", "350px", "350px"]}
-                    h={["30px", "30px", "30px", "32px", "30px"]}
+                    h={["30px", "30px", "30px", "32px", "32px"]}
                     type="email"
                     value={email}
                     fontSize="12px"
@@ -162,7 +164,7 @@ const SignUpSection = ({ isMobile }) => {
                 </InputGroup>
                 {!isMobile && (
                   <Button
-                    size={["sm", "md", "md", "sm", "md"]}
+                    size={["sm", "md", "md", "sm", "sm"]}
                     onClick={handleSignUp}
                     className="btn-sub"
                     color="#FFEA85"
