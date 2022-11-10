@@ -32,11 +32,19 @@
     "label.ContactInformation": "Контакты",
     "label.firstName": "Имя",
     "label.lastName": "Фамилия",
-    "label.Email": "Эл. адрес",
+    "label.email": "Эл. адрес",
     "label.phoneNumber": "Номер телефона",
     "label.Message": "Сообщение",
     "label.sendMessage": "Отправить сообщение",
     "label.Saysomething": "Скажите что-нибудь, чтобы начать живой чат!",
+    "label.advantage":"Преимущество",
+    "label.disadvantage":"Недостаток",
+    "label.relatedProduct":"сопутствующие товары",
+    "label.material":"Материал",
+    "label.origin":"Источник",
+    "label.length":"Длина",
+    "label.weight":"Масса",
+    "label.hairStyle":"Прическа",
 
 
     "/* info */": "info",
@@ -51,5 +59,14 @@
     "button.submit": "Разместить",
     "button.subsrcibe": "подписываться",
     "button.more": "Более",
-    "button.readMore": "Читать далее"
+    "button.readMore": "Читать далее",
+    "button.sendMessage": "Отправить сообщение",
+    "button.clearFilter": "чистый",
+
+
+    "/* placeholder */": "placeholder",
+    "placeholder.message": "Напишите свое сообщение..."
+
+
+
 }

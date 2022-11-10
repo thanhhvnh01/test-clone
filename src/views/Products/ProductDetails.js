@@ -3,9 +3,6 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   AspectRatio,
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Button,
   Center,
   Container,
@@ -96,33 +93,14 @@ const ProductDetails = () => {
           pb: "30px",
         }}
       >
-        <Box bg="#ffff" py="3" px={3}>
-          <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="#">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="#">Products</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="#">{data?.categoryName}</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="#">{data?.productTypeName}</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
         <Box mt={10} borderBottom="3px solid #D9D9D9" pb={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <Center>
                 <Image
                   sx={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
-                  w="480px"
-                  h="480px"
+                  w={["390px", "390px", "460px", "460px", "480px"]}
+                  h={["390px", "390px", "460px", "460px", "480px"]}
                   src={data?.imageUrls[imageIndex]}
                 />
               </Center>
@@ -140,8 +118,8 @@ const ProductDetails = () => {
                           border: "1px solid #AAAAAA",
                         }}
                         key={index}
-                        w="90px"
-                        h="90px"
+                        w={["40px", "40px", "90px", "90px", "90px"]}
+                        h={["40px", "40px", "90px", "90px", "90px"]}
                         src={image}
                       />
                     );
@@ -151,18 +129,19 @@ const ProductDetails = () => {
             </GridItem>
             <GridItem colSpan={[7, 3, 3, 3, 3]}>
               <VStack alignItems="flex-start" p={3}>
-                <Text fontSize="26px" fontWeight="bold">
+                <Text fontSize={["20px", "20px", "26px", "26px", "26px"]} fontWeight="bold">
                   {data?.productName}
                 </Text>
-
                 <HStack>
-                  <Text fontWeight="bold">Color: </Text>
+                  <Text fontWeight="bold">
+                    <FormattedMessage id="label.color" />:{" "}
+                  </Text>
                   <Text>{data?.colorName}</Text>
                 </HStack>
                 <HStack sx={{ cursor: "pointer" }}>
                   <Box
-                    width="35px"
-                    height="35px"
+                    width={["32px", "32px", "35px", "35px", "35px"]}
+                    height={["32px", "32px", "35px", "35px", "35px"]}
                     bg={
                       data?.colorCode.length > 1
                         ? `linear-gradient(to bottom,${data?.colorCode[0]}, ${data?.colorCode[2]} 100%)`
@@ -177,8 +156,8 @@ const ProductDetails = () => {
                           handleColorClick(a);
                         }}
                         key={i}
-                        width="35px"
-                        height="35px"
+                        width={["32px", "32px", "35px", "35px", "35px"]}
+                        height={["32px", "32px", "35px", "35px", "35px"]}
                         bg={
                           a?.colorCode.length > 1
                             ? `linear-gradient(to bottom,${a?.colorCode[0]}, ${a?.colorCode[2]} 100%)`
@@ -253,7 +232,7 @@ const ProductDetails = () => {
         <Box mt={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
-              <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["184px", "128px", "128px", "400px", "400px"]}>
+              <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>
                 <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
               </AspectRatio>
             </GridItem>
