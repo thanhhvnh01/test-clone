@@ -81,7 +81,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
 
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose} size="3xl">
-      <ModalOverlay />(
+      <ModalOverlay />
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <ModalContent p={10} sx={{ borderRadius: "20px !important" }}>
           <ModalBody>
@@ -120,7 +120,9 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
               </GridItem>
               <GridItem colSpan={2}>
                 <Box>
-                  <Text>Message</Text>
+                  <Text>
+                    <FormattedMessage id="label.Message" />
+                  </Text>
                   <RHFInput
                     placeholder={intl.formatMessage({ id: "placeholder.message" })}
                     name="message"
