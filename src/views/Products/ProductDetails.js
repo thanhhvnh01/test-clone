@@ -257,20 +257,24 @@ const ProductDetails = () => {
                 <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
               </AspectRatio>
             </GridItem>
-            <GridItem colSpan={[7, 3, 3, 3, 3]}>
-              <VStack alignItems="flex-start" p={3}>
-                <VStack alignItems="flex-start">
+            <GridItem sx={{ mt: "auto", mb: "auto", display: "flex" }} colSpan={[7, 3, 3, 3, 3]}>
+              <VStack alignItems="flex-start" p={3} justifyContent="center">
+                <VStack alignItems="flex-start" spacing="40px">
                   <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.advantage" />:
+                    <Text textAlign="justify">
+                      <b>
+                        <FormattedMessage id="label.advantage" />:{" "}
+                      </b>
+                      {data?.advantage}
                     </Text>
-                    <Text>{data?.advantage}</Text>
                   </HStack>
                   <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.disadvantage" />:
+                    <Text textAlign="justify">
+                      <b>
+                        <FormattedMessage id="label.disadvantage" />:{" "}
+                      </b>
+                      {data?.disadvantage}
                     </Text>
-                    <Text>{data?.disadvantage}</Text>
                   </HStack>
                 </VStack>
               </VStack>
