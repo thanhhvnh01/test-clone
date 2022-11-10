@@ -81,6 +81,7 @@ const ProductSlider = ({ data, isMobile }) => {
                 transition: "transform .2s",
               }}
               key={index}
+              isBestSelling={item.isBestSelling}
               title={item.productName}
               thumbImage={item.mainImageUrl}
               images={item.imageUrls}

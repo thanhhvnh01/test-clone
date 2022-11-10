@@ -182,25 +182,27 @@ const Products = () => {
           pb: "30px",
         }}
       >
-        <Box bg="#ffff" py={3} px={3}>
-          <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/">
-                <FormattedMessage id="label.home" />
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/products">
-                <FormattedMessage id="label.products" />
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">
-                {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
+        {!isMobile && (
+          <Box bg="#ffff" py={3} px={3}>
+            <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="/">
+                  <FormattedMessage id="label.home" />
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="/products">
+                  <FormattedMessage id="label.products" />
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem isCurrentPage>
+                <BreadcrumbLink href="#">
+                  {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Box>
+        )}
         <FormProvider methods={methods}>
           <Box className="product-main" p={3} mt={2}>
             {!isMobile ? (
@@ -277,12 +279,16 @@ const Products = () => {
                   </HStack>
                 </Flex>
                 <ProductSection
+                  isMobile={isMobile}
                   pageCount={pageCount}
                   categoryId={categoryId}
                   keyword={keyword}
                   pageSize={pageSize}
                   pageNumber={pageNumber}
+                  handleRequestSort={handleRequestSort}
                   data={products}
+                  handlePageChange={handlePageChange}
+                  handleKeywordChange={handleKeywordChange}
                 />
               </>
             )}
@@ -293,7 +299,10 @@ const Products = () => {
               isOpen={isOpen}
               onClose={onClose}
               categoryId={categoryId}
+              selectedProductType={selectedProductType}
+              setValue={setValue}
               handleClearFilter={handleClearFilter}
+              setCategoryName={setCategoryName}
             />
           )}
         </FormProvider>
@@ -345,6 +354,7 @@ const ProductSection = ({
   isLoading,
   pageCount,
   pageNumber,
+  isMobile,
 }) => {
   const navigate = useNavigate();
 
@@ -354,12 +364,15 @@ const ProductSection = ({
 
   return (
     <Box>
-      <Flex mb={2}>
-        <InputGroup display="flex" justifyContent="flex-end" mr={[0, 0, 0, 3, 5]}>
-          <Input w="234px" onChange={handleKeywordChange} value={keyword} />
-          <InputRightElement children={<SearchIcon />} />
-        </InputGroup>
-      </Flex>
+      {!isMobile && (
+        <Flex mb={2}>
+          <InputGroup display="flex" justifyContent="flex-end" mr={[0, 0, 0, 3, 5]}>
+            <Input w="234px" onChange={handleKeywordChange} value={keyword} />
+            <InputRightElement children={<SearchIcon />} />
+          </InputGroup>
+        </Flex>
+      )}
+
       <Flex
         display={["none", "none", "none", "flex", "flex"]}
         pr={[0, 0, 0, 0, 5]}
@@ -432,6 +445,7 @@ const ProductSection = ({
                     mx: "auto",
                   }}
                   key={index}
+                  isBestSelling={item.isBestSelling}
                   title={item.productName}
                   thumbImage={item.mainImageUrl}
                   images={item.imageUrls}

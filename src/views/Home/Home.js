@@ -8,9 +8,6 @@ import {
   Grid,
   GridItem,
   Image,
-  Input,
-  InputGroup,
-  InputLeftAddon,
   SlideFade,
   Text,
   useToast,
@@ -21,9 +18,9 @@ import { useInView } from "react-intersection-observer";
 // slider
 import useMobile from "@hooks/useMobile";
 import SupporterCard from "@components/SupporterCard";
-import { getBestSaleProductsAPI, getSupportersAPI, subscribeNewMemberAPI } from "@api/main";
+import { getBestSaleProductsAPI, getSupportersAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
-import { ChevronRightIcon, EmailIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import { getErrorMessage } from "@api/handleApiError";
 import { useNavigate } from "react-router-dom";
 
@@ -103,12 +100,11 @@ const Home = () => {
           <SupportSection isMobile={isMobile} data={supporterData} />
         </Box>
       </Container>
-      <SignUpSection isMobile={isMobile} />
     </>
   );
 };
 
-const BestSaleSection = ({ isMobile, data }) => {
+const BestSaleSection = ({ isMobile, data, navigate }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
@@ -133,6 +129,9 @@ const BestSaleSection = ({ isMobile, data }) => {
             variant="link"
             className="navbar-item"
             fontWeight="500"
+            onClick={() => {
+              navigate("/products");
+            }}
             sx={{
               textTransform: "none",
               textDecoration: "none",
@@ -278,95 +277,6 @@ const SupportSection = ({ isMobile, data }) => {
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
           </Button>
-        </Box>
-      </SlideFade>
-    </Box>
-  );
-};
-
-const SignUpSection = ({ isMobile }) => {
-  const { ref, inView } = useInView();
-  const [email, setEmail] = useState("");
-  const toast = useToast();
-
-  const handleChangeInput = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSignUp = async () => {
-    try {
-      await subscribeNewMemberAPI({ email });
-    } catch (error) {
-      toast({
-        title: "Api error",
-        description: getErrorMessage(error),
-        status: "error",
-        duration: 3000,
-      });
-    }
-  };
-
-  return (
-    <Box bg="#6B6E72" id="sign-up-section">
-      <SlideFade ref={ref} in={inView} offsetY="100px">
-        <Box sx={{ display: "flex", mt: "auto", mb: "auto", justifyContent: "center" }}>
-          <Box>
-            <Text
-              pt={isMobile ? 10 : 10}
-              fontSize={["20px", "50px", "50px", "50px", "50px"]}
-              fontWeight="bold"
-              color="#FFEA85"
-              textAlign="center"
-              textTransform="uppercase"
-            >
-              <FormattedMessage id="label.newsLetter" />
-            </Text>
-            <Text
-              fontStyle="italic"
-              fontSize={["12px", "18px", "18px", "18px", "18px"]}
-              color="#FFEA85"
-              textAlign="center"
-              fontWeight={300}
-            >
-              <FormattedMessage id="label.subscribeForInfo" />
-            </Text>
-            <VStack
-              spacing="20px"
-              sx={{ justifyContent: "center", m: "auto", mt: 4 }}
-              pb={isMobile ? "60px" : "60px"}
-              w="100%"
-            >
-              <Flex sx={{ display: "flex", mr: "auto", ml: "auto" }}>
-                <InputGroup borderColor="#6B6E72">
-                  <InputLeftAddon
-                    bg="#434343"
-                    w="80px"
-                    justifyContent="center"
-                    children={<EmailIcon boxSize={6} color="#FFEA85" />}
-                    size={["sm", "md", "md", "md", "md"]}
-                  />
-                  <Input
-                    w={["250px", "400px", "400px", "400px", "400px"]}
-                    type="email"
-                    value={email}
-                    onChange={handleChangeInput}
-                    variant="outline"
-                    bg="#fffff"
-                    placeholder="examle@gmail.com"
-                  />
-                </InputGroup>
-              </Flex>
-              <Button
-                size={["sm", "md", "md", "md", "md"]}
-                onClick={handleSignUp}
-                className="btn-sub"
-                color="#FFEA85"
-                borderColor="#FFEA85"
-              >
-                <FormattedMessage id="button.submit" />
-              </Button>
-            </VStack>
-          </Box>
         </Box>
       </SlideFade>
     </Box>

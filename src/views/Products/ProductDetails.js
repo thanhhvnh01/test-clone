@@ -15,7 +15,6 @@ import {
   HStack,
   Image,
   Text,
-  UnorderedList,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -122,8 +121,8 @@ const ProductDetails = () => {
               <Center>
                 <Image
                   sx={{ boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);" }}
-                  maxW="560px"
-                  maxH="520px"
+                  w="480px"
+                  h="480px"
                   src={data?.imageUrls[imageIndex]}
                 />
               </Center>
@@ -151,19 +150,11 @@ const ProductDetails = () => {
               </Center>
             </GridItem>
             <GridItem colSpan={[7, 3, 3, 3, 3]}>
-              <VStack alignItems="flex-start" p={3} sx={{ borderBottom: "1px solid black" }}>
-                <Text fontWeight="bold">{data?.productName}</Text>
-                <Button
-                  _hover={{
-                    boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);",
-                  }}
-                  variant="solid"
-                  bg="tomato"
-                  color="#ffff"
-                  onClick={onOpen}
-                >
-                  Contact
-                </Button>
+              <VStack alignItems="flex-start" p={3}>
+                <Text fontSize="26px" fontWeight="bold">
+                  {data?.productName}
+                </Text>
+
                 <HStack>
                   <Text fontWeight="bold">Color: </Text>
                   <Text>{data?.colorName}</Text>
@@ -200,51 +191,60 @@ const ProductDetails = () => {
                 </HStack>
               </VStack>
               <VStack alignItems="flex-start" p={3}>
-                <VStack alignItems="flex-start">
-                  <UnorderedList>
-                    <HStack>
-                      <Text fontWeight="bold">
-                        <FormattedMessage id="label.material" />:{" "}
-                      </Text>
-                      <Text>
-                        <FormattedMessage id={`enum.${MaterialTypeDisplayConfig[data?.materialTypeId]}`} />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">
-                        <FormattedMessage id="label.origin" />:{" "}
-                      </Text>
-                      <Text>
-                        <FormattedMessage id={`enum.${OriginDisplayConfig[data?.originId]}`} />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">
-                        <FormattedMessage id="label.length" />:
-                      </Text>
-                      <Text>
-                        {data?.fromLength} - {data?.toLength}{" "}
-                        <FormattedMessage id={`enum.${LengthMeasureUnitDisplayConfig[data?.measureUnitLengthId]}`} />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">
-                        <FormattedMessage id="label.weight" />:
-                      </Text>
-                      <Text>
-                        {data?.weight}{" "}
-                        <FormattedMessage id={`enum.${WeightMeasureUnitDisplayConfig[data?.measureUnitWeightId]}`} />
-                      </Text>
-                    </HStack>
-                    <HStack>
-                      <Text fontWeight="bold">
-                        <FormattedMessage id="label.hairStyle" />:{" "}
-                      </Text>
-                      <Text>
-                        <FormattedMessage id={`enum.${HairStyleDisplayConfig[data?.hairStyleId]}`} />
-                      </Text>
-                    </HStack>
-                  </UnorderedList>
+                <VStack alignItems="flex-start" spacing="10px">
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.material" />:{" "}
+                    </Text>
+                    <Text>
+                      <FormattedMessage id={`enum.${MaterialTypeDisplayConfig[data?.materialTypeId]}`} />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.origin" />:{" "}
+                    </Text>
+                    <Text>
+                      <FormattedMessage id={`enum.${OriginDisplayConfig[data?.originId]}`} />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.length" />:
+                    </Text>
+                    <Text>
+                      {data?.fromLength} - {data?.toLength}{" "}
+                      <FormattedMessage id={`enum.${LengthMeasureUnitDisplayConfig[data?.measureUnitLengthId]}`} />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.weight" />:
+                    </Text>
+                    <Text>
+                      {data?.weight}{" "}
+                      <FormattedMessage id={`enum.${WeightMeasureUnitDisplayConfig[data?.measureUnitWeightId]}`} />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.hairStyle" />:{" "}
+                    </Text>
+                    <Text>
+                      <FormattedMessage id={`enum.${HairStyleDisplayConfig[data?.hairStyleId]}`} />
+                    </Text>
+                  </HStack>
+                  <Button
+                    _hover={{
+                      boxShadow: "0px 0px 5px 1px rgba(0, 0, 0, 0.27);",
+                    }}
+                    variant="solid"
+                    bg="tomato"
+                    color="#ffff"
+                    onClick={onOpen}
+                  >
+                    Contact
+                  </Button>
                 </VStack>
               </VStack>
             </GridItem>

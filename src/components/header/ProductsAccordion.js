@@ -1,9 +1,26 @@
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Link } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 
 const ProductsAccordion = ({ data }) => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = (category) => {
+    navigate("/products", { state: { categoryId: category.categoryId, categoryName: category.categoryName } });
+  };
+
+  const handleSubmenuClick = (category, productType) => {
+    navigate("/products", {
+      state: {
+        categoryId: category.categoryId,
+        categoryName: category.categoryName,
+        productTypeId: productType.productTypeId,
+      },
+    });
+  };
+
   return (
     <Accordion borderBottom="none" borderTop="none" w="100%" allowMultiple>
       <AccordionItem>
@@ -49,7 +66,13 @@ const ProductsAccordion = ({ data }) => {
                                   flex="1"
                                   textAlign="left"
                                 >
-                                  {item.categoryName}
+                                  <Text
+                                    onClick={() => {
+                                      handleMenuClick(item);
+                                    }}
+                                  >
+                                    {item.categoryName}
+                                  </Text>
                                 </Box>
                                 <Box color="#FFEA85">
                                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
@@ -77,7 +100,13 @@ const ProductsAccordion = ({ data }) => {
                                               flex="1"
                                               textAlign="left"
                                             >
-                                              {i.productTypeName}
+                                              <Text
+                                                onClick={() => {
+                                                  handleSubmenuClick(item, i);
+                                                }}
+                                              >
+                                                {i.productTypeName}
+                                              </Text>
                                             </Box>
                                           </AccordionButton>
                                         </>

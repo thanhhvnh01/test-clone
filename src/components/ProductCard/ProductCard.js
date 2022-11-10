@@ -2,7 +2,7 @@ import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
-const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick }) => {
+const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, isBestSelling }) => {
   const [hoverImage, setHoverImage] = useState(null);
   const [isHover, setIsHover] = useState(false);
 
@@ -18,13 +18,9 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick }
         transfrom: "scale(1.1)",
         transitionDuration: "0.2s",
       }}
-      // w={isMobile ? "112px" : "236px"}
       w={["175px", "182px", "182px", "270px", "270px"]}
-      // h={isMobile ? "139px" : "318px"}
       h={["248px", "248px", "248px", "390px", "390px"]}
       sx={{ ...sx, cursor: "pointer", position: "relative" }}
-      // ml={[1, 5, 5, 12, 2]}
-      // position={isHover ? "absoluite" : "relative"}
       onMouseEnter={() => {
         setIsHover(true);
       }}
@@ -38,11 +34,14 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick }
         src={hoverImage === null ? thumbImage : images[hoverImage]}
         alt="product"
       />
-      <Box p={1} px={2} bg="red" top="10px" left="-3px" sx={{ position: "absolute" }}>
-        <Text color="#ffff" fontSize="13px">
-          <FormattedMessage id="label.bestSelling" />
-        </Text>
-      </Box>
+      {isBestSelling && (
+        <Box p={1} px={2} bg="red" top="10px" left="-3px" sx={{ position: "absolute" }}>
+          <Text color="#ffff" fontSize="13px">
+            <FormattedMessage id="label.bestSelling" />
+          </Text>
+        </Box>
+      )}
+
       <Box mt={1}>
         <VStack spacing="5px" px={1} display="block">
           <Text
