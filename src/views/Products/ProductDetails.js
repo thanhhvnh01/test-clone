@@ -79,7 +79,12 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Image mt={["87px"]} w="100%" h={["128px", "128px", "128px", "auto", "auto"]} src="/images/product_main.png" />
+      <Image
+        mt={["87px", "113px", "113px", "113px", "113px"]}
+        w="100%"
+        h={["128px", "128px", "128px", "auto", "auto"]}
+        src="/images/product_main.png"
+      />
       <Container
         bg="#ffff"
         p={2}
@@ -287,7 +292,7 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={5}>
+        <Box mt={0}>
           <Box pb={6}>
             <Text
               fontSize={isMobile ? "20px" : "32px"}
@@ -300,23 +305,8 @@ const ProductDetails = () => {
             </Text>
             <Flex bg="black" w={97} h="3px" m="auto" />
           </Box>
-          <Box bg="#EEEEEE" p={isMobile ? 0 : 10}>
+          <Box bg="#ffff" p={isMobile ? 0 : 10}>
             <ProductSlider data={relatedProductData} isMobile={isMobile} />
-
-            <Button
-              variant="link"
-              className="navbar-item"
-              fontWeight="500"
-              sx={{
-                textTransform: "none",
-                textDecoration: "none",
-                ml: "auto",
-                color: "black",
-                display: isMobile ? "none" : "flex",
-              }}
-            >
-              <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
-            </Button>
           </Box>
         </Box>
         {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} productId={productId} />}
