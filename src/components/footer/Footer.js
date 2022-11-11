@@ -202,16 +202,20 @@ const Footer = () => {
   return (
     <>
       <SignUpSection isMobile={isMobile} />
-      <Box bg="black" sx={{ mt: "auto", width: "100%", p: 5, px: isMobile ? "10px" : "11%" }}>
-        <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
-          <GridItem>
+      <Box bg="black" sx={{ mt: "auto", width: "100%", p: 5 }}>
+        <Grid
+          sx={{ display: isMobile ? "block" : "flex", maxWidth: "1200px", ml: "auto", mr: "auto" }}
+          templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"}
+          gap={6}
+        >
+          <GridItem w="100%">
             <InfomationSection isMobile={isMobile} />
           </GridItem>
-          <GridItem>
+          <GridItem w="100%">
             <PaymentSection isMobile={isMobile} />
             <ShippingSection isMobile={isMobile} />
           </GridItem>
-          <GridItem>
+          <GridItem w="100%">
             <SocialNetworkSection isMobile={isMobile} />
           </GridItem>
         </Grid>

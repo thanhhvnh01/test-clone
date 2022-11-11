@@ -130,7 +130,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
             className="navbar-item"
             fontWeight="500"
             onClick={() => {
-              navigate("/products");
+              navigate("/products", { state: { isBestSelling: true } });
             }}
             sx={{
               textTransform: "none",

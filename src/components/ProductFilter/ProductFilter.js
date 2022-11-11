@@ -1,18 +1,8 @@
 import { getCategoriesAPI, getColorAPI, getProductTypesAPI } from "@api/main";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Checkbox,
-  Flex,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { RHFRadioGroup } from "@components/hook-form";
-import RHFCheckbox from "@components/hook-form/RHFCheckbox";
+import { RHFCheckbox, RHFSingleCheckbox } from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -146,10 +136,8 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
           )}
         </AccordionItem>
       </Accordion>
-      <Flex justifyContent="left" mt="2">
-        <Checkbox fontWeight="bold" colorScheme="yellow">
-          <FormattedMessage id="label.bestSelling" />
-        </Checkbox>
+      <Flex justifyContent="left" mt="2" ml="4">
+        <RHFSingleCheckbox name="isBestSelling" fontWeight="bold" label={<FormattedMessage id="label.bestSelling" />} />
       </Flex>
     </Box>
   );

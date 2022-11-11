@@ -144,7 +144,7 @@ const ProductDetails = () => {
                     height={["32px", "32px", "35px", "35px", "35px"]}
                     bg={
                       data?.colorCode.length > 1
-                        ? `linear-gradient(to bottom,${data?.colorCode[0]}, ${data?.colorCode[2]} 100%)`
+                        ? `linear-gradient(to bottom,${data?.colorCode[0]}, ${data?.colorCode[1]} 100%)`
                         : `${data?.colorCode[0]}`
                     }
                     borderRadius="50%"
@@ -160,7 +160,7 @@ const ProductDetails = () => {
                         height={["32px", "32px", "35px", "35px", "35px"]}
                         bg={
                           a?.colorCode.length > 1
-                            ? `linear-gradient(to bottom,${a?.colorCode[0]}, ${a?.colorCode[2]} 100%)`
+                            ? `linear-gradient(to bottom,${a?.colorCode[0]}, ${a?.colorCode[1]} 100%)`
                             : `${a?.colorCode[0]}`
                         }
                         borderRadius="50%"
@@ -260,10 +260,9 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box>
+        <Box mt={5}>
           <Box pb={6}>
             <Text
-              // sx={{ borderBottom: "4px solid black" }}
               fontSize={isMobile ? "20px" : "32px"}
               fontWeight="bold"
               textAlign="center"

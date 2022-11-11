@@ -50,6 +50,7 @@ const Products = () => {
   const { state } = useLocation();
   const categoryIdParam = state?.categoryId;
   const productTypeId = state?.productTypeId;
+  const bestSelling = state?.isBestSelling;
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
   const [keyword, setKeyword] = useState("");
@@ -77,6 +78,14 @@ const Products = () => {
   const categoryId = watch("categoryId");
   const productTypes = watch("productTypes");
   const colors = watch("colors");
+  const isBestSelling = watch("isBestSelling");
+
+  useEffect(() => {
+    if (!!bestSelling) {
+      setValue("isBestSelling", bestSelling);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bestSelling]);
 
   useEffect(() => {
     if (pageNumber !== 0) {
@@ -127,9 +136,10 @@ const Products = () => {
       categoryId: !!categoryId ? Number(categoryId) : null,
       productTypeIds: productTypeIds,
       colorIds: colorIds,
+      isBestSelling: isBestSelling ? true : null,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy, initLang]);
+  }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy, initLang, isBestSelling]);
 
   useEffect(() => {
     setValue("categoryId", categoryIdParam);
@@ -146,6 +156,7 @@ const Products = () => {
     setValue("productTypes", []);
     setValue("categoryId", null);
     setValue("colors", []);
+    setValue("isBestSelling", false);
   };
 
   const handleRequestSort = (e) => {

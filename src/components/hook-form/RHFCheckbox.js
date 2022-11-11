@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
-export default function RHFCheckbox({ name, options, value, isColor, ...other }) {
+export function RHFCheckbox({ name, options, value, isColor, ...other }) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -40,6 +40,31 @@ export default function RHFCheckbox({ name, options, value, isColor, ...other })
       }}
       control={control}
       {...other}
+    />
+  );
+}
+
+export function RHFSingleCheckbox({ name, label, options, value, ...other }) {
+  const { control } = useFormContext();
+  return (
+    <Controller
+      name={name}
+      render={({ field }) => {
+        return (
+          <Checkbox
+            {...other}
+            onChange={(e) => {
+              field.onChange(e.target.checked);
+            }}
+            colorScheme="yellow"
+            value={field.value}
+            isChecked={field.value}
+          >
+            {label}
+          </Checkbox>
+        );
+      }}
+      control={control}
     />
   );
 }

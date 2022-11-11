@@ -68,7 +68,7 @@ const ProductSlider = ({ data, isMobile }) => {
   };
 
   var mobileSettings = {
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 2,
