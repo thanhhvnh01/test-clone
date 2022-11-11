@@ -63,6 +63,22 @@
     "button.sendMessage": "Отправить сообщение",
     "button.clearFilter": "чистый",
 
+    "/* enum */": "enum",
+    "enum.Straight": "Прямой",
+    "enum.KinkyStraight": "СтранныйПрямой",
+    "enum.Wave": "Волна",
+    "enum.BodyWave": "Объемная волна",
+    "enum.LooseWay": "Свободный путь",
+    "enum.DeepWave": "Глубокая волна",
+    "enum.Curly": "Кудрявый",
+    "enum.CurlyWave": "Кудрявая волна",
+    "enum.RemyHair": "Реми Волосы",
+    "enum.Inch": "Inch",
+    "enum.Centimeter": "Centimeter",
+    "enum.Kilogram": "Kilogram",
+    "enum.Pound": "Pound",
+    "enum.VietNam": "Viet Nam",
+
 
     "/* placeholder */": "placeholder",
     "placeholder.message": "Напишите свое сообщение..."

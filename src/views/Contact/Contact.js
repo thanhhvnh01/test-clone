@@ -112,7 +112,7 @@ const Contact = () => {
         p={0}
         // maxW={isMobile ? "100%" : "80%"}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
-        sx={{ mt: 0, minHeight: "100vh !important", mr: "auto", ml: "auto" }}
+        sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
       >
         <Box py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
@@ -122,12 +122,9 @@ const Contact = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem color="#3182CE">
-              <BreadcrumbLink href="/contact-andeahair">
+              <BreadcrumbLink href="/contact">
                 <FormattedMessage id="title.contact" />
               </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">{}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>

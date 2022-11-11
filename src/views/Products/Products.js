@@ -173,7 +173,7 @@ const Products = () => {
       <Image
         mt={isMobile ? "87px" : "113px"}
         w="100%"
-        h={["184px", "184px", "184px", "auto", "auto"]}
+        h={["128px", "184px", "184px", "auto", "auto"]}
         src="/images/product_main.png"
       />
 
@@ -181,8 +181,8 @@ const Products = () => {
         bg="#ffff"
         p={isMobile ? 0 : 2}
         maxW={isMobile ? "100%" : "1200px"}
+        mt={[0, "-100px", "-100px", "-100px", "-100px"]}
         sx={{
-          mt: "-100px",
           mb: "20px",
           minHeight: "120vh !important",
           mr: "auto",
@@ -206,11 +206,11 @@ const Products = () => {
                   <FormattedMessage id="label.products" />
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="#">
-                  {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
+              {!!categoryId && (
+                <BreadcrumbItem isCurrentPage>
+                  <BreadcrumbLink href="#">{categoryName}</BreadcrumbLink>
+                </BreadcrumbItem>
+              )}
             </Breadcrumb>
           </Box>
         )}

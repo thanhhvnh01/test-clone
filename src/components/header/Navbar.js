@@ -22,7 +22,7 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
       }}
       bg="rgb(107,110,114,0.9)"
     >
-      <LocaleHeader isMobile={isMobile} sx={{ px: isMobile ? "10px" : "11%" }} />
+      <LocaleHeader isMobile={isMobile} />
       <Flex
         as="nav"
         align="center"

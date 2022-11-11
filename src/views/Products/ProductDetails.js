@@ -3,6 +3,9 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   AspectRatio,
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Button,
   Center,
   Container,
@@ -76,13 +79,13 @@ const ProductDetails = () => {
 
   return (
     <>
-      <Image mt="113px" w="100%" h={["128px", "128px", "128px", "auto", "auto"]} src="/images/product_main.png" />
+      <Image mt={["87px"]} w="100%" h={["128px", "128px", "128px", "auto", "auto"]} src="/images/product_main.png" />
       <Container
         bg="#ffff"
         p={2}
         maxW={isMobile ? "100%" : "1200px"}
+        mt={[0, "-100px", "-100px", "-100px", "-100px"]}
         sx={{
-          mt: "-100px",
           mb: "20px",
           minHeight: "120vh !important",
           mr: "auto",
@@ -93,6 +96,28 @@ const ProductDetails = () => {
           pb: "30px",
         }}
       >
+        {!isMobile && (
+          <Box bg="#ffff" py="3" px={3}>
+            <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="#">{data?.categoryName}</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem color="#3182CE">
+                <BreadcrumbLink href="#">{data?.productTypeName}</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem isCurrentPage>
+                <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
+              </BreadcrumbItem>
+            </Breadcrumb>
+          </Box>
+        )}
+
         <Box mt={10} borderBottom="3px solid #D9D9D9" pb={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
@@ -236,9 +261,9 @@ const ProductDetails = () => {
                 <iframe title="video" src={data?.videoUrl} />
               </AspectRatio>
             </GridItem>
-            <GridItem sx={{ mt: "auto", mb: "auto", display: "flex" }} colSpan={[7, 3, 3, 3, 3]}>
-              <VStack alignItems="flex-start" p={3} justifyContent="center">
-                <VStack alignItems="flex-start" spacing="40px">
+            <GridItem h="100%" colSpan={[7, 3, 3, 3, 3]}>
+              <Grid h="100%" templateRows="repeat(2,1fr)">
+                <GridItem rowSpan={1}>
                   <HStack>
                     <Text textAlign="justify">
                       <b>
@@ -247,6 +272,8 @@ const ProductDetails = () => {
                       {data?.advantage}
                     </Text>
                   </HStack>
+                </GridItem>
+                <GridItem rowSpan={1}>
                   <HStack>
                     <Text textAlign="justify">
                       <b>
@@ -255,8 +282,8 @@ const ProductDetails = () => {
                       {data?.disadvantage}
                     </Text>
                   </HStack>
-                </VStack>
-              </VStack>
+                </GridItem>
+              </Grid>
             </GridItem>
           </Grid>
         </Box>

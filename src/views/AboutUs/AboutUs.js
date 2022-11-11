@@ -53,9 +53,6 @@ const AboutUs = () => {
                   <FormattedMessage id="title.aboutUs" />
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="#">{}</BreadcrumbLink>
-              </BreadcrumbItem>
             </Breadcrumb>
           </Box>
           <Box px={[4, 5, 5, "200px", "200px"]}>

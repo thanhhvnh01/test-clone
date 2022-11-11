@@ -1,5 +1,5 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, HStack, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Select, Text } from "@chakra-ui/react";
 import { IntlContext } from "@utility/contexts/Internationalization";
 import React, { useContext, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
@@ -11,25 +11,31 @@ const LocaleHeader = ({ isMobile, ...props }) => {
   const [lang, setLang] = useState(intlContext.locale);
   return (
     <Box w="100%" bg="black" {...props}>
-      <HStack
-        color="#ffff"
-        spacing="24px"
-        justifyContent={isMobile ? "space-between" : "right"}
-        sx={{ ml: "auto", alignContent: "center", justifyContent: isMobile ? "space-between" : "flex-end" }}
+      <Flex
+        maxW={isMobile ? "100%" : "1200px"}
+        justifyContent={isMobile ? "space-between" : "flex-end"}
+        sx={{ mr: "auto", ml: "auto" }}
       >
-        <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>+84 973360301</Text>
-        <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>example@gmail.com</Text>
+        <HStack
+          color="#ffff"
+          spacing="24px"
+          w="100%"
+          sx={{ alignContent: "center", justifyContent: isMobile ? "space-between" : "flex-end" }}
+        >
+          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>+84 973360301</Text>
+          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>example@gmail.com</Text>
 
-        <ReactCountryFlag
-          style={{
-            width: "1em",
-            height: "1em",
-          }}
-          countryCode={lang === "en" ? "us" : "ru"}
-          svg
-        />
-        <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
-      </HStack>
+          <ReactCountryFlag
+            style={{
+              width: "1em",
+              height: "1em",
+            }}
+            countryCode={lang === "en" ? "us" : "ru"}
+            svg
+          />
+          <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
+        </HStack>
+      </Flex>
     </Box>
   );
 };
