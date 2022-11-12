@@ -41,7 +41,7 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
             <FormattedMessage id="title.contact" />
           </NavbarItem>
           <NavbarItem>
-            <FormattedMessage id="title.subsrcibe" />
+            <FormattedMessage id="title.subscribe" />
           </NavbarItem>
         </VStack>
       </DrawerContent>
