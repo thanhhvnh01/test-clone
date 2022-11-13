@@ -56,8 +56,6 @@ const ProductDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
-  console.log(data);
-
   const fetchRelatedProductData = async () => {
     if (!!productId) {
       try {
@@ -75,6 +73,14 @@ const ProductDetails = () => {
   //* actions
   const handleColorClick = (item) => {
     navigate(`/product/details?productId=${item.productId}`);
+  };
+
+  const handleCategoryClick = () => {
+    navigate(`/products?categoryId=${data.categoryId}`);
+  };
+
+  const handleProductTypeClick = () => {
+    navigate(`/products?categoryId=${data.categoryId}&productTypeId=${data.productTypeId}`);
   };
 
   return (
@@ -111,10 +117,10 @@ const ProductDetails = () => {
                 <BreadcrumbLink href="/products">Products</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="#">{data?.categoryName}</BreadcrumbLink>
+                <BreadcrumbLink onClick={handleCategoryClick}>{data?.categoryName}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="#">{data?.productTypeName}</BreadcrumbLink>
+                <BreadcrumbLink onClick={handleProductTypeClick}>{data?.productTypeName}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
@@ -123,7 +129,7 @@ const ProductDetails = () => {
           </Box>
         )}
 
-        <Box mt={10} borderBottom="3px solid #D9D9D9" pb={5}>
+        <Box mt={10} pb={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <Center>
@@ -203,7 +209,7 @@ const ProductDetails = () => {
                 <VStack alignItems="flex-start" spacing="10px">
                   <HStack>
                     <Text fontWeight="bold">
-                      <FormattedMessage id="label.material" />:{" "}
+                      <FormattedMessage id="label.material" />:
                     </Text>
                     <Text>
                       <FormattedMessage id={`enum.${MaterialTypeDisplayConfig[data?.materialTypeId]}`} />
@@ -252,14 +258,14 @@ const ProductDetails = () => {
                     color="#ffff"
                     onClick={onOpen}
                   >
-                    Contact
+                    <FormattedMessage id="button.contact" />
                   </Button>
                 </VStack>
               </VStack>
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={5}>
+        <Box mt={20}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>

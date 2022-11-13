@@ -121,7 +121,7 @@ const Contact = () => {
                 <FormattedMessage id="label.home" />
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbItem color="#3182CE">
+            <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink href="/contact">
                 <FormattedMessage id="title.contact" />
               </BreadcrumbLink>

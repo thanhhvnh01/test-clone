@@ -61,6 +61,7 @@
   "button.readMore": "Читать далее",
   "button.sendMessage": "Отправить сообщение",
   "button.clearFilter": "чистый",
+  "button.contact":"Контакт",
 
   "/* enum */": "enum",
   "enum.Straight": "Прямой",
