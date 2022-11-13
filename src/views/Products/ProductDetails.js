@@ -272,7 +272,7 @@ const ProductDetails = () => {
                 <iframe title="video" src={data?.videoUrl} />
               </AspectRatio>
             </GridItem>
-            <GridItem h="100%" colSpan={[7, 3, 3, 3, 3]}>
+            <GridItem p={3} h="100%" colSpan={[7, 3, 3, 3, 3]}>
               <Grid h="100%" templateRows="repeat(2,1fr)">
                 <GridItem rowSpan={1}>
                   <HStack>
