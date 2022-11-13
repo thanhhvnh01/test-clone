@@ -77,7 +77,7 @@ const AboutUs = () => {
               no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
             </Text>
             <Center>
-              <Image maxWidth={["376px", "500px", "500px", "500px", "500px"]} pt={10} src="/images/about_us_1.png" />
+              <Image maxWidth={["300px", "500px", "500px", "500px", "500px"]} pt={10} src="/images/about_us_1.png" />
             </Center>
             <VStack pt={14} spacing={14}>
               <Box>

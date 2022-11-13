@@ -298,7 +298,7 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={0}>
+        <Box mt={10}>
           <Box pb={6}>
             <Text
               fontSize={isMobile ? "20px" : "32px"}

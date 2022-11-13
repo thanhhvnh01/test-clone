@@ -127,16 +127,10 @@ const Products = () => {
   );
 
   useEffect(() => {
-    const productTypeIds = productTypes?.map((i) => {
-      return Number(i);
-    });
-    const colorIds = colors?.map((i) => {
-      return Number(i);
-    });
     fetchProductData(pageSize, pageNumber + 1, orderByType, orderBy, keyword, initLang, {
       categoryId: !!categoryId ? Number(categoryId) : null,
-      productTypeIds: productTypeIds,
-      colorIds: colorIds,
+      productTypeId: !!productTypes ? Number(productTypes) : null,
+      colorId: !!colors ? Number(colors) : null,
       isBestSelling: isBestSelling ? true : null,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,8 +1,8 @@
 import { getCategoriesAPI, getColorAPI, getProductTypesAPI } from "@api/main";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text, VStack } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, Text } from "@chakra-ui/react";
 import { RHFRadioGroup } from "@components/hook-form";
-import { RHFCheckbox, RHFSingleCheckbox } from "@components/hook-form/RHFCheckbox";
+import { RHFSingleCheckbox } from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -108,12 +108,10 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
                 </AccordionButton>
                 <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
-                  <VStack p={0} alignItems="flex-start" px={4} spacing={4} py={2}>
-                    <RHFCheckbox
-                      name="productTypes"
-                      options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
-                    />
-                  </VStack>
+                  <RHFRadioGroup
+                    name="productTypes"
+                    options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
+                  />
                 </AccordionPanel>
               </>
             )}
@@ -131,13 +129,11 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
               <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
-                <VStack p={0} alignItems="flex-start" px={4} spacing={2} py={2}>
-                  <RHFCheckbox
-                    name="colors"
-                    isColor
-                    options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
-                  />
-                </VStack>
+                <RHFRadioGroup
+                  name="colors"
+                  isColor
+                  options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
+                />
               </AccordionPanel>
             </>
           )}
