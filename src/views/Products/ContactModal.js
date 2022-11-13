@@ -80,13 +80,13 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
   };
 
   return (
-    <Modal isCentered isOpen={isOpen} onClose={onClose} size="3xl">
+    <Modal isCentered isOpen={isOpen} onClose={onClose} size={["sm", "sm", "sm", "3xl", "3xl"]}>
       <ModalOverlay />
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <ModalContent p={10} sx={{ borderRadius: "20px !important" }}>
+        <ModalContent p={[5, 5, 5, 10, 10]} sx={{ borderRadius: "20px !important" }}>
           <ModalBody>
             <Grid templateColumns="repeat(2,1fr)" gap={10}>
-              <GridItem colSpan={1}>
+              <GridItem colSpan={[2, 1, 1, 1, 1]}>
                 <Box>
                   <Text>
                     <FormattedMessage id="label.firstName" />
@@ -94,7 +94,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
                   <RHFInput name="firstName" variant="flushed" />
                 </Box>
               </GridItem>
-              <GridItem colSpan={1}>
+              <GridItem colSpan={[2, 1, 1, 1, 1]}>
                 <Box>
                   <Text>
                     <FormattedMessage id="label.lastName" />
@@ -102,7 +102,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
                   <RHFInput name="lastName" variant="flushed" />
                 </Box>
               </GridItem>
-              <GridItem colSpan={1}>
+              <GridItem colSpan={[2, 1, 1, 1, 1]}>
                 <Box>
                   <Text>
                     <FormattedMessage id="label.email" />
@@ -110,7 +110,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
                   <RHFInput name="email" variant="flushed" />
                 </Box>
               </GridItem>
-              <GridItem colSpan={1}>
+              <GridItem colSpan={[2, 1, 1, 1, 1]}>
                 <Box>
                   <Text>
                     <FormattedMessage id="label.phoneNumber" />

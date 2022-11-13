@@ -87,7 +87,7 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
           display="block"
           sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4, cursor: "pointer" }}
         >
-          <FormattedMessage id="title.subsrcibe" />
+          <FormattedMessage id="title.subscribe" />
         </Flex>
       </Stack>
     </Box>

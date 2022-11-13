@@ -261,7 +261,7 @@ const Contact = () => {
               <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
                 <Box w="100%" p={6} py={10}>
                   <Grid templateColumns="repeat(2,1fr)" gap={10}>
-                    <GridItem colSpan={1}>
+                    <GridItem colSpan={2}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.firstName" />
@@ -269,14 +269,14 @@ const Contact = () => {
                         <RHFInput name="firstName" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={1}>
+                    <GridItem colSpan={2}>
                       <Box>
                         <FormattedMessage id="label.lastName" />
                         <Text></Text>
                         <RHFInput name="lastName" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={1}>
+                    <GridItem colSpan={2}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.email" />
@@ -284,7 +284,7 @@ const Contact = () => {
                         <RHFInput name="email" variant="flushed" />
                       </Box>
                     </GridItem>
-                    <GridItem colSpan={1}>
+                    <GridItem colSpan={2}>
                       <Box>
                         <Text>
                           <FormattedMessage id="label.phoneNumber" />
