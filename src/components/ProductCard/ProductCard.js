@@ -59,8 +59,8 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
             {`${subtitle}`}
           </Text>
           {isHover && (
-            <HStack display="flex">
-              {images?.map((image, index) => {
+            <HStack display={["none", "none", "none", "flex", "flex"]}>
+              {images.slice(0, 3)?.map((image, index) => {
                 return (
                   <Image
                     onMouseEnter={() => {

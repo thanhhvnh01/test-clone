@@ -16,6 +16,7 @@ export default function RHFRadioGroup({
   isClearable,
   sx,
   setCategoryName,
+  handleClick,
   ...other
 }) {
   const { control } = useFormContext();
@@ -33,6 +34,7 @@ export default function RHFRadioGroup({
               onChange={(e) => {
                 field.onChange(e);
                 resetProductTypes();
+                handleClick(e);
               }}
               value={Number(field.value)}
               {...other}

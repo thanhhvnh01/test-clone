@@ -4,14 +4,19 @@ import { useFormContext, Controller } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
-export function RHFCheckbox({ name, options, value, isColor, ...other }) {
+export function RHFCheckbox({ name, options, value, isColor, handleClick, ...other }) {
   const { control } = useFormContext();
   return (
     <Controller
       name={name}
       render={({ field }) => {
         return (
-          <CheckboxGroup onChange={(e) => field.onChange(e)} value={field.value}>
+          <CheckboxGroup
+            onChange={(e) => {
+              field.onChange(e);
+            }}
+            value={field.value}
+          >
             {options?.map((item, index) => {
               return (
                 <Checkbox colorScheme="yellow" key={index} value={`${item.id}`}>

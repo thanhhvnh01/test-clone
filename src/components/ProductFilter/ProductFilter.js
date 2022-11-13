@@ -7,13 +7,19 @@ import { arrayToSelectOptions } from "@utility/ultils";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 // import { FormattedMessage } from "react-intl";
 
-const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryName }) => {
+const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
+  const navigate = useNavigate();
   const initLang = localStorage.getItem("language");
   const [categoryData, setCategoryData] = useState([]);
   const [productTypeData, setProductTypeData] = useState([]);
   const [colorData, setColorData] = useState([]);
+
+  const handleMenuClick = (category) => {
+    navigate(`/products?categoryId=${category}`);
+  };
 
   const fetchCategoryData = async (initLang) => {
     try {
@@ -81,6 +87,7 @@ const ProductFilter = ({ categoryId, selectedProductType, setValue, setCategoryN
                   resetProductTypes={() => {
                     setValue("productTypes", []);
                   }}
+                  handleClick={handleMenuClick}
                   name="categoryId"
                   options={arrayToSelectOptions(categoryData, "categoryName", "categoryId")}
                 />

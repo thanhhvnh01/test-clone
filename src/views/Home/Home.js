@@ -129,6 +129,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
             variant="link"
             className="navbar-item"
             fontWeight="500"
+            pr={["3", "3", "3", 0, 0]}
             onClick={() => {
               navigate("/products", { state: { isBestSelling: true } });
             }}
@@ -137,7 +138,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
               textDecoration: "none",
               ml: "auto",
               color: "black",
-              display: isMobile ? "none" : "flex",
+              display: "flex",
             }}
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}

@@ -48,8 +48,9 @@ const Products = () => {
   const initLang = localStorage.getItem("language");
 
   const { state } = useLocation();
-  const categoryIdParam = state?.categoryId;
-  const productTypeId = state?.productTypeId;
+  const query = useLocation().search;
+  const categoryIdParam = new URLSearchParams(query).get("categoryId");
+  const productTypeId = new URLSearchParams(query).get("productTypeId");
   const bestSelling = state?.isBestSelling;
   // filter
   const [selectedProductType, setSelectedProductType] = useState();

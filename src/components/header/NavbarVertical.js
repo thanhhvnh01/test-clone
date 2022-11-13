@@ -3,7 +3,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import ProductsAccordion from "./ProductsAccordion";
 
-const NavbarItem = ({ children, isLast, to = "/", isProducts, ...rest }) => {
+const NavbarItem = ({ children, isLast, to, isProducts, ...rest }) => {
   return (
     <Link className="navbar-item" href={to} sx={{ textDecoration: "none" }}>
       <Flex
@@ -26,6 +26,12 @@ const NavbarItem = ({ children, isLast, to = "/", isProducts, ...rest }) => {
 };
 
 const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
+  const signUpElement = document.getElementById("sign-up-section");
+
+  const handleScroll = () => {
+    signUpElement.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
@@ -40,7 +46,12 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
           <NavbarItem to="/contact">
             <FormattedMessage id="title.contact" />
           </NavbarItem>
-          <NavbarItem>
+          <NavbarItem
+            onClick={() => {
+              handleScroll();
+              onClose();
+            }}
+          >
             <FormattedMessage id="title.subsrcibe" />
           </NavbarItem>
         </VStack>
