@@ -123,25 +123,6 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
         </Box>
         <Box bg="#FFFF" p={isMobile ? 0 : 0}>
           <ProductSlider data={data} isMobile={isMobile} />
-
-          <Button
-            variant="link"
-            className="navbar-item"
-            fontWeight="500"
-            sx={{
-              textTransform: "none",
-              textDecoration: "none",
-              display: "flex",
-              ml: "auto",
-              mr: 10,
-              color: "black",
-            }}
-            onClick={() => {
-              navigate(`/products?isBestSelling=true`);
-            }}
-          >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
-          </Button>
         </Box>
       </Box>
     </SlideFade>
@@ -265,21 +246,6 @@ const SupportSection = ({ isMobile, data }) => {
               );
             })}
           </Grid>
-          <Button
-            variant="link"
-            className="navbar-item"
-            fontWeight="500"
-            sx={{
-              textTransform: "none",
-              textDecoration: "none",
-              display: "flex",
-              ml: "auto",
-              mr: 10,
-              color: "black",
-            }}
-          >
-            <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
-          </Button>
         </Box>
       </SlideFade>
     </Box>

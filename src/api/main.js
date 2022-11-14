@@ -32,7 +32,7 @@ export const getCategoriesAPI = async (lang) => {
 
 // product type
 export const getProductTypesAPI = async (categoryId, lang) => {
-  return axios.post(`${process.env.REACT_APP_API_URL}/product-types/all-enabled?categoryId=${categoryId}&lang=${lang}`);
+  return axios.get(`${process.env.REACT_APP_API_URL}/product-types/all-enabled?categoryId=${categoryId}&lang=${lang}`);
 };
 
 // color

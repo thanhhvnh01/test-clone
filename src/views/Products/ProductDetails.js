@@ -231,7 +231,7 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={20}>
+        <Box mt={20} px={4}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>
@@ -264,23 +264,25 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={10}>
-          <Box pb={6}>
-            <Text
-              fontSize={isMobile ? "20px" : "32px"}
-              fontWeight="bold"
-              textAlign="center"
-              textTransform="uppercase"
-              pt={2}
-            >
-              <FormattedMessage id="label.relatedProduct" />
-            </Text>
-            <Flex bg="black" w={97} h="3px" m="auto" />
+        {relatedProductData.length > 0 && (
+          <Box mt={10}>
+            <Box pb={6}>
+              <Text
+                fontSize={isMobile ? "20px" : "32px"}
+                fontWeight="bold"
+                textAlign="center"
+                textTransform="uppercase"
+                pt={2}
+              >
+                <FormattedMessage id="label.relatedProduct" />
+              </Text>
+              <Flex bg="black" w={97} h="3px" m="auto" />
+            </Box>
+            <Box bg="#ffff" p={isMobile ? 0 : 10}>
+              <ProductSlider data={relatedProductData} isMobile={isMobile} />
+            </Box>
           </Box>
-          <Box bg="#ffff" p={isMobile ? 0 : 10}>
-            <ProductSlider data={relatedProductData} isMobile={isMobile} />
-          </Box>
-        </Box>
+        )}
         {isOpen && <ContactModal isOpen={isOpen} onClose={onClose} productId={productId} />}
       </Container>
     </>

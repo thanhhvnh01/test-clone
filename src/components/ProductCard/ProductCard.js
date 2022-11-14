@@ -13,10 +13,6 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
       }}
       bg="#ffff"
       tabIndex={0}
-      _hover={{
-        transfrom: "scale(1.1)",
-        transitionDuration: "0.2s",
-      }}
       w={["175px", "182px", "182px", "270px", "270px"]}
       h={["248px", "248px", "248px", "390px", "390px"]}
       sx={{ ...sx, cursor: "pointer", position: "relative" }}
