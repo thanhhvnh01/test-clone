@@ -26,7 +26,7 @@ const AboutUs = () => {
           w="100%"
           h={["184px", "128px", "128px", "620", "620"]}
         >
-          <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
+          <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" allowFullScreen />
         </AspectRatio>
       </Box>
       <Box>
