@@ -1,10 +1,9 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box } from "@chakra-ui/react";
 import ProductCard from "@components/ProductCard/ProductCard";
-import React from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 // slick
-import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 
 const ProductSlider = ({ data, isMobile }) => {
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ const ProductSlider = ({ data, isMobile }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 2,
     initialSlide: 0,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,

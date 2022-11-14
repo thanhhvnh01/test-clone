@@ -55,7 +55,6 @@ const Products = () => {
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
   const [keyword, setKeyword] = useState("");
-  const [categoryName, setCategoryName] = useState();
   // product data
   const [pageSize] = useState(9);
   const [pageNumber, setPageNumber] = useState(0);
@@ -212,7 +211,6 @@ const Products = () => {
                       selectedProductType={selectedProductType}
                       setValue={setValue}
                       handleClearFilter={handleClearFilter}
-                      setCategoryName={setCategoryName}
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
@@ -294,7 +292,6 @@ const Products = () => {
               selectedProductType={selectedProductType}
               setValue={setValue}
               handleClearFilter={handleClearFilter}
-              setCategoryName={setCategoryName}
             />
           )}
         </FormProvider>
@@ -303,7 +300,7 @@ const Products = () => {
   );
 };
 
-const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter, setCategoryName }) => {
+const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter }) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
@@ -326,12 +323,7 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
         </Button>
       </Flex>
       <Box sx={{ width: "100%" }}>
-        <ProductFilter
-          setCategoryName={setCategoryName}
-          setValue={setValue}
-          categoryId={categoryId}
-          setSelectedCategory={setSelectedCategory}
-        />
+        <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
       </Box>
     </VStack>
   );
