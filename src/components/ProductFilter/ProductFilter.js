@@ -137,7 +137,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
           )}
         </AccordionItem>
       </Accordion>
-      <Flex justifyContent="spaspace-betweence" mt="2" ml="4">
+      <Flex justifyContent="space-between" mt="2" ml="4">
         <Text fontWeight="bold">
           <FormattedMessage id="label.bestSelling" />
         </Text>
