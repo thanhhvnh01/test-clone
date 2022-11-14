@@ -31,7 +31,7 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
       />
       {isBestSelling && (
         <Box p={1} px={2} bg="red" top="10px" left="-3px" sx={{ position: "absolute" }}>
-          <Text color="#ffff" fontSize="13px">
+          <Text color="#ffff" fontSize="12px" fontWeight="500">
             <FormattedMessage id="label.bestSelling" />
           </Text>
         </Box>
