@@ -64,7 +64,7 @@ const AboutUs = () => {
               textAlign="center"
               textTransform="uppercase"
             >
-              Andrea Hair
+              <FormattedMessage id="info.andreaHair" />
             </Text>
             <Text
               fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -73,8 +73,7 @@ const AboutUs = () => {
               textAlign="center"
               textTransform="capitalize"
             >
-              "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..." "There is
-              no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+              <FormattedMessage id="info.describe" />
             </Text>
             <Center>
               <Image maxWidth={["300px", "500px", "500px", "500px", "500px"]} pt={10} src="/images/about_us_1.png" />
@@ -88,7 +87,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  What is Lorem Ipsum?
+                  <FormattedMessage id="info.question1" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -97,13 +96,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  It is a long established fact that a reader will be distracted by the readable content of a page when
-                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                  distribution of letters, as opposed to using 'Content here, content here', making it look like
-                  readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                  default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                  Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected
-                  humour and the like).
+                  <FormattedMessage id="info.explain1" />
                 </Text>
               </Box>
               <Box>
@@ -114,7 +107,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  What is Lorem Ipsum?
+                  <FormattedMessage id="info.question2" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -123,13 +116,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  It is a long established fact that a reader will be distracted by the readable content of a page when
-                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                  distribution of letters, as opposed to using 'Content here, content here', making it look like
-                  readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                  default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                  Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected
-                  humour and the like).
+                  <FormattedMessage id="info.explain2" />
                 </Text>
               </Box>
               <Box>
@@ -140,7 +127,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  What is Lorem Ipsum?
+                  <FormattedMessage id="info.question3" />
                 </Text>
                 <Text
                   fontSize={["14px", "14px", "14px", "14px", "14px"]}
@@ -149,13 +136,7 @@ const AboutUs = () => {
                   textAlign="center"
                   textTransform="capitalize"
                 >
-                  It is a long established fact that a reader will be distracted by the readable content of a page when
-                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                  distribution of letters, as opposed to using 'Content here, content here', making it look like
-                  readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                  default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                  Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected
-                  humour and the like).
+                  <FormattedMessage id="info.explain3" />
                 </Text>
               </Box>
             </VStack>

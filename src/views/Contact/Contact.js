@@ -166,19 +166,19 @@ const Contact = () => {
                     <HStack mt={10}>
                       <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        +1012 3456 789
+                        <FormattedMessage id="info.phonenumber" />
                       </Text>
                     </HStack>
                     <HStack mt={10}>
                       <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        demo@gmail.com
+                        <FormattedMessage id="info.Email" />
                       </Text>
                     </HStack>
                     <HStack>
                       <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        132 Dartmouth Street Boston, Massachusetts 02156 United States
+                        <FormattedMessage id="info.Address" />
                       </Text>
                     </HStack>
                   </VStack>
@@ -336,19 +336,19 @@ const Contact = () => {
                     <HStack mt={10}>
                       <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        +1012 3456 789
+                        <FormattedMessage id="info.phonenumber" />
                       </Text>
                     </HStack>
                     <HStack mt={10}>
                       <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        demo@gmail.com
+                        <FormattedMessage id="info.Email" />
                       </Text>
                     </HStack>
                     <HStack>
                       <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        132 Dartmouth Street Boston, Massachusetts 02156 United States
+                        <FormattedMessage id="info.Address" />
                       </Text>
                     </HStack>
                   </VStack>
