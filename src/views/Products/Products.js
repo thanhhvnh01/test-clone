@@ -24,21 +24,21 @@ import {
 import ProductCard from "@components/ProductCard";
 import ProductFilter from "@components/ProductFilter";
 import useMobile from "@hooks/useMobile";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 // icon
-import { BsFilterLeft, BsFilter } from "react-icons/bs";
-import MobileProductFilter from "@components/MobileProductFilter";
 import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import MobileProductFilter from "@components/MobileProductFilter";
+import { BsFilter, BsFilterLeft } from "react-icons/bs";
 // paging
+import { getErrorMessage } from "@api/handleApiError";
+import { getProductsAPI } from "@api/main";
+import { FormProvider } from "@components/hook-form";
+import { OrderByTypeEnum } from "@utility/constant";
+import { debounce } from "lodash";
+import { useForm } from "react-hook-form";
 import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FormProvider } from "@components/hook-form";
-import { useForm } from "react-hook-form";
-import { getProductsAPI } from "@api/main";
-import { OrderByTypeEnum } from "@utility/constant";
-import { getErrorMessage } from "@api/handleApiError";
-import { debounce } from "lodash";
 
 const Products = () => {
   // hooks

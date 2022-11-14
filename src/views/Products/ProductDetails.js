@@ -1,11 +1,7 @@
 import { getProductDetailsAPI, getRelateProductAPI } from "@api/main";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   AspectRatio,
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Button,
   Center,
   Container,
@@ -27,7 +23,7 @@ import {
   OriginDisplayConfig,
   WeightMeasureUnitDisplayConfig,
 } from "@utility/constant";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContactModal from "./ContactModal";
@@ -73,14 +69,6 @@ const ProductDetails = () => {
   //* actions
   const handleColorClick = (item) => {
     navigate(`/product/details?productId=${item.productId}`);
-  };
-
-  const handleCategoryClick = () => {
-    navigate(`/products?categoryId=${data.categoryId}`);
-  };
-
-  const handleProductTypeClick = () => {
-    navigate(`/products?categoryId=${data.categoryId}&productTypeId=${data.productTypeId}`);
   };
 
   return (

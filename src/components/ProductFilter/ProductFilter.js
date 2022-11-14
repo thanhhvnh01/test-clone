@@ -4,8 +4,7 @@ import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Flex, T
 import { RHFRadioGroup } from "@components/hook-form";
 import { RHFSingleCheckbox } from "@components/hook-form/RHFCheckbox";
 import { arrayToSelectOptions } from "@utility/ultils";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 
@@ -138,7 +137,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
           )}
         </AccordionItem>
       </Accordion>
-      <Flex justifyContent="left" mt="2" ml="4" justifyContent="space-between">
+      <Flex justifyContent="spaspace-betweence" mt="2" ml="4">
         <Text fontWeight="bold">
           <FormattedMessage id="label.bestSelling" />
         </Text>
