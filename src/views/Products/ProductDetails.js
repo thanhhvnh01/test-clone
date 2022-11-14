@@ -231,7 +231,7 @@ const ProductDetails = () => {
             </GridItem>
           </Grid>
         </Box>
-        <Box mt={20} px={4}>
+        <Box mt={10} px={4}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
               <AspectRatio _before={{ p: "0px !important" }} w="92%" h={["190px", "400px", "400px", "400px", "400px"]}>
@@ -265,7 +265,7 @@ const ProductDetails = () => {
           </Grid>
         </Box>
         {relatedProductData.length > 0 && (
-          <Box mt={10}>
+          <Box mt={16}>
             <Box pb={6}>
               <Text
                 fontSize={isMobile ? "20px" : "32px"}
