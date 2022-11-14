@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
 import {
   Box,
   Button,
@@ -14,14 +12,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import ImageSlider from "@components/ImageSlider";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { FormattedMessage } from "react-intl";
 // slider
-import useMobile from "@hooks/useMobile";
-import SupporterCard from "@components/SupporterCard";
+import { getErrorMessage } from "@api/handleApiError";
 import { getBestSaleProductsAPI, getSupportersAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { getErrorMessage } from "@api/handleApiError";
+import SupporterCard from "@components/SupporterCard";
+import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
 
 const slideImages = [
