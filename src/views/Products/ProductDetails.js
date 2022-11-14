@@ -266,19 +266,19 @@ const ProductDetails = () => {
         </Box>
         {relatedProductData.length > 0 && (
           <Box mt={16}>
-            <Box pb={6}>
+            <Box pb={[0, 0, 0, 6, 6]}>
               <Text
-                fontSize={isMobile ? "20px" : "32px"}
+                fontSize={isMobile ? "20px" : "40px"}
                 fontWeight="bold"
                 textAlign="center"
                 textTransform="uppercase"
-                pt={2}
+                pt={5}
               >
                 <FormattedMessage id="label.relatedProduct" />
               </Text>
               <Flex bg="black" w={97} h="3px" m="auto" />
             </Box>
-            <Box bg="#ffff" p={isMobile ? 0 : 10}>
+            <Box bg="#ffff" p={isMobile ? 0 : 0}>
               <ProductSlider data={relatedProductData} isMobile={isMobile} />
             </Box>
           </Box>

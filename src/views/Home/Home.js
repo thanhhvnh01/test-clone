@@ -109,7 +109,6 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
       <Box>
         <Box pb={[0, 0, 0, 6, 6]}>
           <Text
-            // sx={{ borderBottom: "4px solid black" }}
             fontSize={isMobile ? "20px" : "40px"}
             fontWeight="bold"
             textAlign="center"
