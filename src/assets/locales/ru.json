@@ -25,7 +25,7 @@
   "label.sort": "Сортировать",
   "label.noitemhere": "Здесь нет элементов",
   "label.category": "Категория",
-  "label.productstype": "Тип продуктов",
+  "label.productType": "Тип продукта",
   "label.color": "Цвет",
   "label.contactUs": "Свяжитесь с нами",
   "label.any": "Есть вопросы или замечания? Просто напишите нам сообщение!",
@@ -61,7 +61,7 @@
   "button.readMore": "Читать далее",
   "button.sendMessage": "Отправить сообщение",
   "button.clearFilter": "чистый",
-  "button.contact":"Контакт",
+  "button.contact": "Контакт",
 
   "/* enum */": "enum",
   "enum.Straight": "Прямой",

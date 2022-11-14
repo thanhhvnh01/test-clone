@@ -107,28 +107,6 @@ const ProductDetails = () => {
           pb: "30px",
         }}
       >
-        {!isMobile && (
-          <Box bg="#ffff" py="3" px={3}>
-            <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
-              <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="/products">Products</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink onClick={handleCategoryClick}>{data?.categoryName}</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink onClick={handleProductTypeClick}>{data?.productTypeName}</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="#">{data?.productName}</BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-          </Box>
-        )}
-
         <Box mt={10} pb={5}>
           <Grid templateColumns="repeat(7,1fr)">
             <GridItem colSpan={[7, 4, 4, 4, 4]}>
@@ -305,7 +283,7 @@ const ProductDetails = () => {
               fontWeight="bold"
               textAlign="center"
               textTransform="uppercase"
-              pt={5}
+              pt={2}
             >
               <FormattedMessage id="label.relatedProduct" />
             </Text>

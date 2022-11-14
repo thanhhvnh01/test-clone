@@ -117,9 +117,9 @@ const Contact = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="/contact">
+              <Breadcrumb href="/contact">
                 <FormattedMessage id="title.contact" />
-              </BreadcrumbLink>
+              </Breadcrumb>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>

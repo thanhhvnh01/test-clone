@@ -24,7 +24,7 @@
   "label.sort": "Sort",
   "label.noitemhere": "No item here",
   "label.category": "Category",
-  "label.productstype": "Products Type",
+  "label.productType": "Product Type",
   "label.color": "Color",
   "label.contactUs": "Contact Us",
   "label.any": "Any question or remarks? Just write us a message!",
@@ -60,7 +60,7 @@
   "button.subscribe": "Subscribe",
   "button.sendMessage": " Send Message",
   "button.clearFilter": "Clear",
-  "button.contact":"Contact",
+  "button.contact": "Contact",
 
   "/* enum */": "enum",
   "enum.Straight": "Straight",

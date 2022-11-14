@@ -8,7 +8,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
-// import { FormattedMessage } from "react-intl";
 
 const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
   const navigate = useNavigate();
@@ -82,7 +81,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
+              <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
                   resetProductTypes={() => {
                     setValue("productTypes", []);
@@ -102,12 +101,12 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                 <AccordionButton py={3}>
                   <Box flex="1" textAlign="left">
                     <Text fontWeight="bold">
-                      <FormattedMessage id="label.productstype" />
+                      <FormattedMessage id="label.productType" />
                     </Text>
                   </Box>
                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
                 </AccordionButton>
-                <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
+                <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                   <RHFRadioGroup
                     name="productTypes"
                     options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
@@ -128,7 +127,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} sx={{ borderTop: "1px solid #AAAAAA" }}>
+              <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
                   name="colors"
                   isColor
@@ -139,8 +138,11 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
           )}
         </AccordionItem>
       </Accordion>
-      <Flex justifyContent="left" mt="2" ml="4">
-        <RHFSingleCheckbox name="isBestSelling" fontWeight="bold" label={<FormattedMessage id="label.bestSelling" />} />
+      <Flex justifyContent="left" mt="2" ml="4" justifyContent="space-between">
+        <Text fontWeight="bold">
+          <FormattedMessage id="label.bestSelling" />
+        </Text>
+        <RHFSingleCheckbox name="isBestSelling" fontWeight="bold" />
       </Flex>
     </Box>
   );

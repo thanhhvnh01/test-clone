@@ -44,9 +44,9 @@ const AboutUs = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="/about-us">
+                <Breadcrumb>
                   <FormattedMessage id="title.aboutUs" />
-                </BreadcrumbLink>
+                </Breadcrumb>
               </BreadcrumbItem>
             </Breadcrumb>
           </Box>

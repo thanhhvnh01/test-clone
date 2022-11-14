@@ -14,7 +14,6 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
       bg="#ffff"
       tabIndex={0}
       _hover={{
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         transfrom: "scale(1.1)",
         transitionDuration: "0.2s",
       }}

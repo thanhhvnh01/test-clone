@@ -191,16 +191,11 @@ const Products = () => {
                   <FormattedMessage id="label.home" />
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbItem color="#3182CE">
-                <BreadcrumbLink href="/products">
+              <BreadcrumbItem>
+                <Breadcrumb>
                   <FormattedMessage id="label.products" />
-                </BreadcrumbLink>
+                </Breadcrumb>
               </BreadcrumbItem>
-              {!!categoryId && (
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink href="#">{categoryName}</BreadcrumbLink>
-                </BreadcrumbItem>
-              )}
             </Breadcrumb>
           </Box>
         )}
@@ -208,11 +203,7 @@ const Products = () => {
           <Box className="product-main" p={3} mt={2}>
             {!isMobile ? (
               <>
-                <Flex justifyContent="space-between">
-                  <Text fontSize="2xl" fontWeight="bold">
-                    {!!categoryId ? categoryName : <FormattedMessage id="title.allProducts" />}
-                  </Text>
-                </Flex>
+                <Flex justifyContent="space-between"></Flex>
                 <Grid templateColumns="repeat(13, 1fr)" gap={6}>
                   <GridItem colSpan={3}>
                     <FilterSection
