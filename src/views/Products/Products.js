@@ -47,11 +47,11 @@ const Products = () => {
   const toast = useToast();
   const initLang = localStorage.getItem("language");
 
-  const { state } = useLocation();
   const query = useLocation().search;
   const categoryIdParam = new URLSearchParams(query).get("categoryId");
   const productTypeId = new URLSearchParams(query).get("productTypeId");
-  const bestSelling = state?.isBestSelling;
+  const colorId = new URLSearchParams(query).get("color");
+  const bestSelling = new URLSearchParams(query).get("isBestSelling");
   // filter
   const [selectedProductType, setSelectedProductType] = useState();
   const [keyword, setKeyword] = useState("");
@@ -81,13 +81,6 @@ const Products = () => {
   const isBestSelling = watch("isBestSelling");
 
   useEffect(() => {
-    if (!!bestSelling) {
-      setValue("isBestSelling", bestSelling);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bestSelling]);
-
-  useEffect(() => {
     if (pageNumber !== 0) {
       setPageNumber(0);
     }
@@ -96,7 +89,7 @@ const Products = () => {
 
   useEffect(() => {
     if (!!productTypeId) {
-      setValue("productTypes", [String(productTypeId)]);
+      setValue("productTypes", productTypeId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productTypeId]);
@@ -136,10 +129,16 @@ const Products = () => {
   }, [pageSize, pageNumber, keyword, categoryId, productTypes, colors, orderByType, orderBy, initLang, isBestSelling]);
 
   useEffect(() => {
+    if (bestSelling === "true") {
+      setValue("isBestSelling", true);
+    } else {
+      setValue("isBestSelling", false);
+    }
     setValue("categoryId", categoryIdParam);
+    setValue("colors", colorId);
     setSelectedProductType(productTypeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryIdParam, productTypeId]);
+  }, [categoryIdParam, productTypeId, bestSelling, colorId]);
 
   // * actions
   const handleKeywordChange = (e) => {
@@ -147,9 +146,9 @@ const Products = () => {
   };
 
   const handleClearFilter = () => {
-    setValue("productTypes", []);
+    setValue("productTypes", null);
     setValue("categoryId", null);
-    setValue("colors", []);
+    setValue("colors", null);
     setValue("isBestSelling", false);
   };
 
@@ -211,6 +210,9 @@ const Products = () => {
                       selectedProductType={selectedProductType}
                       setValue={setValue}
                       handleClearFilter={handleClearFilter}
+                      productTypeId={productTypes}
+                      colorId={colors}
+                      isBestSelling={isBestSelling}
                     />
                   </GridItem>
                   <GridItem colSpan={10}>
@@ -288,6 +290,9 @@ const Products = () => {
             <MobileProductFilter
               isOpen={isOpen}
               onClose={onClose}
+              productTypeId={productTypes}
+              colorId={colors}
+              isBestSelling={isBestSelling}
               categoryId={categoryId}
               selectedProductType={selectedProductType}
               setValue={setValue}
@@ -300,7 +305,7 @@ const Products = () => {
   );
 };
 
-const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearFilter }) => {
+const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setValue, handleClearFilter }) => {
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
@@ -323,7 +328,13 @@ const FilterSection = ({ categoryId, setSelectedCategory, setValue, handleClearF
         </Button>
       </Flex>
       <Box sx={{ width: "100%" }}>
-        <ProductFilter setValue={setValue} categoryId={categoryId} setSelectedCategory={setSelectedCategory} />
+        <ProductFilter
+          productTypeId={productTypeId}
+          colorId={colorId}
+          isBestSelling={isBestSelling}
+          setValue={setValue}
+          categoryId={categoryId}
+        />
       </Box>
     </VStack>
   );

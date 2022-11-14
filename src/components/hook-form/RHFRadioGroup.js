@@ -1,4 +1,5 @@
 // form
+import { SmallCloseIcon } from "@chakra-ui/icons";
 import { Box, HStack, Radio, RadioGroup, Text, VStack } from "@chakra-ui/react";
 import { useFormContext, Controller } from "react-hook-form";
 // @mui
@@ -17,7 +18,9 @@ export default function RHFRadioGroup({
   sx,
   setCategoryName,
   handleClick,
+  selectedOption,
   isColor,
+  handleClearOption,
   ...other
 }) {
   const { control } = useFormContext();
@@ -45,27 +48,42 @@ export default function RHFRadioGroup({
               {...other}
             >
               <VStack p={0} alignItems="flex-start" px={4} spacing={2} py={2}>
-                {options.map((item, index) => (
-                  <Radio key={index} value={item.id} sx={{ touchAction: "none" }}>
-                    {!!isColor ? (
-                      <HStack>
-                        <Box
-                          bg={
-                            item.condition.length > 1
-                              ? `linear-gradient(to bottom,${item.condition[0]}, ${item.condition[1]} 100%)`
-                              : `${item.condition[0]}`
-                          }
-                          width="15px"
-                          height="15px"
-                          borderRadius="50%"
-                        />{" "}
-                        <Text>{item.label}</Text>
-                      </HStack>
-                    ) : (
-                      item.label
-                    )}
-                  </Radio>
-                ))}
+                {options.map((item, index) => {
+                  const isSelected = item.id === Number(selectedOption);
+                  return (
+                    <HStack key={index} width="100%" display="flex" justifyContent="space-between">
+                      <Radio value={item.id} sx={{ touchAction: "none", display: "flex" }}>
+                        {!!isColor ? (
+                          <HStack>
+                            <Box
+                              bg={
+                                item.condition.length > 1
+                                  ? `linear-gradient(to bottom,${item.condition[0]}, ${item.condition[1]} 100%)`
+                                  : `${item.condition[0]}`
+                              }
+                              width="15px"
+                              height="15px"
+                              borderRadius="50%"
+                            />
+                            <Text>{item.label}</Text>
+                          </HStack>
+                        ) : (
+                          item.label
+                        )}
+                      </Radio>
+                      {isSelected && (
+                        <SmallCloseIcon
+                          cursor="pointer"
+                          onClick={() => {
+                            handleClearOption();
+                            handleClick();
+                          }}
+                          ml="auto"
+                        />
+                      )}
+                    </HStack>
+                  );
+                })}
               </VStack>
             </RadioGroup>
           </>

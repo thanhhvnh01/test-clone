@@ -108,7 +108,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
       <Box>
-        <Box pb={6}>
+        <Box pb={[0, 0, 0, 6, 6]}>
           <Text
             // sx={{ borderBottom: "4px solid black" }}
             fontSize={isMobile ? "20px" : "40px"}
@@ -137,7 +137,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
               color: "black",
             }}
             onClick={() => {
-              navigate("/products", { state: { isBestSelling: true } });
+              navigate(`/products?isBestSelling=true`);
             }}
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
@@ -161,7 +161,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
               </GridItem>
               <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
                 <Box>
-                  <Box pb={[1, 2, 3, 5, 10]}>
+                  <Box pb={[1, 2, 3, 5, 5]}>
                     <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
                       <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
                     </Text>
@@ -177,7 +177,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
                       with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. . .
                     </Text>
                   </Box>
-                  <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+                  <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <Button
                       onClick={() => {
                         navigate("/about-us");
@@ -248,10 +248,10 @@ const SupportSection = ({ isMobile, data }) => {
             <FormattedMessage id="label.supportOnline" />
           </Text>
           <Flex bg="black" w={97} h="3px" m="auto" />
-          <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
+          <Grid mt={2} templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
             {data?.map((item, index) => {
               return (
-                <GridItem key={index} colSpan={1} p={isMobile ? "10px" : "50px"}>
+                <GridItem key={index} colSpan={1} p={isMobile ? "10px" : "50px"} pt={3}>
                   <SupporterCard
                     isMobile={isMobile}
                     image={item.avatarUrl}

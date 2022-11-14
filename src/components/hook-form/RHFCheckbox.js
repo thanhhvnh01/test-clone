@@ -49,7 +49,7 @@ export function RHFCheckbox({ name, options, value, isColor, handleClick, ...oth
   );
 }
 
-export function RHFSingleCheckbox({ name, label, options, value, ...other }) {
+export function RHFSingleCheckbox({ name, label, options, value, handleClick, ...other }) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -60,6 +60,9 @@ export function RHFSingleCheckbox({ name, label, options, value, ...other }) {
             {...other}
             onChange={(e) => {
               field.onChange(e.target.checked);
+              if (!!handleClick) {
+                handleClick(e.target.checked);
+              }
             }}
             colorScheme="yellow"
             value={field.value}

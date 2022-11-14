@@ -2,8 +2,18 @@ import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay,
 import ProductFilter from "@components/ProductFilter";
 // icon
 import { BsFilter } from "react-icons/bs";
+import { FormattedMessage } from "react-intl";
 
-const MobileProductFilter = ({ isOpen, onClose, categoryId, setValue, handleClearFilter }) => {
+const MobileProductFilter = ({
+  isOpen,
+  onClose,
+  categoryId,
+  setValue,
+  productTypeId,
+  colorId,
+  isBestSelling,
+  handleClearFilter,
+}) => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
@@ -12,14 +22,22 @@ const MobileProductFilter = ({ isOpen, onClose, categoryId, setValue, handleClea
           <HStack>
             <BsFilter style={{ height: "24px", width: "24px" }} />
             <Text fontWeight="bold" fontSize="15px">
-              Filter
+              <FormattedMessage id="label.filter" />
             </Text>
           </HStack>
         </DrawerHeader>
         <DrawerBody p={0}>
-          <ProductFilter setValue={setValue} categoryId={categoryId} />
+          <ProductFilter
+            productTypeId={productTypeId}
+            colorId={colorId}
+            isBestSelling={isBestSelling}
+            setValue={setValue}
+            categoryId={categoryId}
+          />
           <HStack p={5} justifyContent="center">
-            <Button onClick={handleClearFilter}>Reset</Button>
+            <Button onClick={handleClearFilter}>
+              <FormattedMessage id="button.clearFilter" />
+            </Button>
           </HStack>
         </DrawerBody>
       </DrawerContent>

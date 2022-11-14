@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 
-const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
+const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, colorId }) => {
   const navigate = useNavigate();
   const initLang = localStorage.getItem("language");
   const [categoryData, setCategoryData] = useState([]);
@@ -16,17 +16,31 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
   const [colorData, setColorData] = useState([]);
 
   const handleMenuClick = (category) => {
-    navigate(`/products?categoryId=${category}`);
+    navigate(`/products?categoryId=${category}&color=${colorId}&isBestSelling=${isBestSelling}`);
+  };
+
+  const handleProductTypeClick = (productType) => {
+    navigate(
+      `/products?categoryId=${categoryId}&productTypeId=${productType}&color=${colorId}&isBestSelling=${isBestSelling}`
+    );
+  };
+
+  const handleColorClick = (color) => {
+    navigate(
+      `/products?categoryId=${categoryId}&productTypeId=${productTypeId}&color=${color}&isBestSelling=${isBestSelling}`
+    );
+  };
+
+  const handleIsBestSellingClick = (bestSelling) => {
+    navigate(
+      `/products?categoryId=${categoryId}&productTypeId=${productTypeId}&color=${colorId}&isBestSelling=${bestSelling}`
+    );
   };
 
   const fetchCategoryData = async (initLang) => {
     try {
       const categoryRes = await getCategoriesAPI(initLang);
       setCategoryData(categoryRes.data);
-      if (!!categoryId) {
-        const item = categoryRes.data?.filter((i) => i.categoryId === Number(categoryId));
-        setCategoryName(item[0].categoryName);
-      }
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +80,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
     fetchColorData(initLang);
   }, [initLang]);
 
+  // console.log(productTypeId);
   return (
     <Box>
       <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
@@ -83,7 +98,11 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
               <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
                   resetProductTypes={() => {
-                    setValue("productTypes", []);
+                    setValue("productTypes", null);
+                  }}
+                  selectedOption={categoryId}
+                  handleClearOption={() => {
+                    setValue("categoryId", null);
                   }}
                   handleClick={handleMenuClick}
                   name="categoryId"
@@ -108,6 +127,11 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
                 <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                   <RHFRadioGroup
                     name="productTypes"
+                    selectedOption={productTypeId}
+                    handleClearOption={() => {
+                      setValue("productTypes", null);
+                    }}
+                    handleClick={handleProductTypeClick}
                     options={arrayToSelectOptions(productTypeData, "productTypeName", "productTypeId")}
                   />
                 </AccordionPanel>
@@ -129,6 +153,11 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
               <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
                   name="colors"
+                  selectedOption={colorId}
+                  handleClearOption={() => {
+                    setValue("colors", null);
+                  }}
+                  handleClick={handleColorClick}
                   isColor
                   options={arrayToSelectOptions(colorData, "colorName", "colorId", "colorCode")}
                 />
@@ -141,7 +170,7 @@ const ProductFilter = ({ categoryId, setValue, setCategoryName }) => {
         <Text fontWeight="bold">
           <FormattedMessage id="label.bestSelling" />
         </Text>
-        <RHFSingleCheckbox name="isBestSelling" fontWeight="bold" />
+        <RHFSingleCheckbox handleClick={handleIsBestSellingClick} name="isBestSelling" fontWeight="bold" />
       </Flex>
     </Box>
   );
