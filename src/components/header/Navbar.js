@@ -14,13 +14,12 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
     <Box
       w="100%"
       sx={{
-        // opacity: 0.9,
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         position: "fixed",
         top: 0,
         zIndex: 6,
       }}
-      bg="rgb(107,110,114,0.9)"
+      bg="rgb(107,110,114,1)"
     >
       <LocaleHeader isMobile={isMobile} />
       <Flex

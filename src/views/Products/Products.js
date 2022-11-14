@@ -163,7 +163,12 @@ const Products = () => {
 
   return (
     <>
-      <Image w="100%" h={["128px", "184px", "184px", "auto", "auto"]} src="/images/product_main.png" />
+      <Image
+        mt={isMobile ? "87px" : "113px"}
+        w="100%"
+        h={["128px", "184px", "184px", "auto", "auto"]}
+        src="/images/product_main.png"
+      />
 
       <Container
         bg="#ffff"

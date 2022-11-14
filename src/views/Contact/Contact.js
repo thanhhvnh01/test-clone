@@ -100,11 +100,15 @@ const Contact = () => {
   }, []);
   return (
     <Box bg="#F5F5F5">
-      <Image w="100%" h={["128px", "184px", "184px", "auto", "auto"]} src="/images/product_main.png" />
+      <Image
+        mt={isMobile ? "87px" : "113px"}
+        w="100%"
+        h={["128px", "184px", "184px", "auto", "auto"]}
+        src="/images/product_main.png"
+      />
 
       <Container
         p={0}
-        // maxW={isMobile ? "100%" : "80%"}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
         sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
       >
