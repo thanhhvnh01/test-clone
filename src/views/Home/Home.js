@@ -128,16 +128,16 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
             variant="link"
             className="navbar-item"
             fontWeight="500"
-            pr={["3", "3", "3", 0, 0]}
-            onClick={() => {
-              navigate("/products", { state: { isBestSelling: true } });
-            }}
             sx={{
               textTransform: "none",
               textDecoration: "none",
-              ml: "auto",
-              color: "black",
               display: "flex",
+              ml: "auto",
+              mr: 10,
+              color: "black",
+            }}
+            onClick={() => {
+              navigate("/products", { state: { isBestSelling: true } });
             }}
           >
             <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
