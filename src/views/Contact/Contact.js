@@ -101,12 +101,7 @@ const Contact = () => {
   return (
     <Box bg="#F5F5F5">
       <Box>
-        <Image
-          mt={isMobile ? "87px" : "113px"}
-          w="100%"
-          h={["184px", "184px", "184px", "574px", "574px"]}
-          src="/images/contact.jfif"
-        />
+        <Image w="100%" h={["184px", "184px", "184px", "574px", "574px"]} src="/images/contact.jfif" />
       </Box>
       <Container
         p={0}

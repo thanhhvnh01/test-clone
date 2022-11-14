@@ -20,12 +20,7 @@ const AboutUs = () => {
   return (
     <>
       <Box>
-        <AspectRatio
-          _before={{ p: "0px !important" }}
-          mt={isMobile ? "87px" : "113px"}
-          w="100%"
-          h={["184px", "128px", "128px", "620", "620"]}
-        >
+        <AspectRatio _before={{ p: "0px !important" }} w="100%" h={["184px", "128px", "128px", "620", "620"]}>
           <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" />
         </AspectRatio>
       </Box>
