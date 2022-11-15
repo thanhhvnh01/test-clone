@@ -62,3 +62,8 @@ export const OriginEnum = {
 export const OriginDisplayConfig = {
   [OriginEnum.VietNam]: "VietNam",
 };
+
+export const PackingRuleEnum = {
+  ClearPlasticBagWithSmallTag: 1,
+  ClientsPackingAndLogoAccepted: 2,
+};

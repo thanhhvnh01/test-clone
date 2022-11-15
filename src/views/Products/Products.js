@@ -101,7 +101,7 @@ const Products = () => {
       try {
         setIsLoading(true);
         const productRes = await getProductsAPI(pageSize, pageNumber, orderByType, orderBy, keyword, lang, data);
-        const pageCount = productRes.data.paging.totalItem / 9;
+        const pageCount = Math.round(productRes.data.paging.totalItem / 9);
         setPageCount(pageCount);
         setProducts(productRes.data.pageData);
       } catch (error) {

@@ -121,7 +121,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
               <GridItem colSpan={2}>
                 <Box>
                   <Text>
-                    <FormattedMessage id="label.Message" />
+                    <FormattedMessage id="label.message" />
                   </Text>
                   <RHFInput
                     placeholder={intl.formatMessage({ id: "placeholder.message" })}

@@ -157,10 +157,10 @@ const Contact = () => {
                     color="#FFFFFF"
                     textTransform="uppercase"
                   >
-                    <FormattedMessage id="label.ContactInformation" />
+                    <FormattedMessage id="label.contactInformation" />
                   </Text>
                   <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.Saysomething" />
+                    <FormattedMessage id="label.saySomeThing" />
                   </Text>
                   <VStack alignItems="flex-start" mt={5} spacing={4}>
                     <HStack mt={10}>
@@ -172,7 +172,7 @@ const Contact = () => {
                     <HStack mt={10}>
                       <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.Email" />
+                        <FormattedMessage id="info.email" />
                       </Text>
                     </HStack>
                     <HStack>
@@ -223,7 +223,7 @@ const Contact = () => {
                       <GridItem colSpan={2}>
                         <Box>
                           <Text>
-                            <FormattedMessage id="label.Message" />
+                            <FormattedMessage id="label.message" />
                           </Text>
                           <RHFInput
                             placeholder={intl.formatMessage({ id: "placeholder.message" })}
@@ -293,7 +293,7 @@ const Contact = () => {
                     <GridItem colSpan={2}>
                       <Box>
                         <Text>
-                          <FormattedMessage id="label.Message" />
+                          <FormattedMessage id="label.message" />
                         </Text>
                         <RHFInput
                           placeholder={intl.formatMessage({ id: "placeholder.message" })}
@@ -327,10 +327,10 @@ const Contact = () => {
                     color="#FFFFFF"
                     textTransform="uppercase"
                   >
-                    <FormattedMessage id="label.ContactInformation" />
+                    <FormattedMessage id="label.contactInformation" />
                   </Text>
                   <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.Saysomething" />
+                    <FormattedMessage id="label.saySomeThing" />
                   </Text>
                   <VStack alignItems="flex-start" mt={5} spacing={4}>
                     <HStack mt={10}>
@@ -342,7 +342,7 @@ const Contact = () => {
                     <HStack mt={10}>
                       <CgMail style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.Email" />
+                        <FormattedMessage id="info.email" />
                       </Text>
                     </HStack>
                     <HStack>
