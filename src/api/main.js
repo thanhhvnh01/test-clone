@@ -17,9 +17,10 @@ export const getSupportersAPI = async (pageSize, pageNumber) => {
     { __auth: false }
   );
 };
-// subscribe
+
+// subscriber
 export const subscribeNewMemberAPI = async (email) => {
-  return axios.post(`${process.env.REACT_APP_API_URL}/subscribe/new-subscriber`, email, { __auth: false });
+  return axios.post(`${process.env.REACT_APP_API_URL}/subscribers`, email, { __auth: false });
 };
 
 // * end home section

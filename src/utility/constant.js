@@ -29,10 +29,12 @@ export const HairStyleDisplayConfig = {
 
 export const MaterialTypeEnum = {
   RemyHair: 1,
+  VirginHair: 2,
 };
 
 export const MaterialTypeDisplayConfig = {
   [MaterialTypeEnum.RemyHair]: "RemyHair",
+  [MaterialTypeEnum.VirginHair]: "VirginHair",
 };
 
 export const LengthMeasureUnitEnum = {
@@ -55,15 +57,12 @@ export const WeightMeasureUnitDisplayConfig = {
   [WeightMeasureUnitEnum.Pound]: "Pound",
 };
 
-export const OriginEnum = {
-  VietNam: 1,
-};
-
-export const OriginDisplayConfig = {
-  [OriginEnum.VietNam]: "VietNam",
-};
-
 export const PackingRuleEnum = {
   ClearPlasticBagWithSmallTag: 1,
   ClientsPackingAndLogoAccepted: 2,
+};
+
+export const PackingRuleDisplayConfig = {
+  [PackingRuleEnum.ClearPlasticBagWithSmallTag]: "ClearPlasticBagWithSmallTag",
+  [PackingRuleEnum.ClientsPackingAndLogoAccepted]: "ClientsPackingAndLogoAccepted",
 };

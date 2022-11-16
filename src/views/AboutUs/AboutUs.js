@@ -1,6 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
-  AspectRatio,
   Box,
   Breadcrumb,
   BreadcrumbItem,
@@ -12,7 +11,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
-import React from "react";
 import { FormattedMessage } from "react-intl";
 
 const AboutUs = () => {
@@ -20,16 +18,12 @@ const AboutUs = () => {
   return (
     <>
       <Box>
-        <AspectRatio
-          _before={{ p: "0px !important" }}
+        <Image
           mt={isMobile ? "87px" : "113px"}
           w="100%"
-          h={["184px", "128px", "128px", "620", "620"]}
-        >
-          <iframe title="video" src="https://www.youtube.com/embed/okz5RIZRT0U" allowFullScreen />
-        </AspectRatio>
-      </Box>
-      <Box>
+          h={["128px", "184px", "184px", "auto", "auto"]}
+          src="/images/product_main.png"
+        />
         <Container
           p={isMobile ? 0 : 2}
           maxW={isMobile ? "100%" : "1200px"}

@@ -22,9 +22,11 @@ const LocaleHeader = ({ isMobile, ...props }) => {
           w="100%"
           sx={{ alignContent: "center", justifyContent: isMobile ? "space-between" : "flex-end" }}
         >
-          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>+84 973360301</Text>
-          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]} textTransform="uppercase">
-            example@gmail.com
+          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+            <FormattedMessage id="info.phoneNumber" />
+          </Text>
+          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+            <FormattedMessage id="info.email" />
           </Text>
 
           <ReactCountryFlag

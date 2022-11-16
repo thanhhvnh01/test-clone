@@ -159,14 +159,11 @@ const Contact = () => {
                   >
                     <FormattedMessage id="label.contactInformation" />
                   </Text>
-                  <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.saySomeThing" />
-                  </Text>
                   <VStack alignItems="flex-start" mt={5} spacing={4}>
                     <HStack mt={10}>
                       <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.phonenumber" />
+                        <FormattedMessage id="info.phoneNumber" />
                       </Text>
                     </HStack>
                     <HStack mt={10}>
@@ -178,7 +175,7 @@ const Contact = () => {
                     <HStack>
                       <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["6px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.Address" />
+                        <FormattedMessage id="info.address" />
                       </Text>
                     </HStack>
                   </VStack>
@@ -336,7 +333,7 @@ const Contact = () => {
                     <HStack mt={10}>
                       <CgPhone style={{ color: "#FFFF", height: "19px", width: "19px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.phonenumber" />
+                        <FormattedMessage id="info.phoneNumber" />
                       </Text>
                     </HStack>
                     <HStack mt={10}>
@@ -348,7 +345,7 @@ const Contact = () => {
                     <HStack>
                       <ImLocation2 style={{ color: "#FFFF", height: "22px", width: "22px" }} />
                       <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                        <FormattedMessage id="info.Address" />
+                        <FormattedMessage id="info.address" />
                       </Text>
                     </HStack>
                   </VStack>
@@ -396,9 +393,7 @@ const Contact = () => {
                 mr: 10,
                 color: "black",
               }}
-            >
-              <FormattedMessage id="button.more" /> {<ChevronRightIcon mt={0.5} />}
-            </Button>
+            ></Button>
           </Box>
         </Box>
       </Container>

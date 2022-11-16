@@ -20,7 +20,7 @@ import {
   HairStyleDisplayConfig,
   LengthMeasureUnitDisplayConfig,
   MaterialTypeDisplayConfig,
-  OriginDisplayConfig,
+  PackingRuleDisplayConfig,
   WeightMeasureUnitDisplayConfig,
 } from "@utility/constant";
 import { useEffect, useState } from "react";
@@ -185,9 +185,7 @@ const ProductDetails = () => {
                     <Text fontWeight="bold">
                       <FormattedMessage id="label.origin" />:{" "}
                     </Text>
-                    <Text>
-                      <FormattedMessage id={`enum.${OriginDisplayConfig[data?.originId]}`} />
-                    </Text>
+                    <Text>{data?.origin}</Text>
                   </HStack>
                   <HStack>
                     <Text fontWeight="bold">
@@ -213,6 +211,14 @@ const ProductDetails = () => {
                     </Text>
                     <Text>
                       <FormattedMessage id={`enum.${HairStyleDisplayConfig[data?.hairStyleId]}`} />
+                    </Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="bold">
+                      <FormattedMessage id="label.packing" />:{" "}
+                    </Text>
+                    <Text>
+                      <FormattedMessage id={`enum.${PackingRuleDisplayConfig[data?.packingRuleId]}`} />
                     </Text>
                   </HStack>
                   <Button
@@ -244,19 +250,9 @@ const ProductDetails = () => {
                   <HStack>
                     <Text textAlign="justify">
                       <b>
-                        <FormattedMessage id="label.advantage" />:{" "}
+                        <FormattedMessage id="label.description" />:{" "}
                       </b>
-                      {data?.advantage}
-                    </Text>
-                  </HStack>
-                </GridItem>
-                <GridItem rowSpan={1}>
-                  <HStack>
-                    <Text textAlign="justify">
-                      <b>
-                        <FormattedMessage id="label.disadvantage" />:{" "}
-                      </b>
-                      {data?.disadvantage}
+                      {data?.description}
                     </Text>
                   </HStack>
                 </GridItem>
