@@ -44,7 +44,7 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
         pt={[4, 4, 0, 0]}
       >
         <NavbarItem to="/about-us">
-          <FormattedMessage id="title.aboutUs" />
+          <FormattedMessage id="title.ourStory" />
         </NavbarItem>
         <DropDownSubmenu
           data={dropDownData}

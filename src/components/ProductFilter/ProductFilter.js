@@ -173,7 +173,12 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
         <Text fontSize={["16px", "12px", "12px", "16px", "16px"]} fontWeight="bold">
           <FormattedMessage id="label.bestSelling" />
         </Text>
-        <RHFSingleCheckbox handleClick={handleIsBestSellingClick} name="isBestSelling" fontWeight="bold" />
+        <RHFSingleCheckbox
+          sx={{ mr: 4 }}
+          handleClick={handleIsBestSellingClick}
+          name="isBestSelling"
+          fontWeight="bold"
+        />
       </Flex>
     </Box>
   );

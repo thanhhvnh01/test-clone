@@ -45,7 +45,7 @@ const Contact = () => {
   const ContactSchema = yup.object().shape({
     firstName: yup.string().required().max(256),
     lastName: yup.string().required().max(256),
-    email: yup.string().required().max(256),
+    email: yup.string().email().required().max(256),
     phoneNumber: yup.string().required(),
     message: yup.string().required(),
   });
@@ -109,7 +109,7 @@ const Contact = () => {
       <Container
         p={0}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
-        sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
+        sx={{ mt: 0, minHeight: "60vh !important", mr: "auto", ml: "auto" }}
       >
         <Box py={3} px={3}>
           <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>

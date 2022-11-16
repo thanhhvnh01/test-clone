@@ -75,6 +75,7 @@ const ProductDetails = () => {
   return (
     <>
       <Image
+        id="product-image"
         mt={["87px", "87px", "113px", "113px", "113px"]}
         w="100%"
         h={["128px", "auto", "auto", "auto", "auto"]}

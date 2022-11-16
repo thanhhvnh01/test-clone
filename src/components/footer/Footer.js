@@ -83,11 +83,22 @@ const ShippingSection = ({ isMobile }) => {
 
 const SocialNetworkSection = ({ isMobile }) => {
   return (
-    <VStack color="#AAAAAA" p={4} display={isMobile ? "block" : "flex"} textTransform="uppercase" spacing="0">
-      <Text fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
+    <Box
+      sx={{ display: "flex", justifyContent: "flex-end", flexDirection: "column" }}
+      color="#AAAAAA"
+      p={4}
+      display={isMobile ? "block" : "flex"}
+      textTransform="uppercase"
+      spacing="0"
+    >
+      <Text
+        sx={{ display: "flex", justifyContent: !isMobile && "flex-end" }}
+        fontSize={["16px", "16px", "16px", "xl", "xl"]}
+        fontWeight="bold"
+      >
         <FormattedMessage id="label.socialNetwork" />
       </Text>
-      <Box display="flex" sx={{ display: "flex", ml: "120px !important", cursor: "pointer" }}>
+      <Box sx={{ display: "flex", cursor: "pointer", justifyContent: !isMobile && "flex-end" }}>
         <Image
           onClick={() => {
             window.open(`https://www.facebook.com/profile.php?id=100087279692478`);
@@ -101,7 +112,8 @@ const SocialNetworkSection = ({ isMobile }) => {
           src="icons/instagram_icon.svg"
         />
       </Box>
-    </VStack>
+      <Image src="images/map.png" />
+    </Box>
   );
 };
 
@@ -109,10 +121,20 @@ const SignUpSection = ({ isMobile }) => {
   const intl = useIntl();
   const { ref, inView } = useInView();
   const [email, setEmail] = useState("");
+  const [isValid, setIsValid] = useState(false);
   const toast = useToast();
 
-  const handleChangeInput = (e) => {
-    setEmail(e.target.value);
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  const handleChangeInput = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+    setEmail(event.target.value);
   };
 
   const handleSignUp = async () => {
@@ -186,6 +208,7 @@ const SignUpSection = ({ isMobile }) => {
                 </InputGroup>
                 {!isMobile && (
                   <Button
+                    disabled={!isValid}
                     size={["sm", "sm", "sm", "sm", "sm"]}
                     onClick={handleSignUp}
                     className="btn-sub"

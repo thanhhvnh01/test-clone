@@ -17,33 +17,39 @@ import { useInView } from "react-intersection-observer";
 import { FormattedMessage } from "react-intl";
 // slider
 import { getErrorMessage } from "@api/handleApiError";
-import { getBestSaleProductsAPI, getSupportersAPI } from "@api/main";
+import { getBestSaleProductsAPI, getImagesAPI, getSupportersAPI } from "@api/main";
 import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
 
-const slideImages = [
-  {
-    url: "images/picture_1.png",
-    caption: "Slide 1",
-  },
-  {
-    url: "images/picture_1.png",
-    caption: "Slide 2",
-  },
-  {
-    url: "images/picture_1.png",
-    caption: "Slide 3",
-  },
-];
-
 const Home = () => {
   const initLang = localStorage.getItem("language");
   const toast = useToast();
+  const [isMobile] = useMobile();
   const navigate = useNavigate();
   const [productsData, setProductsData] = useState([]);
   const [supporterData, setSupporterData] = useState([]);
+  const [slideImages, setSlideImages] = useState([]);
+
+  const fetchImageData = async () => {
+    try {
+      const res = await getImagesAPI();
+      setSlideImages(res.data);
+    } catch (error) {
+      toast({
+        title: "Api error",
+        description: getErrorMessage(error),
+        status: "error",
+        duration: 3000,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchImageData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchProductData = async (lang) => {
     try {
@@ -83,7 +89,6 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [isMobile] = useMobile();
   return (
     <>
       <ImageSlider images={slideImages} />
@@ -172,7 +177,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
                       textTransform="uppercase"
                       textAlign="center"
                     >
-                      <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
+                      <FormattedMessage id="title.ourStory" defaultMessage="About us" />
                     </Text>
                     <Flex bg="black" w={97} h="3px" m="auto" />
                   </Box>
@@ -204,7 +209,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
           <VStack spacing="24px">
             <Box>
               <Text fontSize="20px" fontWeight="bold" textTransform="uppercase" textAlign="center">
-                <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
+                <FormattedMessage id="title.ourStory" defaultMessage="About us" />
               </Text>
               <Flex bg="black" w={97} h="3px" m="auto" />
             </Box>

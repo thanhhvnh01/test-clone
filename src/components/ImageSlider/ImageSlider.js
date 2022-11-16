@@ -20,10 +20,10 @@ const ImageSlider = ({ images }) => {
           interval={6000}
           className="slide-container"
         >
-          {images.map((slideImage, index) => (
+          {images.urls?.map((slideImage, index) => (
             <Box key={index} sx={{ position: "relative", color: "#ffff", textAlign: "center" }}>
               <Image
-                src={slideImage.url}
+                src={slideImage}
                 h={["128px", "184px", "184px", "auto", "auto"]}
                 sx={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
               />

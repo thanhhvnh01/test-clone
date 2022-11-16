@@ -2,6 +2,11 @@ import axios from "./base";
 
 //* home section
 
+// image
+export const getImagesAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/covers/all-enabled`, { __auth: false });
+};
+
 // dropdown
 export const getProductForHomePageAPI = async (lang) => {
   return axios.get(`${process.env.REACT_APP_API_URL}/categories/product-types?lang=${lang}`, { __auth: false });

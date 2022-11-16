@@ -38,7 +38,7 @@ const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
       <DrawerContent bg="#61656B">
         <VStack alignItems="left" spacing={0}>
           <NavbarItem to="/about-us">
-            <FormattedMessage id="title.aboutUs" />
+            <FormattedMessage id="title.ourStory" />
           </NavbarItem>
           {/* <FormattedMessage id="title.products" /> */}
           <ProductsAccordion data={data} />

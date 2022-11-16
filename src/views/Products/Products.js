@@ -403,16 +403,8 @@ const ProductSection = ({
             borderColor="#ffff"
             textColor="#FFA800"
           >
-            <option value={OrderByTypeEnum.Asc}>
-              <Text textAlign="center" fontSize={["16px", "12px", "12px", "16px", "16px"]}>
-                A-Z
-              </Text>
-            </option>
-            <option value={OrderByTypeEnum.Desc}>
-              <Text textAlign="center" fontSize={["16px", "12px", "12px", "16px", "16px"]}>
-                Z-A
-              </Text>
-            </option>
+            <option value={OrderByTypeEnum.Asc}>A-Z</option>
+            <option value={OrderByTypeEnum.Desc}>Z-A</option>
           </Select>
         </HStack>
       </Flex>

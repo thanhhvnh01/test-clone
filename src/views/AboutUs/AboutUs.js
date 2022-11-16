@@ -44,7 +44,7 @@ const AboutUs = () => {
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <Breadcrumb>
-                  <FormattedMessage id="title.aboutUs" />
+                  <FormattedMessage id="title.ourStory" />
                 </Breadcrumb>
               </BreadcrumbItem>
             </Breadcrumb>

@@ -2,13 +2,22 @@ import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
-const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, isBestSelling }) => {
+const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick, isBestSelling }) => {
   const [hoverImage, setHoverImage] = useState(null);
   const [isHover, setIsHover] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
 
   return (
     <Box
       onClick={() => {
+        scrollToTop();
         onClick();
       }}
       bg="#ffff"

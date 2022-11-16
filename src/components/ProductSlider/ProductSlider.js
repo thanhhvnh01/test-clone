@@ -100,7 +100,6 @@ const ProductSlider = ({ data, isMobile }) => {
                 sx={{
                   mx: "auto",
                   mb: 1,
-                  transition: "transform .2s",
                 }}
                 key={index}
                 isBestSelling={item.isBestSelling}
@@ -123,7 +122,6 @@ const ProductSlider = ({ data, isMobile }) => {
                 sx={{
                   mx: "auto",
                   mb: 1,
-                  transition: "transform .2s",
                 }}
                 key={index}
                 isBestSelling={item.isBestSelling}
@@ -146,7 +144,6 @@ const ProductSlider = ({ data, isMobile }) => {
                 sx={{
                   mx: "auto",
                   mb: 1,
-                  transition: "transform .2s",
                 }}
                 key={index}
                 isBestSelling={item.isBestSelling}

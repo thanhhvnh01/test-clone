@@ -34,7 +34,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
   const ContactSchema = yup.object().shape({
     firstName: yup.string().required().max(256),
     lastName: yup.string().required().max(256),
-    email: yup.string().required().max(256),
+    email: yup.string().email().required().max(256),
     phoneNumber: yup.string().required(),
     message: yup.string().required(),
   });
@@ -79,7 +79,7 @@ const ContactModal = ({ isOpen, onClose, productId }) => {
   };
 
   return (
-    <Modal isCentered isOpen={isOpen} onClose={onClose} size={["sm", "sm", "sm", "3xl", "3xl"]}>
+    <Modal isCentered isOpen={isOpen} onClose={onClose} size={["sm", "2xl", "2xl", "3xl", "3xl"]}>
       <ModalOverlay />
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <ModalContent p={[5, 5, 5, 10, 10]} sx={{ borderRadius: "20px !important" }}>
