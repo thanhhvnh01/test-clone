@@ -251,7 +251,13 @@ const SupportSection = ({ isMobile, data }) => {
           <Grid mt={2} templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
             {data?.map((item, index) => {
               return (
-                <GridItem key={index} colSpan={1} p={["10px", "20px", "20px", "50px", "50px"]} pt={3}>
+                <GridItem
+                  sx={{ display: "flex", justifyContent: "center" }}
+                  key={index}
+                  colSpan={1}
+                  p={["10px", "20px", "20px", "50px", "50px"]}
+                  pt={3}
+                >
                   <SupporterCard
                     isMobile={isMobile}
                     image={item.avatarUrl}
