@@ -22,31 +22,31 @@ import Logo from "@components/header/Logo";
 import useMobile from "@hooks/useMobile";
 import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const InfomationSection = ({ isMobile }) => {
   return (
     <Box color="#AAAAAA" p={4}>
       <Logo />
       <Stack spacing="16px">
-        <Text fontSize="xl" fontWeight="bold">
+        <Text fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
           Andreahairvn.com
         </Text>
         <HStack spacing="12px" className="address">
           <Image h="16px" src="icons/location_icon.svg" />
-          <Text fontSize="small">
+          <Text fontSize={["10px", "10px", "10px", "small", "small"]}>
             <FormattedMessage id="info.address" />
           </Text>
         </HStack>
         <HStack spacing="12px" className="phone">
           <Image h="16px" src="icons/phone_icon.svg" />
-          <Text fontSize="small">
+          <Text fontSize={["10px", "10px", "10px", "small", "small"]}>
             <FormattedMessage id="info.phoneNumber" />
           </Text>
         </HStack>
         <HStack spacing="12px" className="email">
           <Image h="16px" src="icons/mail_icon.svg" />
-          <Text fontSize="small">
+          <Text fontSize={["10px", "10px", "10px", "small", "small"]}>
             <FormattedMessage id="info.email" />
           </Text>
         </HStack>
@@ -58,7 +58,7 @@ const InfomationSection = ({ isMobile }) => {
 const PaymentSection = ({ isMobile }) => {
   return (
     <VStack color="#AAAAAA" p={4} display={isMobile ? "block" : "flex"} textTransform="uppercase">
-      <Text align={isMobile ? "left" : "center"} fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
+      <Text align={isMobile ? "left" : "center"} fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
         <FormattedMessage id="info.payment" />
       </Text>
       <Flex>
@@ -71,7 +71,7 @@ const PaymentSection = ({ isMobile }) => {
 const ShippingSection = ({ isMobile }) => {
   return (
     <VStack color="#AAAAAA" p={4} display={isMobile ? "block" : "flex"} textTransform="uppercase">
-      <Text align={isMobile ? "left" : "center"} fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
+      <Text align={isMobile ? "left" : "center"} fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
         <FormattedMessage id="info.shipping" />
       </Text>
       <Flex>
@@ -83,15 +83,30 @@ const ShippingSection = ({ isMobile }) => {
 
 const SocialNetworkSection = ({ isMobile }) => {
   return (
-    <VStack color="#AAAAAA" p={4} display={isMobile ? "block" : "flex"} textTransform="uppercase">
-      <Text fontSize={isMobile ? "16px" : "xl"} fontWeight="bold">
+    <VStack color="#AAAAAA" p={4} display={isMobile ? "block" : "flex"} textTransform="uppercase" spacing="0">
+      <Text fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
         <FormattedMessage id="label.socialNetwork" />
       </Text>
+      <Box display="flex" sx={{ display: "flex", ml: "120px !important", cursor: "pointer" }}>
+        <Image
+          onClick={() => {
+            window.open(`https://www.facebook.com/profile.php?id=100087279692478`);
+          }}
+          src="icons/facebook_icon.svg"
+        />
+        <Image
+          onClick={() => {
+            window.open(`http://Instagram.com/andreahair_vietnam`);
+          }}
+          src="icons/instagram_icon.svg"
+        />
+      </Box>
     </VStack>
   );
 };
 
 const SignUpSection = ({ isMobile }) => {
+  const intl = useIntl();
   const { ref, inView } = useInView();
   const [email, setEmail] = useState("");
   const toast = useToast();
@@ -103,6 +118,13 @@ const SignUpSection = ({ isMobile }) => {
   const handleSignUp = async () => {
     try {
       await subscribeNewMemberAPI({ email });
+      toast({
+        title: intl.formatMessage({ id: "toast.messageSubscribeSuccess" }),
+        description: intl.formatMessage({ id: "toast.messageContactSuccess" }),
+        status: "success",
+        duration: 3000,
+      });
+      setEmail("");
     } catch (error) {
       toast({
         title: "Api error",
@@ -120,7 +142,7 @@ const SignUpSection = ({ isMobile }) => {
           <Box>
             <Text
               pt={isMobile ? 5 : 5}
-              fontSize={["20px", "50px", "50px", "30px", "30px"]}
+              fontSize={["20px", "20px", "20px", "30px", "30px"]}
               fontWeight="bold"
               color="#FFEA85"
               textAlign="center"
@@ -130,7 +152,7 @@ const SignUpSection = ({ isMobile }) => {
             </Text>
             <Text
               fontStyle="italic"
-              fontSize={["12px", "18px", "18px", "14px", "14px"]}
+              fontSize={["12px", "12px", "12px", "14px", "14px"]}
               color="#FFEA85"
               textAlign="center"
               fontWeight={300}
@@ -164,7 +186,7 @@ const SignUpSection = ({ isMobile }) => {
                 </InputGroup>
                 {!isMobile && (
                   <Button
-                    size={["sm", "md", "md", "sm", "sm"]}
+                    size={["sm", "sm", "sm", "sm", "sm"]}
                     onClick={handleSignUp}
                     className="btn-sub"
                     color="#FFEA85"

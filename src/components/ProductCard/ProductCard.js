@@ -14,7 +14,7 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
       bg="#ffff"
       tabIndex={0}
       w={["175px", "182px", "182px", "270px", "270px"]}
-      h={["248px", "248px", "248px", "390px", "390px"]}
+      h={["280px", "290px", "290px", "480px", "480px"]}
       sx={{ ...sx, cursor: "pointer", position: "relative" }}
       onMouseEnter={() => {
         setIsHover(true);
@@ -25,7 +25,7 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, hover, onClick, 
     >
       <Image
         w="100%"
-        h={["162px", "162px", "162px", "278px", "278px"]}
+        h={["233px", "238px", "238px", "360px", "360px"]}
         src={hoverImage === null ? thumbImage : images[hoverImage]}
         alt="product"
       />

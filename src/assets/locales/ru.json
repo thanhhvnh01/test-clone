@@ -93,5 +93,6 @@
   "placeholder.message": "Напишите свое сообщение...",
 
   "/* toast */": "toast",
-  "toast.messageContactSuccess": "Мы получили ваше сообщение, мы свяжемся с вами позже"
+  "toast.messageContactSuccess": "Мы получили ваше сообщение, мы свяжемся с вами позже",
+  "toast.messageSubscribeSuccess": "Спасибо за подписку"
 }

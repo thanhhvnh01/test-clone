@@ -47,7 +47,7 @@ const Contact = () => {
     firstName: yup.string().required().max(256),
     lastName: yup.string().required().max(256),
     email: yup.string().required().max(256),
-    phoneNumber: yup.string().matches(PhoneNumberRegExp, intl.formatMessage({ id: "formError.phoneNumber" })),
+    phoneNumber: yup.string().required(),
     message: yup.string().required(),
   });
 

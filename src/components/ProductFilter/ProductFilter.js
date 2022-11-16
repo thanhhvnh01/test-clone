@@ -95,8 +95,9 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
+              <AccordionPanel p={0} pl={[3, 0, 0, 3, 3]} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
+                  isClearable
                   resetProductTypes={() => {
                     setValue("productTypes", null);
                   }}
@@ -124,9 +125,10 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
                   </Box>
                   {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
                 </AccordionButton>
-                <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
+                <AccordionPanel p={0} pl={[3, 0, 0, 3, 3]} sx={{ borderTop: "1px solid #AAAAAA" }}>
                   <RHFRadioGroup
                     name="productTypes"
+                    isClearable
                     selectedOption={productTypeId}
                     handleClearOption={() => {
                       setValue("productTypes", null);
@@ -150,9 +152,10 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
                 </Box>
                 {isExpanded ? <MinusIcon fontSize="12px" /> : <AddIcon fontSize="12px" />}
               </AccordionButton>
-              <AccordionPanel p={0} pl={3} sx={{ borderTop: "1px solid #AAAAAA" }}>
+              <AccordionPanel p={0} pl={[3, 0, 0, 3, 3]} sx={{ borderTop: "1px solid #AAAAAA" }}>
                 <RHFRadioGroup
                   name="colors"
+                  isClearable
                   selectedOption={colorId}
                   handleClearOption={() => {
                     setValue("colors", null);

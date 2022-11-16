@@ -29,6 +29,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ContactModal from "./ContactModal";
 
 const ProductDetails = () => {
+  const initLang = localStorage.getItem("language");
   const [isMobile] = useMobile();
   const navigate = useNavigate();
   const query = useLocation().search;
@@ -38,17 +39,17 @@ const ProductDetails = () => {
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const fetchData = async (productId) => {
+  const fetchData = async (productId, initLang) => {
     if (!!productId) {
       try {
-        const res = await getProductDetailsAPI(productId);
+        const res = await getProductDetailsAPI(productId, initLang);
         setData(res.data);
       } catch (error) {}
     }
   };
 
   useEffect(() => {
-    fetchData(productId);
+    fetchData(productId, initLang);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
@@ -138,7 +139,7 @@ const ProductDetails = () => {
                   <Text fontWeight="bold">
                     <FormattedMessage id="label.color" />:{" "}
                   </Text>
-                  <Text>{data?.colorName}</Text>
+                  <Text>{data?.colorName}</Text> {data?.colorCode.length === 1 && <Text>{data?.colorCode[0]}</Text>}
                 </HStack>
                 <HStack sx={{ cursor: "pointer" }}>
                   <Box

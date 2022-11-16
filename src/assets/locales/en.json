@@ -93,5 +93,6 @@
   "placeholder.message": "Write your message...",
 
   "/* toast */": "toast",
-  "toast.messageContactSuccess": "We've received your message, we'll contact you later"
+  "toast.messageContactSuccess": "We've received your message, we'll contact you later",
+  "toast.messageSubscribeSuccess": "Thank you for subscribed"
 }

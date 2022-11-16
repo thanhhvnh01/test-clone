@@ -4,20 +4,6 @@ import { CustomButton as Button } from "./CustomStyle/CustomStyle";
 export const theme = extendTheme({
   components: {
     Button,
-    Checkbox: {
-      baseStyle: {
-        container: {
-          touchAction: "none",
-        },
-      },
-    },
-    Radio: {
-      baseStyle: {
-        container: {
-          touchAction: "none",
-        },
-      },
-    },
   },
   breakpoints: {
     sm: "415px", // mobile

@@ -34,7 +34,7 @@ export default function RHFRadioGroup({
           <>
             <RadioGroup
               colorScheme="yellow"
-              sx={{ m: "0px !important", touchAction: "none", ...sx }}
+              sx={{ m: "0px !important", ...sx }}
               onChange={(e) => {
                 field.onChange(e);
                 if (!!resetProductTypes) {
@@ -52,7 +52,7 @@ export default function RHFRadioGroup({
                   const isSelected = item.id === Number(selectedOption);
                   return (
                     <HStack key={index} width="100%" display="flex" justifyContent="space-between">
-                      <Radio value={item.id} sx={{ touchAction: "none", display: "flex" }}>
+                      <Radio value={item.id} sx={{ display: "flex" }}>
                         {!!isColor ? (
                           <HStack>
                             <Box
@@ -65,14 +65,15 @@ export default function RHFRadioGroup({
                               height="15px"
                               borderRadius="50%"
                             />
-                            <Text>{item.label}</Text>
+                            <Text fontWeight={isSelected ? "bold" : "400"}>{item.label}</Text>
                           </HStack>
                         ) : (
-                          item.label
+                          <Text fontWeight={isSelected ? "bold" : "400"}>{item.label}</Text>
                         )}
                       </Radio>
                       {isSelected && (
                         <SmallCloseIcon
+                          boxSize={[6, 6, 6, 4, 4]}
                           cursor="pointer"
                           onClick={() => {
                             handleClearOption();

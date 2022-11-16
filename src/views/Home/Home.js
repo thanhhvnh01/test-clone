@@ -22,6 +22,7 @@ import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
+import ProductCard from "@components/ProductCard";
 
 const slideImages = [
   {
@@ -121,6 +122,31 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
         </Box>
         <Box bg="#FFFF" p={isMobile ? 0 : 0}>
           <ProductSlider data={data} isMobile={isMobile} />
+          {/* <Grid
+            templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)", "repeat(4, 1fr)"]}
+          >
+            {data.map((item, index) => {
+              return (
+                <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
+                  <ProductCard
+                    sx={{
+                      mb: 1,
+                      mx: "auto",
+                    }}
+                    key={index}
+                    isBestSelling={item.isBestSelling}
+                    title={item.productName}
+                    thumbImage={item.mainImageUrl}
+                    images={item.imageUrls}
+                    subtitle={item.productTypeName}
+                    // onClick={() => {
+                    //   handleOnClick(item);
+                    // }}
+                  />
+                </GridItem>
+              );
+            })}
+          </Grid> */}
         </Box>
       </Box>
     </SlideFade>
@@ -132,7 +158,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
   return (
     <SlideFade ref={ref} in={inView} offsetY="100px">
       {!isMobile ? (
-        <Flex bg="#F5F5F5" px={[10, 10, 10, 10, "50px"]} my={5} justifyContent="center">
+        <Flex bg="#F5F5F5" px={[10, 10, 10, 10, "50px"]} mb={5} justifyContent="center">
           <Flex mx="auto" justifyContent="center">
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               <GridItem colSpan={1} display="flex" ml="auto">

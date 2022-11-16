@@ -20,24 +20,25 @@ const LocaleHeader = ({ isMobile, ...props }) => {
           color="#ffff"
           spacing="24px"
           w="100%"
-          sx={{ alignContent: "center", justifyContent: isMobile ? "space-between" : "flex-end" }}
+          sx={{ alignContent: "center", justifyContent: !isMobile ? "space-between" : "space-between" }}
         >
-          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
-            <FormattedMessage id="info.phoneNumber" />
+          <Text ml={2} fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+            ANDREAHAIRVN.COM
           </Text>
-          <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
-            <FormattedMessage id="info.email" />
-          </Text>
+          <HStack spacing="20px">
+            {!isMobile && (
+              <>
+                <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                  <FormattedMessage id="info.phoneNumber" />
+                </Text>
+                <Text textTransform="uppercase" fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                  <FormattedMessage id="info.email" />
+                </Text>
+              </>
+            )}
 
-          <ReactCountryFlag
-            style={{
-              width: "1em",
-              height: "1em",
-            }}
-            countryCode={lang === "en" ? "us" : "ru"}
-            svg
-          />
-          <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
+            <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
+          </HStack>
         </HStack>
       </Flex>
     </Box>
@@ -52,29 +53,40 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
   };
 
   return (
-    <Select
-      color="white"
-      icon={<TriangleDownIcon />}
-      iconSize="9px"
-      variant="unstyled"
-      fontSize={["10px", "12px", "12px", "12px", "12px"]}
-      bg="black"
-      w="90px"
-      borderColor="black"
-      value={lang}
-      onChange={(e) => {
-        handleLangUpdate(e);
-      }}
-      size="xs"
-      pb={1}
-    >
-      <option value="en" style={{ textAlign: "center" }}>
-        <FormattedMessage id="title.en" />
-      </option>
-      <option value="ru" style={{ textAlign: "center" }}>
-        <FormattedMessage id="title.ru" />
-      </option>
-    </Select>
+    <HStack sx={{ alignContent: "center", justifyContent: "space-between" }}>
+      <ReactCountryFlag
+        style={{
+          width: "1em",
+          height: "1em",
+          marginBottom: 1.5,
+        }}
+        countryCode={lang === "en" ? "us" : "ru"}
+        svg
+      />
+      <Select
+        color="white"
+        icon={<TriangleDownIcon />}
+        iconSize="9px"
+        variant="unstyled"
+        fontSize={["10px", "12px", "12px", "12px", "12px"]}
+        bg="black"
+        w="90px"
+        borderColor="black"
+        value={lang}
+        onChange={(e) => {
+          handleLangUpdate(e);
+        }}
+        size="xs"
+        pb={1}
+      >
+        <option value="en" style={{ textAlign: "center" }}>
+          <FormattedMessage id="title.en" />
+        </option>
+        <option value="ru" style={{ textAlign: "center" }}>
+          <FormattedMessage id="title.ru" />
+        </option>
+      </Select>
+    </HStack>
   );
 };
 
