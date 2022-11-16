@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormattedMessage, useIntl } from "react-intl";
-import { PhoneNumberRegExp } from "@utility/ultils";
 
 const ContactModal = ({ isOpen, onClose, productId }) => {
   const intl = useIntl();
