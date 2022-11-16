@@ -22,7 +22,6 @@ import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
-import ProductCard from "@components/ProductCard";
 
 const slideImages = [
   {
@@ -91,7 +90,7 @@ const Home = () => {
       <Container
         p={0}
         maxW={["100%", "100%", "100%", "1200px", "1200px"]}
-        sx={{ mt: 0, minHeight: "120vh !important", mr: "auto", ml: "auto" }}
+        sx={{ mt: 0, minHeight: "90vh !important", mr: "auto", ml: "auto" }}
       >
         <Box>
           <BestSaleSection isMobile={isMobile} data={productsData} navigate={navigate} />
@@ -110,7 +109,7 @@ const BestSaleSection = ({ isMobile, data, navigate }) => {
       <Box>
         <Box pb={[0, 0, 0, 6, 6]}>
           <Text
-            fontSize={isMobile ? "20px" : "40px"}
+            fontSize={["20px", "20px", "20px", "40px", "40px"]}
             fontWeight="bold"
             textAlign="center"
             textTransform="uppercase"
@@ -167,18 +166,24 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
               <GridItem colSpan={1} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
                 <Box>
                   <Box pb={[1, 2, 3, 5, 5]}>
-                    <Text fontSize="40px" fontWeight="bold" textTransform="uppercase" textAlign="center">
+                    <Text
+                      fontSize={["20px", "20px", "20px", "40px", "40px"]}
+                      fontWeight="bold"
+                      textTransform="uppercase"
+                      textAlign="center"
+                    >
                       <FormattedMessage id="title.aboutUs" defaultMessage="About us" />
                     </Text>
                     <Flex bg="black" w={97} h="3px" m="auto" />
                   </Box>
-                  <Box bg="#DFDFDF" p={7} borderRadius="17px">
+                  <Box fontSize={["10px", "10px", "10px", "16px", "16px"]} bg="#DFDFDF" p={7} borderRadius="17px">
                     <Text textAlign="justify">
                       <FormattedMessage id="info.aboutUsSection" />
                     </Text>
                   </Box>
                   <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
                     <Button
+                      size={["sm", "sm", "sm"]}
                       onClick={() => {
                         navigate("/about-us");
                       }}
@@ -235,7 +240,7 @@ const SupportSection = ({ isMobile, data }) => {
         <Box pb={5}>
           <Text
             pt={10}
-            fontSize={isMobile ? "20px" : "40px"}
+            fontSize={["20px", "20px", "20px", "40px", "40px"]}
             fontWeight="bold"
             textAlign="center"
             textTransform="uppercase"
@@ -246,7 +251,7 @@ const SupportSection = ({ isMobile, data }) => {
           <Grid mt={2} templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
             {data?.map((item, index) => {
               return (
-                <GridItem key={index} colSpan={1} p={isMobile ? "10px" : "50px"} pt={3}>
+                <GridItem key={index} colSpan={1} p={["10px", "20px", "20px", "50px", "50px"]} pt={3}>
                   <SupporterCard
                     isMobile={isMobile}
                     image={item.avatarUrl}

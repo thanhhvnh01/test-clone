@@ -1,4 +1,4 @@
-import { Box, Container, Image, Text } from "@chakra-ui/react";
+import { Box, Container, Image } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
@@ -10,10 +10,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <Container p={0} maxW={isMobile ? "100%" : "100%"}>
-      <Box
-        h={["128px", "184px", "184px", "auto", "auto"]}
-        sx={{ mt: isMobile ? "87px" : "113px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}
-      >
+      <Box mt={["87px", "87px", "113px", "113px", "113px"]} w="100%" h={["128px", "auto", "auto", "auto", "auto"]}>
         <Carousel
           showThumbs={false}
           infiniteLoop

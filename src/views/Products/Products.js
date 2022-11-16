@@ -164,9 +164,9 @@ const Products = () => {
   return (
     <>
       <Image
-        mt={isMobile ? "87px" : "113px"}
+        mt={["87px", "87px", "113px", "113px", "113px"]}
         w="100%"
-        h={["128px", "184px", "184px", "auto", "auto"]}
+        h={["128px", "auto", "auto", "auto", "auto"]}
         src="/images/product_main.png"
       />
 
@@ -177,7 +177,7 @@ const Products = () => {
         mt={[0, "-100px", "-100px", "-100px", "-100px"]}
         sx={{
           mb: "20px",
-          minHeight: "120vh !important",
+          minHeight: "90vh !important",
           mr: "auto",
           ml: "auto",
           position: "relative",
@@ -314,7 +314,7 @@ const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setV
   return (
     <VStack>
       <Flex sx={{ width: "100%" }} justifyContent="space-between">
-        <HStack>
+        <HStack fontSize={["16px", "13px", "13px", "16px", "16px"]}>
           <BsFilter style={{ height: "19px", width: "19px" }} />
           <FormattedMessage id="label.filter" />
         </HStack>
@@ -323,7 +323,7 @@ const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setV
           fontWeight="500"
           textTransform="none"
           variant="solid"
-          fontSize="14px"
+          fontSize={["16px", "12px", "12px", "14px", "14px"]}
           rightIcon={<SmallCloseIcon />}
           p={3}
           bg="#FFA800"
@@ -374,12 +374,12 @@ const ProductSection = ({
       )}
 
       <Flex
-        display={["none", "none", "none", "flex", "flex"]}
+        display={["none", "flex", "flex", "flex", "flex"]}
         pr={[0, 0, 0, 0, 5]}
         pl={[0, 0, 0, 5, 12]}
         justifyContent="space-between"
       >
-        <HStack>
+        <HStack fontSize={["16px", "12px", "12px", "16px", "16px"]}>
           <Text>
             <FormattedMessage id="label.showing" />
           </Text>
@@ -389,7 +389,7 @@ const ProductSection = ({
           </Text>
         </HStack>
         <HStack>
-          <HStack>
+          <HStack fontSize={["16px", "12px", "12px", "16px", "16px"]}>
             <BsFilterLeft style={{ height: "19px", width: "19px" }} />
             <Text>
               <FormattedMessage id="label.sort" />:
@@ -403,11 +403,15 @@ const ProductSection = ({
             borderColor="#ffff"
             textColor="#FFA800"
           >
-            <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold", textAlign: "center" }}>
-              A-Z
+            <option value={OrderByTypeEnum.Asc}>
+              <Text textAlign="center" fontSize={["16px", "12px", "12px", "16px", "16px"]}>
+                A-Z
+              </Text>
             </option>
-            <option value={OrderByTypeEnum.Desc} style={{ fontWeight: "bold", textAlign: "center" }}>
-              Z-A
+            <option value={OrderByTypeEnum.Desc}>
+              <Text textAlign="center" fontSize={["16px", "12px", "12px", "16px", "16px"]}>
+                Z-A
+              </Text>
             </option>
           </Select>
         </HStack>

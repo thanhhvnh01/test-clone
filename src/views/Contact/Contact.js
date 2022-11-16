@@ -25,7 +25,6 @@ import { getSupportersAPI, sendMessageAPI } from "@api/main";
 import { FormProvider, RHFInput } from "@components/hook-form";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { PhoneNumberRegExp } from "@utility/ultils";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getErrorMessage } from "@api/handleApiError";
 
@@ -101,9 +100,9 @@ const Contact = () => {
   return (
     <Box bg="#F5F5F5">
       <Image
-        mt={isMobile ? "87px" : "113px"}
+        mt={["87px", "87px", "113px", "113px", "113px"]}
         w="100%"
-        h={["128px", "184px", "184px", "auto", "auto"]}
+        h={["128px", "auto", "auto", "auto", "auto"]}
         src="/images/product_main.png"
       />
 
@@ -128,7 +127,7 @@ const Contact = () => {
         </Box>
         <Box>
           <Text
-            fontSize={["32px", "40px", "40px", "40px", "40px"]}
+            fontSize={["20px", "20px", "20px", "40px", "40px"]}
             fontWeight="bold"
             color="#000000"
             textAlign="center"
@@ -137,7 +136,7 @@ const Contact = () => {
             <FormattedMessage id="label.contactUs" />
           </Text>
           <Text
-            fontSize={["12px", "18px", "18px", "18px", "18px"]}
+            fontSize={["12px", "12px", "12px", "18px", "18px"]}
             fontWeight="regular"
             color="#000000"
             textAlign="center"
@@ -148,7 +147,7 @@ const Contact = () => {
         </Box>
         {!isMobile ? (
           <Flex bg="#FFFFFF" my={5}>
-            <Grid templateColumns="repeat(10, 1fr)" gap={6}>
+            <Grid templateColumns="repeat(10, 1fr)" w="100%">
               <GridItem colSpan={4} bg="url('/backgrounds/contact_2.jpg')">
                 <Box sx={{ p: 10 }}>
                   <Text
@@ -158,6 +157,9 @@ const Contact = () => {
                     textTransform="uppercase"
                   >
                     <FormattedMessage id="label.contactInformation" />
+                  </Text>
+                  <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
+                    <FormattedMessage id="label.saySomething" />
                   </Text>
                   <VStack alignItems="flex-start" mt={5} spacing={4}>
                     <HStack mt={10}>
@@ -181,7 +183,7 @@ const Contact = () => {
                   </VStack>
                 </Box>
               </GridItem>
-              <GridItem colSpan={6} sx={{ mt: "auto", mb: "auto", display: "flex" }} maxW="690px">
+              <GridItem w="100%" colSpan={6} sx={{ mt: "auto", mb: "auto", display: "flex" }}>
                 <Box w="100%" p={6} py={10}>
                   <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                     <Grid templateColumns="repeat(2,1fr)" gap={10}>
@@ -327,7 +329,7 @@ const Contact = () => {
                     <FormattedMessage id="label.contactInformation" />
                   </Text>
                   <Text fontSize={["15px", "14px", "14px", "14px", "14px"]} fontWeight="regular" color="#FFFFFF">
-                    <FormattedMessage id="label.saySomeThing" />
+                    <FormattedMessage id="label.saySomething" />
                   </Text>
                   <VStack alignItems="flex-start" mt={5} spacing={4}>
                     <HStack mt={10}>
@@ -359,7 +361,7 @@ const Contact = () => {
           <Box pb={5}>
             <Text
               pt={10}
-              fontSize={isMobile ? "20px" : "40px"}
+              fontSize={["20px", "20px", "20px", "40px", "40px"]}
               fontWeight="bold"
               textAlign="center"
               textTransform="uppercase"
@@ -370,12 +372,20 @@ const Contact = () => {
             <Grid templateColumns={isMobile ? "repeat(1, 1fr)" : "repeat(3, 1fr)"} gap={6}>
               {supporterData?.map((item, index) => {
                 return (
-                  <GridItem key={index} colSpan={1} p={isMobile ? "10px" : "50px"}>
+                  <GridItem
+                    sx={{ display: "flex", justifyContent: "center" }}
+                    key={index}
+                    colSpan={1}
+                    p={["10px", "20px", "20px", "50px", "50px"]}
+                  >
                     <SupporterCard
                       isMobile={isMobile}
                       image={item.avatarUrl}
                       name={item.supporterName}
                       email={item.email}
+                      fb={item.facebookUrl}
+                      ig={item.instagramUrl}
+                      whatsapp={item.whatsappPhoneNumber}
                     />
                   </GridItem>
                 );

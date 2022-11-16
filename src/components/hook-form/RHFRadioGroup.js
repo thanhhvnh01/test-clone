@@ -65,10 +65,20 @@ export default function RHFRadioGroup({
                               height="15px"
                               borderRadius="50%"
                             />
-                            <Text fontWeight={isSelected ? "bold" : "400"}>{item.label}</Text>
+                            <Text
+                              fontSize={["16px", "12px", "12px", "16px", "16px"]}
+                              fontWeight={isSelected ? "bold" : "400"}
+                            >
+                              {item.label}
+                            </Text>
                           </HStack>
                         ) : (
-                          <Text fontWeight={isSelected ? "bold" : "400"}>{item.label}</Text>
+                          <Text
+                            fontSize={["16px", "12px", "12px", "16px", "16px"]}
+                            fontWeight={isSelected ? "bold" : "400"}
+                          >
+                            {item.label}
+                          </Text>
                         )}
                       </Radio>
                       {isSelected && (

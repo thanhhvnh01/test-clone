@@ -89,7 +89,7 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  <Text fontWeight="bold">
+                  <Text fontSize={["16px", "12px", "12px", "16px", "16px"]} fontWeight="bold">
                     <FormattedMessage id="label.category" />
                   </Text>
                 </Box>
@@ -119,7 +119,7 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
               <>
                 <AccordionButton py={3}>
                   <Box flex="1" textAlign="left">
-                    <Text fontWeight="bold">
+                    <Text fontSize={["16px", "12px", "12px", "16px", "16px"]} fontWeight="bold">
                       <FormattedMessage id="label.productType" />
                     </Text>
                   </Box>
@@ -146,7 +146,7 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
             <>
               <AccordionButton py={3}>
                 <Box flex="1" textAlign="left">
-                  <Text fontWeight="bold">
+                  <Text fontSize={["16px", "12px", "12px", "16px", "16px"]} fontWeight="bold">
                     <FormattedMessage id="label.color" />
                   </Text>
                 </Box>
@@ -170,7 +170,7 @@ const ProductFilter = ({ categoryId, setValue, productTypeId, isBestSelling, col
         </AccordionItem>
       </Accordion>
       <Flex justifyContent="space-between" mt="2" ml="4">
-        <Text fontWeight="bold">
+        <Text fontSize={["16px", "12px", "12px", "16px", "16px"]} fontWeight="bold">
           <FormattedMessage id="label.bestSelling" />
         </Text>
         <RHFSingleCheckbox handleClick={handleIsBestSellingClick} name="isBestSelling" fontWeight="bold" />

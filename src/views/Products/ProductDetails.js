@@ -75,9 +75,9 @@ const ProductDetails = () => {
   return (
     <>
       <Image
-        mt={["87px", "113px", "113px", "113px", "113px"]}
+        mt={["87px", "87px", "113px", "113px", "113px"]}
         w="100%"
-        h={["128px", "128px", "128px", "auto", "auto"]}
+        h={["128px", "auto", "auto", "auto", "auto"]}
         src="/images/product_main.png"
       />
       <Container
@@ -87,7 +87,7 @@ const ProductDetails = () => {
         mt={[0, "-100px", "-100px", "-100px", "-100px"]}
         sx={{
           mb: "20px",
-          minHeight: "120vh !important",
+          minHeight: "90vh !important",
           mr: "auto",
           ml: "auto",
           position: "relative",
@@ -121,8 +121,8 @@ const ProductDetails = () => {
                           border: "1px solid #AAAAAA",
                         }}
                         key={index}
-                        w={["40px", "40px", "90px", "90px", "90px"]}
-                        h={["40px", "40px", "90px", "90px", "90px"]}
+                        w={["40px", "50px", "50px", "90px", "90px"]}
+                        h={["40px", "50px", "50px", "90px", "90px"]}
                         src={image}
                       />
                     );

@@ -31,7 +31,7 @@ const AboutUs = () => {
           bg="url('/backgrounds/support_background.png')"
           sx={{
             boxShadow: "0px -5px 4px 1px rgba(0, 0, 0, 0.38)",
-            minHeight: "120vh !important",
+            minHeight: "90vh !important",
             paddingBottom: "30px !important",
           }}
         >
