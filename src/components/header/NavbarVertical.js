@@ -3,7 +3,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import ProductsAccordion from "./ProductsAccordion";
 
-const NavbarItem = ({ children, isLast, to = "/", isProducts, ...rest }) => {
+const NavbarItem = ({ children, isLast, to, isProducts, ...rest }) => {
   return (
     <Link className="navbar-item" href={to} sx={{ textDecoration: "none" }}>
       <Flex
@@ -25,24 +25,34 @@ const NavbarItem = ({ children, isLast, to = "/", isProducts, ...rest }) => {
   );
 };
 
-const NavbarVertical = ({ isOpen, toggle, onClose }) => {
+const NavbarVertical = ({ isOpen, toggle, onClose, data }) => {
+  const signUpElement = document.getElementById("sign-up-section");
+
+  const handleScroll = () => {
+    signUpElement.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent bg="#61656B">
         <VStack alignItems="left" spacing={0}>
-          <NavbarItem>
-            <FormattedMessage id="title.aboutUs" />
+          <NavbarItem to="/our-story">
+            <FormattedMessage id="title.ourStory" />
           </NavbarItem>
-
           {/* <FormattedMessage id="title.products" /> */}
-          <ProductsAccordion />
+          <ProductsAccordion data={data} />
 
-          <NavbarItem>
+          <NavbarItem to="/contact">
             <FormattedMessage id="title.contact" />
           </NavbarItem>
-          <NavbarItem>
-            <FormattedMessage id="title.subsrcibe" />
+          <NavbarItem
+            onClick={() => {
+              handleScroll();
+              onClose();
+            }}
+          >
+            <FormattedMessage id="title.subscribe" />
           </NavbarItem>
         </VStack>
       </DrawerContent>

@@ -1,9 +1,9 @@
-import { getProductForHomePageAPI } from "@api/main";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { Box, Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import DropDownSubmenu from "@components/DropDownSubmenu";
+import React from "react";
 import { FormattedMessage } from "react-intl";
-import Dropdown from "react-multilevel-dropdown";
+import { useNavigate } from "react-router-dom";
 
 const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -23,83 +23,8 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-const ProductMenu = ({ dropDownData }) => {
-  return (
-    <Dropdown
-      openOnHover
-      position="right"
-      className="dropdown"
-      title={
-        <Flex
-          alignContent="center"
-          justifyContent="center"
-          fontSize="18px"
-          fontWeight="500"
-          textTransform="uppercase"
-          //   display="block"
-        >
-          <HStack className="navbar-item" justifyContent="center">
-            <Link href="/products">
-              <Text>
-                <FormattedMessage id="title.products" />
-              </Text>
-            </Link>
-            <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
-          </HStack>
-        </Flex>
-      }
-    >
-      <Box
-        bg="#575757"
-        sx={{
-          borderBottom: "none",
-          // opacity: "1 !important",
-          boxShadow: "-4px 0px 3px rgba(0, 0, 0, 0.25)",
-        }}
-      >
-        {dropDownData.map((item, index) => {
-          const isLastItem = Boolean(index + 1 === dropDownData.length);
-          return (
-            <Dropdown.Item className={!isLastItem ? "Item_item__eDdfj" : "last-menu-item"} key={item.categoryId}>
-              {item.categoryName}
-              {!!item.productTypes && (
-                <Dropdown.Submenu position="right">
-                  <Box sx={{ borderBottom: "none" }}>
-                    {item.productTypes.map((i, a) => {
-                      const isLastChildItem = Boolean(a + 1 === item.productTypes.length);
-                      return (
-                        <Dropdown.Item
-                          className={!isLastChildItem ? "child-item" : "last-child-item"}
-                          key={i.productTypeId}
-                        >
-                          {i.productTypeName}
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </Box>
-                </Dropdown.Submenu>
-              )}
-            </Dropdown.Item>
-          );
-        })}
-      </Box>
-    </Dropdown>
-  );
-};
-
-const NavbarItems = ({ isOpen }) => {
-  const initLang = localStorage.getItem("language");
-  const [dropDownData, setDropDownData] = useState([]);
-
-  const fetchDropDownData = async (initLang) => {
-    const res = await getProductForHomePageAPI(initLang);
-    setDropDownData(res.data);
-  };
-
-  useEffect(() => {
-    fetchDropDownData(initLang);
-  }, [initLang]);
-
+const NavbarItems = ({ isOpen, dropDownData }) => {
+  const navigate = useNavigate();
   const signUpElement = document.getElementById("sign-up-section");
 
   const handleScroll = () => {
@@ -107,7 +32,10 @@ const NavbarItems = ({ isOpen }) => {
   };
 
   return (
-    <Box display={{ base: isOpen ? "block" : "none", md: "block" }} flexBasis={{ base: "100%", md: "auto" }}>
+    <Box
+      display={[isOpen ? "block" : "none", isOpen ? "block" : "none", isOpen ? "block" : "none", "block", "block"]}
+      flexBasis={{ base: "100%", md: "auto" }}
+    >
       <Stack
         spacing={12}
         align="center"
@@ -115,11 +43,35 @@ const NavbarItems = ({ isOpen }) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <NavbarItem to="/">
-          <FormattedMessage id="title.aboutUs" />
+        <NavbarItem to="/our-story">
+          <FormattedMessage id="title.ourStory" />
         </NavbarItem>
-        <ProductMenu dropDownData={dropDownData} />
-        <NavbarItem to="/how">
+        <DropDownSubmenu
+          data={dropDownData}
+          title={
+            <Flex
+              alignContent="center"
+              justifyContent="center"
+              fontSize="18px"
+              fontWeight="500"
+              textTransform="uppercase"
+              //   display="block"
+            >
+              <HStack className="navbar-item" justifyContent="center">
+                <Text
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => {
+                    navigate("/products");
+                  }}
+                >
+                  <FormattedMessage id="title.products" />
+                </Text>
+                <TriangleDownIcon w="12px" sx={{ mt: "2px !important" }} />
+              </HStack>
+            </Flex>
+          }
+        />
+        <NavbarItem to="/contact">
           <FormattedMessage id="title.contact" />
         </NavbarItem>
         <Flex
@@ -135,7 +87,7 @@ const NavbarItems = ({ isOpen }) => {
           display="block"
           sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4, cursor: "pointer" }}
         >
-          <FormattedMessage id="title.subsrcibe" />
+          <FormattedMessage id="title.subscribe" />
         </Flex>
       </Stack>
     </Box>

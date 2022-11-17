@@ -4,7 +4,7 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 export const ToggleButton = ({ toggle, isMobile }) => {
   return (
-    <Box display={isMobile ? "block" : "none"} onClick={toggle}>
+    <Box display={["block", "block", "block", "none", "none"]} onClick={toggle}>
       <HamburgerIcon />
     </Box>
   );

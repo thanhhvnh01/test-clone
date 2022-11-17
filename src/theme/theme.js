@@ -6,10 +6,10 @@ export const theme = extendTheme({
     Button,
   },
   breakpoints: {
-    sm: "414px",
-    md: "880px",
-    lg: "960px",
-    xl: "1600px",
-    "2xl": "1650px",
+    sm: "415px", // mobile
+    md: "820px", // tablet 1
+    lg: "914px", // table 2
+    xl: "1537px", // pc 1
+    "2xl": "1920px", //pc 2
   },
 });

@@ -1,5 +1,5 @@
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { Box, HStack, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Select, Text } from "@chakra-ui/react";
 import { IntlContext } from "@utility/contexts/Internationalization";
 import React, { useContext, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
@@ -11,25 +11,36 @@ const LocaleHeader = ({ isMobile, ...props }) => {
   const [lang, setLang] = useState(intlContext.locale);
   return (
     <Box w="100%" bg="black" {...props}>
-      <HStack
-        color="#ffff"
-        spacing="24px"
-        justifyContent={isMobile ? "space-between" : "right"}
-        sx={{ ml: "auto", alignContent: "center" }}
+      <Flex
+        maxW={isMobile ? "100%" : "1200px"}
+        justifyContent={isMobile ? "space-between" : "flex-end"}
+        sx={{ mr: "auto", ml: "auto" }}
       >
-        <Text fontSize="12px">+84 973360301</Text>
-        <Text fontSize="12px">example@gmail.com</Text>
+        <HStack
+          color="#ffff"
+          spacing="24px"
+          w="100%"
+          sx={{ alignContent: "center", justifyContent: !isMobile ? "space-between" : "space-between" }}
+        >
+          <Text ml={2} fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+            ANDREAHAIRVN.COM
+          </Text>
+          <HStack spacing="20px">
+            {!isMobile && (
+              <>
+                <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                  <FormattedMessage id="info.phoneNumber" />
+                </Text>
+                <Text textTransform="uppercase" fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                  <FormattedMessage id="info.email" />
+                </Text>
+              </>
+            )}
 
-        <ReactCountryFlag
-          style={{
-            width: "1em",
-            height: "1em",
-          }}
-          countryCode={lang === "en" ? "us" : "ru"}
-          svg
-        />
-        <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
-      </HStack>
+            <LocalPopover lang={lang} setLang={setLang} intlContext={intlContext} />
+          </HStack>
+        </HStack>
+      </Flex>
     </Box>
   );
 };
@@ -42,29 +53,40 @@ const LocalPopover = ({ lang, setLang, intlContext }) => {
   };
 
   return (
-    <Select
-      color="white"
-      icon={<TriangleDownIcon />}
-      iconSize="9px"
-      variant="unstyled"
-      bg="black"
-      w="90px"
-      borderColor="black"
-      value={lang}
-      onChange={(e) => {
-        handleLangUpdate(e);
-      }}
-      size="xs"
-      pb={1}
-    >
-      <option value="en">
-        <FormattedMessage id="title.en" />
-      </option>
-
-      <option value="ru">
-        <FormattedMessage id="title.ru" />
-      </option>
-    </Select>
+    <HStack sx={{ alignContent: "center", justifyContent: "space-between" }}>
+      <ReactCountryFlag
+        style={{
+          width: "1em",
+          height: "1em",
+          marginBottom: 1.5,
+        }}
+        countryCode={lang === "en" ? "us" : "ru"}
+        svg
+      />
+      <Select
+        color="white"
+        icon={<TriangleDownIcon />}
+        iconSize="9px"
+        variant="unstyled"
+        fontSize={["10px", "12px", "12px", "12px", "12px"]}
+        bg="black"
+        w="90px"
+        borderColor="black"
+        value={lang}
+        onChange={(e) => {
+          handleLangUpdate(e);
+        }}
+        size="xs"
+        pb={1}
+      >
+        <option value="en" style={{ textAlign: "center" }}>
+          <FormattedMessage id="title.en" />
+        </option>
+        <option value="ru" style={{ textAlign: "center" }}>
+          <FormattedMessage id="title.ru" />
+        </option>
+      </Select>
+    </HStack>
   );
 };
 

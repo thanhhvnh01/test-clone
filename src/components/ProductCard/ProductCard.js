@@ -1,44 +1,89 @@
-import { Box, Button, Center, Image, Text, VStack } from "@chakra-ui/react";
-import useMobile from "@hooks/useMobile";
-import React from "react";
-// import { VisibilityContext } from "react-horizontal-scrolling-menu";
+import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
-const ProductCard = ({ title, image }) => {
-  const [isMobile] = useMobile();
+const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick, isBestSelling }) => {
+  const [hoverImage, setHoverImage] = useState(null);
+  const [isHover, setIsHover] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
 
   return (
     <Box
+      onClick={() => {
+        scrollToTop();
+        onClick();
+      }}
       bg="#ffff"
       tabIndex={0}
-      w={isMobile ? "112px" : "236px"}
-      h={isMobile ? "139px" : "318px"}
-      sx={{ border: "1px solid #AAAAAA" }}
-      mr={10}
+      w={["175px", "182px", "182px", "270px", "270px"]}
+      h={["280px", "290px", "290px", "480px", "480px"]}
+      sx={{ ...sx, cursor: "pointer", position: "relative" }}
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
+      }}
     >
-      <Image mb={3} mx={isMobile ? 2 : 5} w={isMobile ? "94px" : "198px"} src="/images/product_1.png" />
-      <Center h="20%" sx={{ display: "flex", alignContent: "center" }}>
-        <VStack spacing="5px">
-          <Text textTransform="uppercase" fontWeight="600" m="auto" fontSize={isMobile ? "12px" : "16px"}>
+      <Image
+        w="100%"
+        h={["233px", "238px", "238px", "360px", "360px"]}
+        src={hoverImage === null ? thumbImage : images[hoverImage]}
+        alt="product"
+      />
+      {isBestSelling && (
+        <Box p={1} px={2} bg="red" top="10px" left="-3px" sx={{ position: "absolute" }}>
+          <Text color="#ffff" fontSize="12px" fontWeight="500">
+            <FormattedMessage id="label.bestSelling" />
+          </Text>
+        </Box>
+      )}
+
+      <Box mt={1}>
+        <VStack spacing="5px" px={1} display="block">
+          <Text
+            textTransform="uppercase"
+            fontWeight="600"
+            m="auto"
+            fontSize={["12px", "12px", "12px", "13px", "13px"]}
+            noOfLines={2}
+          >
             {title}
           </Text>
-          <Text fontSize="11px" color="#FFB800">
-            {"(Single color hair)"}
-          </Text>
-          <Button
-            _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
-            p={3}
-            borderRadius="206px"
-            bg="#FFB800"
-            variant="solid"
-            h="25px"
-            w="125px"
-          >
-            <Text fontSize="13px" textTransform="none">
-              Explore
-            </Text>
-          </Button>
         </VStack>
-      </Center>
+        <Box sx={{ bottom: 0 }} mb={2} ml={1}>
+          <Text textTransform="none" fontSize="12px" color="#AAAAAA">
+            {`${subtitle}`}
+          </Text>
+          {isHover && (
+            <HStack display={["none", "none", "none", "flex", "flex"]}>
+              {images.slice(0, 3)?.map((image, index) => {
+                return (
+                  <Image
+                    onMouseEnter={() => {
+                      setHoverImage(index);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverImage(null);
+                    }}
+                    h="47px"
+                    w="48px"
+                    key={index}
+                    src={image}
+                  />
+                );
+              })}
+            </HStack>
+          )}
+        </Box>
+      </Box>
     </Box>
   );
 };

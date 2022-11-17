@@ -1,20 +1,16 @@
-import { Box, Container, Image, Text } from "@chakra-ui/react";
+import { Box, Container, Image } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // responsive
-import { ResponsiveImage } from "src/theme/ResponsiveTheme";
 
 const ImageSlider = ({ images }) => {
   const [isMobile] = useMobile();
 
   return (
-    <Container p={isMobile && 0} maxW={isMobile ? "100%" : "80%"}>
-      <Box
-        h={ResponsiveImage}
-        sx={{ mt: isMobile ? "100px" : "130px", width: "100%", display: "flex", mr: "auto", ml: "auto" }}
-      >
+    <Container p={0} maxW={isMobile ? "100%" : "100%"}>
+      <Box mt={["87px", "87px", "113px", "113px", "113px"]} w="100%" h={["128px", "auto", "auto", "auto", "auto"]}>
         <Carousel
           showThumbs={false}
           infiniteLoop
@@ -24,45 +20,13 @@ const ImageSlider = ({ images }) => {
           interval={6000}
           className="slide-container"
         >
-          {images.map((slideImage, index) => (
+          {images.urls?.map((slideImage, index) => (
             <Box key={index} sx={{ position: "relative", color: "#ffff", textAlign: "center" }}>
               <Image
-                src={slideImage.url}
-                h={ResponsiveImage}
+                src={slideImage}
+                h={["128px", "184px", "184px", "auto", "auto"]}
                 sx={{ width: "100%", maxHeight: "700px", objectFit: "cover" }}
               />
-              <Box>
-                <Text
-                  fontSize={isMobile ? "32px" : "93px"}
-                  as="b"
-                  textTransform="uppercase"
-                  fontWeight="700"
-                  fontFamily="Josefin Sans"
-                  sx={{
-                    position: "absolute",
-                    top: isMobile ? "35%" : "45%",
-                    left: "35%",
-                    textShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-                  }}
-                >
-                  AndreaHair
-                </Text>
-                <Text
-                  fontSize={isMobile ? "15px" : "45px"}
-                  as="b"
-                  textTransform="uppercase"
-                  fontWeight="500"
-                  fontFamily="Josefin Sans"
-                  sx={{
-                    position: "absolute",
-                    top: isMobile ? "52%" : "61%",
-                    left: isMobile ? "46%" : "46%",
-                    textShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-                  }}
-                >
-                  Beautiful hair
-                </Text>
-              </Box>
             </Box>
           ))}
         </Carousel>
