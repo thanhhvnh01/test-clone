@@ -190,7 +190,7 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
                     <Button
                       size={["sm", "sm", "sm"]}
                       onClick={() => {
-                        navigate("/about-us");
+                        navigate("/our-story");
                       }}
                       textTransform="none"
                       _hover={{ backgroundColor: "#D8D8D8" }}
@@ -213,14 +213,14 @@ const AboutUsSection = ({ content, isMobile, navigate }) => {
               </Text>
               <Flex bg="black" w={97} h="3px" m="auto" />
             </Box>
-            <Image px={10} pt={0} src="/images/about_us_picture.png" />
+            <Image h="334px" px={10} pt={0} src="/images/about_us_picture.png" />
             <Text px={10} fontSize="10px" textAlign="justify">
               <FormattedMessage id="info.aboutUsSection" />
             </Text>
             <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
               <Button
                 onClick={() => {
-                  navigate("/about-us");
+                  navigate("/our-story");
                 }}
                 size="sm"
                 textTransform="none"

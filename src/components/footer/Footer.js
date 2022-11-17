@@ -224,6 +224,7 @@ const SignUpSection = ({ isMobile }) => {
               {isMobile && (
                 <Button
                   size={["sm", "md", "md", "sm", "sm"]}
+                  disabled={!isValid}
                   onClick={handleSignUp}
                   className="btn-sub"
                   color="#FFEA85"

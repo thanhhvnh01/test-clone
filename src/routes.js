@@ -14,7 +14,7 @@ const routes = [
       { path: "/", element: <Home /> },
       { path: "products", element: <Products /> },
       { path: "product/details", element: <ProductDetails /> },
-      { path: "about-us", element: <AboutUs /> },
+      { path: "our-story", element: <AboutUs /> },
       { path: "contact", element: <Contact /> },
       { path: "/", element: <Navigate to="/" /> },
     ],
