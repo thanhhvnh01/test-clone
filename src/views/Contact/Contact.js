@@ -89,7 +89,7 @@ const Contact = () => {
 
   const fetchSupporterData = async () => {
     try {
-      const res = await getSupportersAPI(3, 1);
+      const res = await getSupportersAPI(12, 1);
       setSupporterData(res.data.pageData);
     } catch (error) {}
   };

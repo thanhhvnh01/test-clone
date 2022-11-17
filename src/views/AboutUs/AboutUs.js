@@ -11,10 +11,24 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import useMobile from "@hooks/useMobile";
+import { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 
 const AboutUs = () => {
   const [isMobile] = useMobile();
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <>
       <Box>

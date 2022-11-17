@@ -83,7 +83,7 @@ export default function RHFRadioGroup({
                       </Radio>
                       {isSelected && (
                         <SmallCloseIcon
-                          boxSize={[6, 6, 6, 4, 4]}
+                          boxSize={[6, 3, 3, 4, 4]}
                           cursor="pointer"
                           onClick={() => {
                             handleClearOption();

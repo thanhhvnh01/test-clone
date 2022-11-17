@@ -64,6 +64,18 @@ const Products = () => {
   const [orderByType, setOrderByType] = useState(OrderByTypeEnum.Asc);
   const [isLoading, setIsLoading] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   // form
   const methods = useForm({
     mode: "all",

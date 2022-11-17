@@ -216,12 +216,13 @@ const ProductDetails = () => {
                     </Text>
                   </HStack>
                   <HStack>
-                    <Text fontWeight="bold">
-                      <FormattedMessage id="label.packing" />:{" "}
-                    </Text>
                     <Text>
+                      <b>
+                        <FormattedMessage id="label.packing" />:
+                      </b>{" "}
                       <FormattedMessage id={`enum.${PackingRuleDisplayConfig[data?.packingRuleId]}`} />
                     </Text>
+                    <Text></Text>
                   </HStack>
                   <Button
                     _hover={{
