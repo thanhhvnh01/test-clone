@@ -6,18 +6,9 @@ const ProductCard = ({ title, subtitle, thumbImage, images, sx, onClick, isBestS
   const [hoverImage, setHoverImage] = useState(null);
   const [isHover, setIsHover] = useState(false);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
-    });
-  };
-
   return (
     <Box
       onClick={() => {
-        scrollToTop();
         onClick();
       }}
       bg="#ffff"

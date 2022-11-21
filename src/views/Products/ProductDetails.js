@@ -39,6 +39,18 @@ const ProductDetails = () => {
   const [relatedProductData, setRelatedProductData] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  }, [productId]);
+
   const fetchData = async (productId, initLang) => {
     if (!!productId) {
       try {
