@@ -28,14 +28,6 @@ const MobileProductFilter = ({
     <Drawer isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent bg="#FFFFFF">
-        <DrawerHeader borderBottomWidth="1px" p={4}>
-          <HStack>
-            <BsFilter style={{ height: "24px", width: "24px" }} />
-            <Text fontWeight="bold" fontSize="15px">
-              <FormattedMessage id="label.filter" />
-            </Text>
-          </HStack>
-        </DrawerHeader>
         <DrawerBody p={0}>
           <Box>
             <ProductFilter

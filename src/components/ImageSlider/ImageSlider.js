@@ -9,7 +9,7 @@ const ImageSlider = ({ images }) => {
   const [isMobile] = useMobile();
 
   return (
-    <Container p={0} maxW={isMobile ? "100%" : "100%"}>
+    <Container p={0} maxW={["100%", "100%", "100%", "1200px", "1200px"]}>
       <Box mt={["87px", "87px", "113px", "113px", "113px"]} w="100%" h={["128px", "auto", "auto", "auto", "auto"]}>
         <Carousel
           showThumbs={false}
