@@ -12,7 +12,7 @@ const NavbarItem = ({ children, isLast, to = "/", ...rest }) => {
         alignContent="center"
         justifyContent="center"
         fontSize="18px"
-        fontWeight="500"
+        fontWeight="600"
         textTransform="uppercase"
         display="block"
         {...rest}
@@ -53,7 +53,7 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
               alignContent="center"
               justifyContent="center"
               fontSize="18px"
-              fontWeight="500"
+              fontWeight="600"
               textTransform="uppercase"
               //   display="block"
             >
@@ -82,10 +82,10 @@ const NavbarItems = ({ isOpen, dropDownData }) => {
           alignContent="center"
           justifyContent="center"
           fontSize="18px"
-          fontWeight="500"
+          fontWeight="600"
           textTransform="uppercase"
           display="block"
-          sx={{ border: "2px solid #FFEA85 !important", p: 1, px: 4, cursor: "pointer" }}
+          sx={{ border: "2px solid #000 !important", p: 1, px: 4, cursor: "pointer" }}
         >
           <FormattedMessage id="title.subscribe" />
         </Flex>

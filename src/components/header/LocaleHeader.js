@@ -12,7 +12,7 @@ const LocaleHeader = ({ isMobile, ...props }) => {
   return (
     <Box w="100%" bg="black" {...props}>
       <Flex
-        maxW={isMobile ? "100%" : "1200px"}
+        maxW={isMobile ? "100%" : "1320px"}
         justifyContent={isMobile ? "space-between" : "flex-end"}
         sx={{ mr: "auto", ml: "auto" }}
       >

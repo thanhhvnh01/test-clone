@@ -8,20 +8,26 @@ import Logo from "./Logo";
 import NavbarItems from "./NavbarItems";
 import NavbarVertical from "./NavbarVertical";
 import { ToggleButton } from "./ToggleButton";
+//scss
+import './Navbar.scss'
+import Cart from "./Cart";
+import Searchbar from "@components/Searchbar";
 
 const NavBarContainer = ({ children, isMobile, ...props }) => {
   return (
     <Box
+      className="navbar"
+      id="navbar"
       w="100%"
       sx={{
-        boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+        boxShadow: "1px 1px 10px rgba(0,0,0,.15)",
         position: "fixed",
         top: 0,
         zIndex: 6,
       }}
-      bg="rgb(107,110,114,1)"
+      bg="#ffffff"
     >
-      <LocaleHeader isMobile={isMobile} />
+      
       <Flex
         as="nav"
         align="center"
@@ -29,10 +35,10 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         alignContent="center"
         wrap="wrap"
         h={ResponsiveNavbarHeight}
-        p={4}
-        maxW="1230px"
+        p={2}
+        maxW="1320px"
         sx={{ ml: "auto", mr: "auto" }}
-        color={["#FFEA85", "#FFEA85", "#FFEA85", "#FFEA85"]}
+        color="#000"
         {...props}
       >
         {children}
@@ -58,6 +64,20 @@ const Navbar = ({ ...props }) => {
   };
 
   useEffect(() => {
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset;      
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+        if(currentScrollPos < 110){
+          document.getElementById("navbar").style.top = "28px";
+        }
+      }      
+      else {
+        document.getElementById("navbar").style.top = "-120px";
+      }
+      prevScrollpos = currentScrollPos;
+    }
     fetchDropDownData(initLang);
   }, [initLang]);
   // console.log(open);
@@ -68,6 +88,10 @@ const Navbar = ({ ...props }) => {
       <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
       <NavbarItems dropDownData={dropDownData} isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
       {isOpen && <NavbarVertical data={dropDownData} isOpen={isOpen} onClose={onClose} />}
+      <Flex>
+        <Searchbar/>
+        <Cart/>
+      </Flex>
     </NavBarContainer>
   );
 };

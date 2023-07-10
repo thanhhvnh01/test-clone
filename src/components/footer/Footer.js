@@ -27,7 +27,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 const InfomationSection = ({ isMobile }) => {
   return (
     <Box color="#AAAAAA" p={4}>
-      <Logo />
+      <Logo type={true} />
       <Stack spacing="16px">
         <Text fontSize={["16px", "16px", "16px", "xl", "xl"]} fontWeight="bold">
           Andreahairvn.com
