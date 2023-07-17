@@ -22,6 +22,7 @@ import ProductSlider from "@components/ProductSlider";
 import SupporterCard from "@components/SupporterCard";
 import useMobile from "@hooks/useMobile";
 import { useNavigate } from "react-router-dom";
+import Widget from "@components/Widget";
 
 const Home = () => {
   const initLang = localStorage.getItem("language");
@@ -103,6 +104,7 @@ const Home = () => {
           <SupportSection isMobile={isMobile} data={supporterData} />
         </Box>
       </Container>
+      <Widget />
     </>
   );
 };

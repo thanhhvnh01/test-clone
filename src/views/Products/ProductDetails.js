@@ -104,7 +104,7 @@ const ProductDetails = () => {
           mr: "auto",
           ml: "auto",
           position: "relative",
-          zIndex: 5,
+          zIndex: 1,
           boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           pb: "30px",
         }}

@@ -16,6 +16,9 @@ import {
   Select,
   Skeleton,
   SkeletonText,
+  Tab,
+  TabList,
+  Tabs,
   Text,
   useDisclosure,
   useToast,
@@ -27,7 +30,7 @@ import useMobile from "@hooks/useMobile";
 import { useCallback, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 // icon
-import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, ChevronRightIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import MobileProductFilter from "@components/MobileProductFilter";
 import { BsFilter, BsFilterLeft } from "react-icons/bs";
 // paging
@@ -39,6 +42,12 @@ import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
 import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
+// 
+import './Product.scss'
+import Filter from "@components/ProductFilter/Filter";
+import { FaFilter } from 'react-icons/fa'
+
+import { filterData } from "./DataLua";
 
 const Products = () => {
   // hooks
@@ -53,7 +62,7 @@ const Products = () => {
   const colorId = new URLSearchParams(query).get("color");
   const bestSelling = new URLSearchParams(query).get("isBestSelling");
   // filter
-  const [selectedProductType, setSelectedProductType] = useState();
+  const [selectedProductType, setSelectedProductType] = useState(0);
   const [keyword, setKeyword] = useState("");
   // product data
   const [pageSize] = useState(9);
@@ -74,6 +83,7 @@ const Products = () => {
 
   useEffect(() => {
     scrollToTop();
+    document.getElementById("navbar").style.position = "absolute";
   }, []);
 
   // form
@@ -148,7 +158,7 @@ const Products = () => {
     }
     setValue("categoryId", categoryIdParam);
     setValue("colors", colorId);
-    setSelectedProductType(productTypeId);
+    // setSelectedProductType(productTypeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIdParam, productTypeId, bestSelling, colorId]);
 
@@ -173,32 +183,33 @@ const Products = () => {
     setPageNumber(e.selected);
   };
 
+  const handleOpenFilter = () => {
+    document.getElementById('backdrop').style.display = 'flex'
+    document.getElementById('filter').style.width = "30vw"
+    // document.getElementById('toolbar').style.backgroundColor = "rgba(0, 0, 0, 0.202)"
+  }
+
+  console.log("this ", selectedProductType);
   return (
     <>
-      <Image
-        mt={["87px", "87px", "113px", "113px", "113px"]}
-        w="100%"
-        h={["128px", "auto", "auto", "auto", "auto"]}
-        src="/images/product_main.png"
-      />
 
       <Container
         bg="#ffff"
         p={isMobile ? 0 : 2}
-        maxW={isMobile ? "100%" : "1200px"}
-        mt={[0, "-100px", "-100px", "-100px", "-100px"]}
+        maxW={isMobile ? "100%" : "1320px"}
+        mt={[0, "100px", "100px", "100px", "100px"]}
         sx={{
           mb: "20px",
           minHeight: "90vh !important",
           mr: "auto",
           ml: "auto",
           position: "relative",
-          zIndex: 5,
-          boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+          zIndex: 2,
+          // boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           pb: "30px",
         }}
       >
-        {!isMobile && (
+        {/* {!isMobile && (
           <Box bg="#ffff" py={3} px={3}>
             <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
               <BreadcrumbItem color="#3182CE">
@@ -213,40 +224,47 @@ const Products = () => {
               </BreadcrumbItem>
             </Breadcrumb>
           </Box>
-        )}
+        )} */}
+        <div className="toolbar" id="toolbar">
+
+
+          <Tabs index={selectedProductType} defaultIndex={0} onChange={(e) => { setSelectedProductType(e) }}>
+            <TabList>
+              {
+                filterData.map((i) => {
+                  return (
+                    <Tab
+                      className="had-dropdown"
+                      pl={2}
+                      pr={2}
+                      _selected={{ color: "#d4af37", fontWeight: "bold", borderBottom: "2px solid #d4af37" }}
+                      id={i.id}>
+                      {i.label}
+                    </Tab>
+                  )
+                })
+              }
+            </TabList>
+          </Tabs>
+          <button onClick={() => { handleOpenFilter() }} className="btn-filter">Filter & Sort <FaFilter style={{ marginTop: "4px", marginLeft: "2px" }} /></button>
+        </div>
         <FormProvider methods={methods}>
-          <Box className="product-main" p={3} mt={2}>
+          <Box className="product-main" mt={0}>
             {!isMobile ? (
               <>
-                <Flex justifyContent="space-between"></Flex>
-                <Grid templateColumns="repeat(13, 1fr)" gap={6}>
-                  <GridItem colSpan={3}>
-                    <FilterSection
-                      isDirty={isDirty}
-                      categoryId={categoryId}
-                      selectedProductType={selectedProductType}
-                      setValue={setValue}
-                      handleClearFilter={handleClearFilter}
-                      productTypeId={productTypes}
-                      colorId={colors}
-                      isBestSelling={isBestSelling}
-                    />
-                  </GridItem>
-                  <GridItem colSpan={10}>
-                    <ProductSection
-                      pageCount={pageCount}
-                      categoryId={categoryId}
-                      keyword={keyword}
-                      pageSize={pageSize}
-                      pageNumber={pageNumber}
-                      handleRequestSort={handleRequestSort}
-                      data={products}
-                      handlePageChange={handlePageChange}
-                      handleKeywordChange={handleKeywordChange}
-                      isLoading={isLoading}
-                    />
-                  </GridItem>
-                </Grid>
+                <ProductSection
+                  pageCount={pageCount}
+                  categoryId={categoryId}
+                  keyword={keyword}
+                  pageSize={pageSize}
+                  pageNumber={pageNumber}
+                  handleRequestSort={handleRequestSort}
+                  data={products}
+                  handlePageChange={handlePageChange}
+                  handleKeywordChange={handleKeywordChange}
+                  isLoading={isLoading}
+                />
+
               </>
             ) : (
               <>
@@ -265,7 +283,7 @@ const Products = () => {
                       variant="unstyled"
                       borderColor="#ffff"
                       fontWeight="bold"
-                      textColor="#FFA800"
+                      textColor="#d4af37"
                     >
                       <option value={OrderByTypeEnum.Asc} style={{ fontWeight: "bold" }}>
                         A-Z
@@ -317,7 +335,9 @@ const Products = () => {
             />
           )}
         </FormProvider>
+        
       </Container>
+      <Filter />
     </>
   );
 };
@@ -338,7 +358,7 @@ const FilterSection = ({ categoryId, productTypeId, colorId, isBestSelling, setV
           fontSize={["16px", "12px", "12px", "14px", "14px"]}
           rightIcon={<SmallCloseIcon />}
           p={3}
-          bg="#FFA800"
+          bg="#d4af37"
           h="23px"
         >
           <FormattedMessage id="button.clearFilter" />
@@ -376,16 +396,16 @@ const ProductSection = ({
 
   return (
     <Box>
-      {!isMobile && (
+      {/* {!isMobile && (
         <Flex mb={2}>
           <InputGroup display="flex" justifyContent="flex-end" mr={[0, 0, 0, 3, 5]}>
             <Input w="234px" onChange={handleKeywordChange} value={keyword} />
             <InputRightElement children={<SearchIcon />} />
           </InputGroup>
         </Flex>
-      )}
+      )} */}
 
-      <Flex
+      {/* <Flex
         display={["none", "flex", "flex", "flex", "flex"]}
         pr={[0, 0, 0, 0, 5]}
         pl={[0, 0, 0, 5, 12]}
@@ -413,18 +433,18 @@ const ProductSection = ({
             }}
             variant="unstyled"
             borderColor="#ffff"
-            textColor="#FFA800"
+            textColor="#d4af37"
           >
             <option value={OrderByTypeEnum.Asc}>A-Z</option>
             <option value={OrderByTypeEnum.Desc}>Z-A</option>
           </Select>
         </HStack>
-      </Flex>
+      </Flex> */}
       <Grid
         mt={2}
-        templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]}
+        templateColumns={["repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(4, 1fr)", "repeat(4, 1fr)"]}
       >
-        {isLoading &&
+        {/* {isLoading &&
           [...Array(9)].map((e, i) => {
             return (
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={i}>
@@ -442,9 +462,9 @@ const ProductSection = ({
                 </Box>
               </GridItem>
             );
-          })}
-        {data.length > 0 ? (
-          data?.map((item, index) => {
+          })} */}
+        {
+          [...Array(12)].map((item, index) => {
             return (
               <GridItem sx={{ display: "flex", mx: "auto" }} colSpan={1} key={index}>
                 <ProductCard
@@ -453,11 +473,11 @@ const ProductSection = ({
                     mx: "auto",
                   }}
                   key={index}
-                  isBestSelling={item.isBestSelling}
-                  title={item.productName}
-                  thumbImage={item.mainImageUrl}
-                  images={item.imageUrls}
-                  subtitle={item.productTypeName}
+                  // isBestSelling={item.isBestSelling}
+                  // title={item.productName}
+                  // thumbImage={item.mainImageUrl}
+                  // images={item.imageUrls}
+                  // subtitle={item.productTypeName}
                   onClick={() => {
                     handleOnClick(item);
                   }}
@@ -465,13 +485,7 @@ const ProductSection = ({
               </GridItem>
             );
           })
-        ) : (
-          <GridItem colSpan={3}>
-            <Text textAlign="center">
-              <FormattedMessage id="label.noitemhere" />
-            </Text>
-          </GridItem>
-        )}
+        }
       </Grid>
       <ReactPaginate
         breakLabel="..."

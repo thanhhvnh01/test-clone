@@ -17,6 +17,7 @@ const Searchbar = () => {
     }
 
     return (
+        
         <div className='search-wrapper'>
             <div style={{ cursor: "pointer" }} className='box' onClick={() => { handleOpen() }} >
                 <input value={keyword} onChange={handleInputChange} ref={inputRef} onBlur={() => { setOpen(false) }} type="text" className={open ? "input-focus" : "input"} name="txt" ></input>

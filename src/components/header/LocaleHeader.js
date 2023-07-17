@@ -22,16 +22,16 @@ const LocaleHeader = ({ isMobile, ...props }) => {
           w="100%"
           sx={{ alignContent: "center", justifyContent: !isMobile ? "space-between" : "space-between" }}
         >
-          <Text ml={2} fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+          <Text ml={2} fontSize={["10px", "10px", "12px", "12px", "12px"]}>
             ANDREAHAIRVN.COM
           </Text>
           <HStack spacing="20px">
             {!isMobile && (
               <>
-                <Text fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                <Text fontSize={["10px", "10px", "10px", "12px", "12px"]}>
                   <FormattedMessage id="info.phoneNumber" />
                 </Text>
-                <Text textTransform="uppercase" fontSize={["10px", "12px", "12px", "12px", "12px"]}>
+                <Text textTransform="uppercase" fontSize={["10px", "10px", "12px", "12px", "12px"]}>
                   <FormattedMessage id="info.email" />
                 </Text>
               </>

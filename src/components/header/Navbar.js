@@ -23,12 +23,13 @@ const NavBarContainer = ({ children, isMobile, ...props }) => {
         boxShadow: "1px 1px 10px rgba(0,0,0,.15)",
         position: "fixed",
         top: 0,
-        zIndex: 6,
+        zIndex: "3 !important",
       }}
       bg="#ffffff"
     >
-      
+
       <Flex
+        position="relative"
         as="nav"
         align="center"
         justifyContent="space-between"
@@ -66,13 +67,13 @@ const Navbar = ({ ...props }) => {
   useEffect(() => {
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset;      
+      var currentScrollPos = window.pageYOffset;
       if (prevScrollpos > currentScrollPos) {
         document.getElementById("navbar").style.top = "0";
-        if(currentScrollPos < 110){
+        if (currentScrollPos < 110) {
           document.getElementById("navbar").style.top = "28px";
         }
-      }      
+      }
       else {
         document.getElementById("navbar").style.top = "-120px";
       }
@@ -84,13 +85,13 @@ const Navbar = ({ ...props }) => {
 
   return (
     <NavBarContainer isMobile={isMobile} {...props}>
-      <Logo w="100px" color={["white", "white", "primary.500", "primary.500"]} />
+      <Logo transform="scale(1.2)" w="100px" color={["white", "white", "primary.500", "primary.500"]} />
       <ToggleButton isMobile={isMobile} toggle={onOpen} isOpen={isOpen} />
       <NavbarItems dropDownData={dropDownData} isOpen={open} onMouseOver={toggleOn} onMouseLeave={toggleOff} />
       {isOpen && <NavbarVertical data={dropDownData} isOpen={isOpen} onClose={onClose} />}
       <Flex>
-        <Searchbar/>
-        <Cart/>
+        <Searchbar />
+        <Cart />
       </Flex>
     </NavBarContainer>
   );
